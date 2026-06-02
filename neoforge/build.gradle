@@ -1,0 +1,83 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev'
+    id "com.modrinth.minotaur"
+    id "com.matthewprenger.cursegradle"
+}
+modrinth {
+    token = property("modrinth_token").toString()
+    projectId = property("modrinth_project_id").toString()
+    versionNumber = version.toString()
+    versionType = "release"
+    uploadFile = tasks.findByName("remapJar") ?: tasks.named("jar")
+    gameVersions = ["1.21", property("minecraft_version").toString()]
+    loaders = ["neoforge"]
+    changelog = rootProject.file("CHANGELOG.md").text
+}
+curseforge {
+    apiKey = property("curseforge_token").toString()
+
+    project {
+        id = property("curseforge_project_id").toString()
+
+        mainArtifact(tasks.named("jar").flatMap { it.archiveFile }) {
+            displayName = "Redden's Stone Lanterns Reconstructed v${version}"
+        }
+
+        releaseType = "release"
+
+        addGameVersion "1.21"
+        addGameVersion property("minecraft_version").toString()
+
+        addGameVersion "NeoForge"
+
+        changelogType = "markdown"
+        changelog = rootProject.file("CHANGELOG.md").text
+    }
+}
+sourceSets {
+    main {
+        resources {
+            srcDirs += project(':common').file('src/main/generated')
+        }
+    }
+}
+neoForge {
+    version = neoforge_version
+    // Automatically enable neoforge AccessTransformers if the file exists
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers.from(at.absolutePath)
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+    runs {
+        configureEach {
+            systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
+        }
+        client {
+            client()
+        }
+        data {
+            data()
+
+            // DataGen can be run by - "./gradlew :neoforge:runData" in Terminal.
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+
+        }
+        server {
+            server()
+        }
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }

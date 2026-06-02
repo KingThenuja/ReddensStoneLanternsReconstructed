@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "group": "stone_lantern",
+  "ingredient": {
+    "item": "reddensstonelantern:stone_pillar_bigger_short"
+  },
+  "result": {
+    "id": "reddensstonelantern:stone_pillar_mid_short",
+    "count": 1
+  }
+}

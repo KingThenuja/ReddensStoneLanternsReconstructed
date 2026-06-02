@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "reddensstonelantern:blocks/broad_stone_lantern_block_dark",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "reddensstonelantern:broad_stone_lantern_block_light"
+        }
+      ]
+    }
+  ]
+}

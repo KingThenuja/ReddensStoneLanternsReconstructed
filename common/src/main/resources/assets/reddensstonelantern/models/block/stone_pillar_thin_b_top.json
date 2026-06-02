@@ -1,0 +1,9 @@
+{
+  "parent": "reddensstonelantern:custom/stone_pillar_thin_b_top",
+  "textures": {
+    "all": "reddensstonelantern:block/stone_lantern_a",
+    "particle": "reddensstonelantern:block/polished_andesite",
+    "2": "reddensstonelantern:block/stone_lantern_a"
+  },
+  "render_type": "cutout"
+}

@@ -1,0 +1,74 @@
+plugins {
+    id 'multiloader-loader'
+    id 'fabric-loom'
+    id "com.modrinth.minotaur"
+    id "com.matthewprenger.cursegradle"
+}
+modrinth {
+    token = property("modrinth_token").toString()
+    projectId = property("modrinth_project_id").toString()
+    versionNumber = version.toString()
+    versionType = "release"
+    uploadFile = tasks.findByName("remapJar") ?: tasks.named("jar")
+    gameVersions = ["1.21", property("minecraft_version").toString()]
+    loaders = ["fabric", "quilt"]
+    changelog = rootProject.file("CHANGELOG.md").text
+}
+curseforge {
+    apiKey = property("curseforge_token").toString()
+
+    project {
+        id = property("curseforge_project_id").toString()
+
+        mainArtifact(tasks.findByName("remapJar") ?: tasks.named("jar")) {
+            displayName = "Redden's Stone Lanterns Reconstructed v${version}"
+        }
+
+        releaseType = "release"
+
+        addGameVersion "1.21"
+        addGameVersion property("minecraft_version").toString()
+
+        addGameVersion "Fabric"
+        addGameVersion "Quilt"
+
+        changelogType = "markdown"
+        changelog = rootProject.file("CHANGELOG.md").text
+    }
+}
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    mappings "net.fabricmc:yarn:${yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+}
+sourceSets {
+    main {
+        resources {
+            srcDirs += project(':common').file('src/main/generated')
+        }
+    }
+}
+loom {
+    def aw = project(':common').file("src/main/resources/${mod_id}.accesswidener")
+    if (aw.exists()) {
+        accessWidenerPath.set(aw)
+    }
+    mixin {
+        defaultRefmapName.set("${mod_id}.refmap.json")
+    }
+    runs {
+        client {
+            client()
+            setConfigName('Fabric Client')
+            ideConfigGenerated(true)
+            runDir('runs/client')
+        }
+        server {
+            server()
+            setConfigName('Fabric Server')
+            ideConfigGenerated(true)
+            runDir('runs/server')
+        }
+    }
+}

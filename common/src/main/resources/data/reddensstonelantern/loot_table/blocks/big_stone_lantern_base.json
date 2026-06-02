@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "reddensstonelantern:blocks/big_stone_lantern_base",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "reddensstonelantern:big_stone_lantern_mid"
+        }
+      ]
+    }
+  ]
+}

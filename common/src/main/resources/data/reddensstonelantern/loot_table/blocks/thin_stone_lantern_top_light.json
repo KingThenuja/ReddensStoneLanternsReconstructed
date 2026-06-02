@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "reddensstonelantern:blocks/thin_stone_lantern_top_light",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "reddensstonelantern:thin_stone_lantern"
+        }
+      ]
+    }
+  ]
+}
