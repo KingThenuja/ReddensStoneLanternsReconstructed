@@ -4,18 +4,20 @@ plugins {
     id "com.modrinth.minotaur"
     id "com.matthewprenger.cursegradle"
 }
+def modrinthToken = System.getenv("MODRINTH_TOKEN")
+def curseforgeToken = System.getenv("CURSEFORGE_TOKEN")
 modrinth {
-    token = property("modrinth_token").toString()
+    token = modrinthToken
     projectId = property("modrinth_project_id").toString()
     versionNumber = version.toString()
-    versionType = "release"
+    versionType = property("versionType").toString()
     uploadFile = tasks.findByName("remapJar") ?: tasks.named("jar")
-    gameVersions = ["1.21", property("minecraft_version").toString()]
+    gameVersions = [property("minecraft_version").toString()]
     loaders = ["neoforge"]
     changelog = rootProject.file("CHANGELOG.md").text
 }
 curseforge {
-    apiKey = property("curseforge_token").toString()
+    apiKey = curseforgeToken.toString()
 
     project {
         id = property("curseforge_project_id").toString()
@@ -24,9 +26,8 @@ curseforge {
             displayName = "Redden's Stone Lanterns Reconstructed v${version}"
         }
 
-        releaseType = "release"
+        releaseType = property("versionType").toString()
 
-        addGameVersion "1.21"
         addGameVersion property("minecraft_version").toString()
 
         addGameVersion "NeoForge"
@@ -48,10 +49,6 @@ neoForge {
     def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
     if (at.exists()) {
         accessTransformers.from(at.absolutePath)
-    }
-    parchment {
-        minecraftVersion = parchment_minecraft
-        mappingsVersion = parchment_version
     }
     runs {
         configureEach {
