@@ -23,8 +23,6 @@ eclipse
 run
 runs
 
-gradle.properties
-
 buildSrc/build
 buildSrc/.gradle
 

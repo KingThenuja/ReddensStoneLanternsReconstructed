@@ -4,8 +4,10 @@ plugins {
     id "com.modrinth.minotaur"
     id "com.matthewprenger.cursegradle"
 }
+def modrinthToken = System.getenv("MODRINTH_TOKEN")
+def curseforgeToken = System.getenv("CURSEFORGE_TOKEN")
 modrinth {
-    token = property("modrinth_token").toString()
+    token = modrinthToken
     projectId = property("modrinth_project_id").toString()
     versionNumber = version.toString()
     versionType = "release"
@@ -15,7 +17,7 @@ modrinth {
     changelog = rootProject.file("CHANGELOG.md").text
 }
 curseforge {
-    apiKey = property("curseforge_token").toString()
+    apiKey = curseforgeToken.toString()
 
     project {
         id = property("curseforge_project_id").toString()
