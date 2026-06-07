@@ -10,7 +10,7 @@ modrinth {
     token = modrinthToken
     projectId = property("modrinth_project_id").toString()
     versionNumber = version.toString()
-    versionType = "release"
+    versionType = property("versionType").toString()
     uploadFile = tasks.findByName("remapJar") ?: tasks.named("jar")
     gameVersions = ["1.21", property("minecraft_version").toString()]
     loaders = ["fabric", "quilt"]
@@ -26,7 +26,7 @@ curseforge {
             displayName = "Redden's Stone Lanterns Reconstructed v${version}"
         }
 
-        releaseType = "release"
+        releaseType = property("versionType").toString()
 
         addGameVersion "1.21"
         addGameVersion property("minecraft_version").toString()
