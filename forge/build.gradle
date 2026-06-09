@@ -6,7 +6,19 @@ plugins {
     id "com.matthewprenger.cursegradle"
 }
 def modrinthToken = System.getenv("MODRINTH_TOKEN")
-def curseforgeToken = System.getenv("CURSEFORGE_TOKEN")
+def secretPropsFile = rootProject.file('publishing.properties')
+def secretProps = new Properties()
+
+if (secretPropsFile.exists()) {
+    secretPropsFile.withInputStream { stream ->
+        secretProps.load(stream)
+    }
+} else {
+    logger.warn("publishing.properties file not found!")
+}
+
+def cfToken = secretProps.getProperty('curseforge_token') ?: ""
+
 modrinth {
     token = modrinthToken
     projectId = property("modrinth_project_id").toString()
@@ -18,7 +30,7 @@ modrinth {
     changelog = rootProject.file("CHANGELOG.md").text
 }
 curseforge {
-    apiKey = curseforgeToken.toString()
+    apiKey = cfToken
 
     project {
         id = property("curseforge_project_id").toString()
@@ -126,4 +138,8 @@ sourceSets.each {
     def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
     it.output.resourcesDir = dir
     it.java.destinationDirectory = dir
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
