@@ -23,6 +23,8 @@ eclipse
 run
 runs
 
+publishing.properties
+
 buildSrc/build
 buildSrc/.gradle
 
