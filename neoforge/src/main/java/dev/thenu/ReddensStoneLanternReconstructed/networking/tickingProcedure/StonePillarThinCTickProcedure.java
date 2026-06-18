@@ -5,7 +5,8 @@
 
 package dev.thenu.ReddensStoneLanternReconstructed.networking.tickingProcedure;
 
-import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.Blocks.StonePillarThinCLanternBlockFile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -34,7 +35,7 @@ public class StonePillarThinCTickProcedure {
         if (BottomIsPillar) {
             if (TopIsPillar) {
                 BlockPos _bp = BlockPos.containing(x, y, z);
-                BlockState _bs = ((Block) BlockFile.STONE_PILLAR_THIN_C_MIDDLE.get()).defaultBlockState();
+                BlockState _bs = StonePillarThinCLanternBlockFile.STONE_PILLAR_THIN_C_MIDDLE.get().defaultBlockState();
                 BlockState _bso = world.getBlockState(_bp);
 
                 for(Property<?> _propertyOld : _bso.getProperties()) {
@@ -66,7 +67,7 @@ public class StonePillarThinCTickProcedure {
                 }
             } else {
                 BlockPos _bp = BlockPos.containing(x, y, z);
-                BlockState _bs = ((Block) BlockFile.STONE_PILLAR_THIN_C_TOP.get()).defaultBlockState();
+                BlockState _bs = StonePillarThinCLanternBlockFile.STONE_PILLAR_THIN_C_TOP.get().defaultBlockState();
                 BlockState _bso = world.getBlockState(_bp);
 
                 for(Property<?> _propertyOld : _bso.getProperties()) {
@@ -99,7 +100,7 @@ public class StonePillarThinCTickProcedure {
             }
         } else if (TopIsPillar) {
             BlockPos _bp = BlockPos.containing(x, y, z);
-            BlockState _bs = ((Block) BlockFile.STONE_PILLAR_THIN_C_BOTTOM.get()).defaultBlockState();
+            BlockState _bs = StonePillarThinCLanternBlockFile.STONE_PILLAR_THIN_C_BOTTOM.get().defaultBlockState();
             BlockState _bso = world.getBlockState(_bp);
 
             for(Property<?> _propertyOld : _bso.getProperties()) {
@@ -131,7 +132,7 @@ public class StonePillarThinCTickProcedure {
             }
         } else {
             BlockPos _bp = BlockPos.containing(x, y, z);
-            BlockState _bs = ((Block) BlockFile.STONE_PILLAR_THIN_C_SHORT.get()).defaultBlockState();
+            BlockState _bs = StonePillarThinCLanternBlockFile.STONE_PILLAR_THIN_C_SHORT.get().defaultBlockState();
             BlockState _bso = world.getBlockState(_bp);
 
             for(Property<?> _propertyOld : _bso.getProperties()) {

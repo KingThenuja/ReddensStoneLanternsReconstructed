@@ -28,7 +28,6 @@ public class BroadStoneLanternBlockRightClickProcedure {
             bs = BlockFile.BROAD_STONE_LANTERN_BLOCK_DARK.getDefaultState();
         }
 
-        // Dynamically retain all matching block state properties across modifications
         for (Property<?> propertyOld : bso.getProperties()) {
             Property propertyNew = bs.getBlock().getStateManager().getProperty(propertyOld.getName());
             if (propertyNew != null && bs.get(propertyNew) != null) {
@@ -39,7 +38,6 @@ public class BroadStoneLanternBlockRightClickProcedure {
             }
         }
 
-        // Snapshot existing block entity metadata cleanly prior to block swap
         BlockEntity be = world.getBlockEntity(bp);
         NbtCompound bnbt = null;
         if (be != null) {
@@ -49,7 +47,6 @@ public class BroadStoneLanternBlockRightClickProcedure {
 
         world.setBlockState(bp, bs, 3);
 
-        // Restore snapshot information safely using the public read bridge method
         if (bnbt != null) {
             be = world.getBlockEntity(bp);
             if (be != null) {
@@ -60,7 +57,6 @@ public class BroadStoneLanternBlockRightClickProcedure {
             }
         }
 
-        // Play the ignition sound effect across both logical sides
         if (world instanceof World level) {
             if (!level.isClient()) {
                 level.playSound((PlayerEntity) null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);

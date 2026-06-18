@@ -8,6 +8,9 @@ def modrinthToken = System.getenv("MODRINTH_TOKEN")
 def secretPropsFile = rootProject.file('publishing.properties')
 def secretProps = new Properties()
 
+tasks.withType(ProcessResources).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
 if (secretPropsFile.exists()) {
     secretPropsFile.withInputStream { stream ->
         secretProps.load(stream)

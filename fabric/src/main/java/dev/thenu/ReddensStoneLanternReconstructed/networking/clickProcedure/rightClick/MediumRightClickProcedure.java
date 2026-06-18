@@ -28,7 +28,6 @@ public class MediumRightClickProcedure {
             bs = BlockFile.MEDIUM_STONE_LANTERN_TOP_LIGHT.getDefaultState();
         }
 
-        // Copy block state properties dynamically across blocks
         for (Property<?> propertyOld : bso.getProperties()) {
             Property propertyNew = bs.getBlock().getStateManager().getProperty(propertyOld.getName());
             if (propertyNew != null && bs.get(propertyNew) != null) {
@@ -39,7 +38,6 @@ public class MediumRightClickProcedure {
             }
         }
 
-        // Retain any block entity data across the transformation
         BlockEntity be = world.getBlockEntity(bp);
         NbtCompound bnbt = null;
         if (be != null) {
@@ -49,7 +47,6 @@ public class MediumRightClickProcedure {
 
         world.setBlockState(bp, bs, 3);
 
-        // Restore block entity state safely using the public read method bridge
         if (bnbt != null) {
             be = world.getBlockEntity(bp);
             if (be != null) {
@@ -60,7 +57,6 @@ public class MediumRightClickProcedure {
             }
         }
 
-        // Play the flint and steel click audio across sides cleanly
         if (world instanceof World level) {
             if (!level.isClient()) {
                 level.playSound((PlayerEntity) null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);

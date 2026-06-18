@@ -28,7 +28,6 @@ public class MininoproofRightClickProcedure {
             bs = BlockFile.MININOPROOF_STONE_LANTERN_LIGHT.getDefaultState();
         }
 
-        // Mirror existing block state values over if properties align
         for (Property<?> propertyOld : bso.getProperties()) {
             Property propertyNew = bs.getBlock().getStateManager().getProperty(propertyOld.getName());
             if (propertyNew != null && bs.get(propertyNew) != null) {
@@ -39,7 +38,6 @@ public class MininoproofRightClickProcedure {
             }
         }
 
-        // Snapshot and detach structural block entity NBT values prior to block placement
         BlockEntity be = world.getBlockEntity(bp);
         NbtCompound bnbt = null;
         if (be != null) {
@@ -49,7 +47,6 @@ public class MininoproofRightClickProcedure {
 
         world.setBlockState(bp, bs, 3);
 
-        // Safely re-hydrate the new block instance with the extracted components tag snapshot
         if (bnbt != null) {
             be = world.getBlockEntity(bp);
             if (be != null) {
@@ -60,7 +57,6 @@ public class MininoproofRightClickProcedure {
             }
         }
 
-        // Handle cross-side ignition acoustics cleanly 
         if (world instanceof World level) {
             if (!level.isClient()) {
                 level.playSound((PlayerEntity) null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);

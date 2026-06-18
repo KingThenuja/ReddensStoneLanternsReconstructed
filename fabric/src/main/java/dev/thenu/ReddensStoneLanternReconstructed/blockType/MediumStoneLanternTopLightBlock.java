@@ -36,15 +36,8 @@ import static net.minecraft.fluid.Fluids.WATER;
 public class MediumStoneLanternTopLightBlock extends Block implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
-    public MediumStoneLanternTopLightBlock() {
-        super(Settings.create()
-                .mapColor(MapColor.STONE_GRAY)
-                .sounds(BlockSoundGroup.STONE)
-                .strength(1.0F, 10.0F)
-                .luminance((state) -> 15)
-                .nonOpaque()
-                .pistonBehavior(PistonBehavior.BLOCK)
-                .solidBlock((state, world, pos) -> false));
+    public MediumStoneLanternTopLightBlock(Settings settings) {
+        super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false));
     }
 

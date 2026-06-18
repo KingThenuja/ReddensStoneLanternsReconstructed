@@ -4,8 +4,8 @@ import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.init.CreativeTabFile;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,10 +13,11 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ReddensstonelanternMod implements ModInitializer {
-    public static final Logger LOGGER = LogManager.getLogger(ReddensstonelanternMod.class);
-    public static final String MODID = "reddensstonelantern";
 
-    // Using a custom clean record instead of the deprecated net.minecraft.util.Tuple
+    public static final Logger LOGGER = LoggerFactory.getLogger("Redden's Stone Lanterns Reconstructed");
+    public static final String MOD_ID = "reddensstonelantern";
+    public static final String MODID = MOD_ID;
+
     private static final Collection<ActionEntry> workQueue = new ConcurrentLinkedQueue<>();
 
     @Override
@@ -26,7 +27,6 @@ public class ReddensstonelanternMod implements ModInitializer {
 
         initNetworking();
 
-        // Handles the delayed action tick processing
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             List<ActionEntry> actionsToRun = new ArrayList<>();
 
@@ -37,19 +37,20 @@ public class ReddensstonelanternMod implements ModInitializer {
                 }
             }
 
-            actionsToRun.forEach(entry -> entry.getAction().run());
+            for (ActionEntry entry : actionsToRun) {
+                entry.getAction().run();
+            }
             workQueue.removeAll(actionsToRun);
         });
     }
 
     private void initNetworking() {
-    }
+        }
 
     public static void queueServerWork(int tick, Runnable action) {
         workQueue.add(new ActionEntry(action, tick));
     }
 
-    // Custom helper class replacing the Tuple functionality
     private static class ActionEntry {
         private final Runnable action;
         private int ticks;

@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
-import dev.thenu.ReddensStoneLanternReconstructed.init.CreativeTabFile;
+
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -35,6 +34,26 @@ public class ReddensstonelanternMod {
     public ReddensstonelanternMod(IEventBus modEventBus) {
         NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::registerNetworking);
+
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.MediumLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.ThinLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.BroadLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.SmallStoneLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.MiniStoneLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.SmallFootLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.SmallProofLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.SmallNoProofLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.MiniNoProofLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.StonePillarThinALanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.StonePillarMidLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.StonePillarThinBLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.StonePillarThinCLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.StonePillarBigLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.StonePillarBiggerLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.BigStoneLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.BiggerStoneLanternBlockFile.register();
+        dev.thenu.ReddensStoneLanternReconstructed.Blocks.MidStoneLanternBlockFile.register();
+
         BlockFile.BLOCKS.register(modEventBus);
         BlockFile.ITEMS.register(modEventBus);
         CreativeTabFile.REGISTRY.register(modEventBus);

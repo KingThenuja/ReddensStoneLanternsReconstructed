@@ -1,11 +1,7 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package dev.thenu.ReddensStoneLanternReconstructed.world.blockPlaceProcedure;
 
-import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.Blocks.MediumLanternBlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.checkGamemode.CheckGamemode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -26,24 +22,32 @@ public class MediumPlaceProcedure {
 
     public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
         if (entity != null) {
-            if (world.isEmptyBlock(BlockPos.containing(x, y + (double)1.0F, z))) {
-                world.setBlock(BlockPos.containing(x, y + (double)1.0F, z), ((Block) BlockFile.MEDIUM_STONE_LANTERN_TOP_LIGHT.get()).defaultBlockState(), 3);
-                if (world instanceof Level) {
-                    Level _level = (Level)world;
-                    if (!_level.isClientSide()) {
-                        _level.playSound((Player)null, BlockPos.containing(x, y, z), (SoundEvent)BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.flintandsteel.use")), SoundSource.BLOCKS, 0.3F, 1.0F);
-                    } else {
-                        _level.playLocalSound(x, y, z, (SoundEvent)BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.flintandsteel.use")), SoundSource.BLOCKS, 0.3F, 1.0F, false);
+            if (world.isEmptyBlock(BlockPos.containing(x, y + 1.0D, z))) {
+                world.setBlock(BlockPos.containing(x, y + 1.0D, z), ((Block) MediumLanternBlockFile.MEDIUM_STONE_LANTERN_TOP_LIGHT.get()).defaultBlockState(), 3);
+
+                if (world instanceof Level _level) {
+                    SoundEvent flintSound = BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.flintandsteel.use"))
+                            .map(net.minecraft.core.Holder::value)
+                            .orElse(null);
+
+                    if (flintSound != null) {
+                        if (!_level.isClientSide()) {
+                            _level.playSound((Player)null, BlockPos.containing(x, y, z), flintSound, SoundSource.BLOCKS, 0.3F, 1.0F);
+                        } else {
+                            _level.playLocalSound(x, y, z, flintSound, SoundSource.BLOCKS, 0.3F, 1.0F, false);
+                        }
                     }
                 }
-            } else if ((CheckGamemode.checkGamemode(entity))) {
+            } else if (CheckGamemode.checkGamemode(entity)) {
                 BlockPos _pos = BlockPos.containing(x, y, z);
-                Block.dropResources(world.getBlockState(_pos), world, BlockPos.containing(x, y, z), (BlockEntity)null);
+                // Safe cast ensures Level is provided instead of LevelAccessor
+                if (world instanceof Level _level) {
+                    Block.dropResources(world.getBlockState(_pos), _level, BlockPos.containing(x, y, z), (BlockEntity)null);
+                }
                 world.destroyBlock(_pos, false);
             } else {
                 world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
             }
-
         }
     }
 }

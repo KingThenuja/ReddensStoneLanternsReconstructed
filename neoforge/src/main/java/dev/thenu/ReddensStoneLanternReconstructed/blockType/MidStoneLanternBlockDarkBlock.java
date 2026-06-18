@@ -5,22 +5,22 @@
 
 package dev.thenu.ReddensStoneLanternReconstructed.blockType;
 
-import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.Blocks.MidStoneLanternBlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.Blocks.MiniNoProofLanternBlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.MidStoneLanternBlockRightClickProcedure;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -39,9 +39,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class MidStoneLanternBlockDarkBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED;
 
-    public MidStoneLanternBlockDarkBlock() {
-        super(Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.STONE).sound(SoundType.STONE).strength(1.0F, 10.0F).noOcclusion().pushReaction(PushReaction.DESTROY).isRedstoneConductor((bs, br, bp) -> false));
-        this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any()).setValue(WATERLOGGED, false));
+    public MidStoneLanternBlockDarkBlock(BlockBehaviour.Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
     }
 
     public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
@@ -74,16 +74,17 @@ public class MidStoneLanternBlockDarkBlock extends Block implements SimpleWaterl
         return (Boolean)state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
-    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
-        if ((Boolean)state.getValue(WATERLOGGED)) {
-            world.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
+    @Override
+    public BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess tickAccess, BlockPos currentPos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (state.getValue(WATERLOGGED)) {
+            tickAccess.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelReader));
         }
 
-        return super.updateShape(state, facing, facingState, world, currentPos, facingPos);
+        return super.updateShape(state, levelReader, tickAccess, currentPos, direction, neighborPos, neighborState, random);
     }
 
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
-        return new ItemStack((ItemLike) BlockFile.MID_STONE_LANTERN_BLOCK_LIGHT.get());
+        return new ItemStack((ItemLike) MidStoneLanternBlockFile.MID_STONE_LANTERN_BLOCK_LIGHT.get());
     }
 
     public InteractionResult useWithoutItem(BlockState blockstate, Level world, BlockPos pos, Player entity, BlockHitResult hit) {

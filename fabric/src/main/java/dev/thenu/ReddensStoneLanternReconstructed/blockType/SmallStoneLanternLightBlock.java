@@ -34,15 +34,8 @@ import static net.minecraft.fluid.Fluids.WATER;
 public class SmallStoneLanternLightBlock extends Block implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
-    public SmallStoneLanternLightBlock() {
-        super(Settings.create()
-                .mapColor(MapColor.STONE_GRAY)
-                .sounds(BlockSoundGroup.STONE)
-                .strength(1.0F, 10.0F)
-                .luminance((state) -> 14) // Custom light value of 14 preserved
-                .nonOpaque()
-                .pistonBehavior(PistonBehavior.DESTROY)
-                .solidBlock((state, world, pos) -> false));
+    public SmallStoneLanternLightBlock(Settings settings) {
+        super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false));
     }
 

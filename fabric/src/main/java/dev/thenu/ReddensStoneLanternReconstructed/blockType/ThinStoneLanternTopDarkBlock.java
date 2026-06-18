@@ -35,14 +35,8 @@ import static net.minecraft.fluid.Fluids.WATER;
 public class ThinStoneLanternTopDarkBlock extends Block implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
-    public ThinStoneLanternTopDarkBlock() {
-        super(Settings.create()
-                .mapColor(MapColor.STONE_GRAY)
-                .sounds(BlockSoundGroup.STONE)
-                .strength(1.0F, 10.0F)
-                .nonOpaque()
-                .pistonBehavior(PistonBehavior.NORMAL)
-                .solidBlock((state, world, pos) -> false));
+    public ThinStoneLanternTopDarkBlock(Settings settings) {
+        super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false));
     }
 

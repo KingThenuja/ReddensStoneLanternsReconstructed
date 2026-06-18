@@ -1,11 +1,7 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick;
 
-import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.Blocks.SmallProofLanternBlockFile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -25,89 +21,57 @@ public class SmallproofRightClickProcedure {
     }
 
     public static void execute(LevelAccessor world, double x, double y, double z) {
-        if (world.getBlockState(BlockPos.containing(x, y, z)).getBlock() == BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT.get()) {
-            BlockPos _bp = BlockPos.containing(x, y, z);
-            BlockState _bs = ((Block) BlockFile.SMALLPROOF_STONE_LANTERN_DARK.get()).defaultBlockState();
-            BlockState _bso = world.getBlockState(_bp);
+        BlockPos _bp = BlockPos.containing(x, y, z);
+        BlockState _bso = world.getBlockState(_bp);
+        BlockState _bs;
 
-            for(Property<?> _propertyOld : _bso.getProperties()) {
-                Property _propertyNew = _bs.getBlock().getStateDefinition().getProperty(_propertyOld.getName());
-                if (_propertyNew != null && _bs.getValue(_propertyNew) != null) {
-                    try {
-                        _bs = (BlockState)_bs.setValue(_propertyNew, _bso.getValue(_propertyOld));
-                    } catch (Exception var17) {
-                    }
-                }
-            }
-
-            BlockEntity _be = world.getBlockEntity(_bp);
-            CompoundTag _bnbt = null;
-            if (_be != null) {
-                _bnbt = _be.saveWithFullMetadata(world.registryAccess());
-                _be.setRemoved();
-            }
-
-            world.setBlock(_bp, _bs, 3);
-            if (_bnbt != null) {
-                _be = world.getBlockEntity(_bp);
-                if (_be != null) {
-                    try {
-                        _be.loadWithComponents(_bnbt, world.registryAccess());
-                    } catch (Exception var16) {
-                    }
-                }
-            }
-
-            if (world instanceof Level) {
-                Level _level = (Level)world;
-                if (!_level.isClientSide()) {
-                    _level.playSound((Player)null, BlockPos.containing(x, y, z), (SoundEvent)BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.flintandsteel.use")), SoundSource.BLOCKS, 0.5F, 1.0F);
-                } else {
-                    _level.playLocalSound(x, y, z, (SoundEvent)BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.flintandsteel.use")), SoundSource.BLOCKS, 0.5F, 1.0F, false);
-                }
-            }
+        if (_bso.getBlock() == SmallProofLanternBlockFile.SMALLPROOF_STONE_LANTERN_LIGHT.get()) {
+            _bs = SmallProofLanternBlockFile.SMALLPROOF_STONE_LANTERN_DARK.get().defaultBlockState();
         } else {
-            BlockPos _bp = BlockPos.containing(x, y, z);
-            BlockState _bs = ((Block) BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT.get()).defaultBlockState();
-            BlockState _bso = world.getBlockState(_bp);
+            _bs = SmallProofLanternBlockFile.SMALLPROOF_STONE_LANTERN_LIGHT.get().defaultBlockState();
+        }
 
-            for(Property<?> _propertyOld : _bso.getProperties()) {
-                Property _propertyNew = _bs.getBlock().getStateDefinition().getProperty(_propertyOld.getName());
-                if (_propertyNew != null && _bs.getValue(_propertyNew) != null) {
-                    try {
-                        _bs = (BlockState)_bs.setValue(_propertyNew, _bso.getValue(_propertyOld));
-                    } catch (Exception var15) {
-                    }
-                }
-            }
-
-            BlockEntity _be = world.getBlockEntity(_bp);
-            CompoundTag _bnbt = null;
-            if (_be != null) {
-                _bnbt = _be.saveWithFullMetadata(world.registryAccess());
-                _be.setRemoved();
-            }
-
-            world.setBlock(_bp, _bs, 3);
-            if (_bnbt != null) {
-                _be = world.getBlockEntity(_bp);
-                if (_be != null) {
-                    try {
-                        _be.loadWithComponents(_bnbt, world.registryAccess());
-                    } catch (Exception var14) {
-                    }
-                }
-            }
-
-            if (world instanceof Level) {
-                Level _level = (Level)world;
-                if (!_level.isClientSide()) {
-                    _level.playSound((Player)null, BlockPos.containing(x, y, z), (SoundEvent)BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.flintandsteel.use")), SoundSource.BLOCKS, 0.5F, 1.0F);
-                } else {
-                    _level.playLocalSound(x, y, z, (SoundEvent)BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.flintandsteel.use")), SoundSource.BLOCKS, 0.5F, 1.0F, false);
+        for(Property<?> _propertyOld : _bso.getProperties()) {
+            Property _propertyNew = _bs.getBlock().getStateDefinition().getProperty(_propertyOld.getName());
+            if (_propertyNew != null && _bs.getValue(_propertyNew) != null) {
+                try {
+                    _bs = (BlockState)_bs.setValue(_propertyNew, _bso.getValue(_propertyOld));
+                } catch (Exception var17) {
                 }
             }
         }
 
+        BlockEntity _be = world.getBlockEntity(_bp);
+        CompoundTag _bnbt = null;
+        if (_be != null) {
+            _bnbt = _be.saveWithFullMetadata(world.registryAccess());
+            _be.setRemoved();
+        }
+
+        world.setBlock(_bp, _bs, 3);
+        if (_bnbt != null) {
+            _be = world.getBlockEntity(_bp);
+            if (_be != null) {
+                try {
+                    _be.loadWithComponents(_bnbt, world.registryAccess());
+                } catch (Exception var16) {
+                }
+            }
+        }
+
+        if (world instanceof Level) {
+            Level _level = (Level)world;
+            SoundEvent flintSound = BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.flintandsteel.use"))
+                    .map(net.minecraft.core.Holder::value)
+                    .orElse(null);
+
+            if (flintSound != null) {
+                if (!_level.isClientSide()) {
+                    _level.playSound((Player)null, _bp, flintSound, SoundSource.BLOCKS, 0.5F, 1.0F);
+                } else {
+                    _level.playLocalSound(x, y, z, flintSound, SoundSource.BLOCKS, 0.5F, 1.0F, false);
+                }
+            }
+        }
     }
 }

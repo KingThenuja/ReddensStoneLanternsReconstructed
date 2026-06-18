@@ -5,7 +5,9 @@
 
 package dev.thenu.ReddensStoneLanternReconstructed.networking.tickingProcedure;
 
-import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.Blocks.StonePillarThinALanternBlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.Blocks.StonePillarThinBLanternBlockFile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -34,7 +36,7 @@ public class StonePillarThinATickProcedure {
         if (BottomIsPillar) {
             if (!TopIsPillar) {
                 BlockPos _bp = BlockPos.containing(x, y, z);
-                BlockState _bs = ((Block) BlockFile.STONE_PILLAR_THIN_A_TOP.get()).defaultBlockState();
+                BlockState _bs = StonePillarThinALanternBlockFile.STONE_PILLAR_THIN_A_TOP.get().defaultBlockState();
                 BlockState _bso = world.getBlockState(_bp);
 
                 for(Property<?> _propertyOld : _bso.getProperties()) {
@@ -67,7 +69,7 @@ public class StonePillarThinATickProcedure {
             }
         } else if (TopIsPillar) {
             BlockPos _bp = BlockPos.containing(x, y, z);
-            BlockState _bs = ((Block) BlockFile.STONE_PILLAR_THIN_A_BOTTOM.get()).defaultBlockState();
+            BlockState _bs = StonePillarThinALanternBlockFile.STONE_PILLAR_THIN_A_BOTTOM.get().defaultBlockState();
             BlockState _bso = world.getBlockState(_bp);
 
             for(Property<?> _propertyOld : _bso.getProperties()) {
@@ -99,7 +101,7 @@ public class StonePillarThinATickProcedure {
             }
         } else {
             BlockPos _bp = BlockPos.containing(x, y, z);
-            BlockState _bs = ((Block) BlockFile.STONE_PILLAR_THIN_A_SHORT.get()).defaultBlockState();
+            BlockState _bs = StonePillarThinALanternBlockFile.STONE_PILLAR_THIN_A_SHORT.get().defaultBlockState();
             BlockState _bso = world.getBlockState(_bp);
 
             for(Property<?> _propertyOld : _bso.getProperties()) {

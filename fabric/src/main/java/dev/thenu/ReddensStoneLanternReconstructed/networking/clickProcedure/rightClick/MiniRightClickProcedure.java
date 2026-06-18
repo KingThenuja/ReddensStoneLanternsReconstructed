@@ -28,7 +28,6 @@ public class MiniRightClickProcedure {
             bs = BlockFile.MINI_STONE_LANTERN_DARK.getDefaultState();
         }
 
-        // Copy block state values across dynamically
         for (Property<?> propertyOld : bso.getProperties()) {
             Property propertyNew = bs.getBlock().getStateManager().getProperty(propertyOld.getName());
             if (propertyNew != null && bs.get(propertyNew) != null) {
@@ -39,7 +38,6 @@ public class MiniRightClickProcedure {
             }
         }
 
-        // Extract metadata tags cleanly from the previous block instance
         BlockEntity be = world.getBlockEntity(bp);
         NbtCompound bnbt = null;
         if (be != null) {
@@ -49,7 +47,6 @@ public class MiniRightClickProcedure {
 
         world.setBlockState(bp, bs, 3);
 
-        // Put block entity snapshot properties back safely via public read bridge
         if (bnbt != null) {
             be = world.getBlockEntity(bp);
             if (be != null) {
@@ -60,7 +57,6 @@ public class MiniRightClickProcedure {
             }
         }
 
-        // Replicate flint and steel audio signals on both sides
         if (world instanceof World level) {
             if (!level.isClient()) {
                 level.playSound((PlayerEntity) null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);

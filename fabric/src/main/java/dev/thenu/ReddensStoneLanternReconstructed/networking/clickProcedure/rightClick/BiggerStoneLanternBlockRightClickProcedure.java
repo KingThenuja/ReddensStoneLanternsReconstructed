@@ -28,7 +28,6 @@ public class BiggerStoneLanternBlockRightClickProcedure {
             bs = BlockFile.BIGGER_STONE_LANTERN_BLOCK_L.getDefaultState();
         }
 
-        // Mirror old block properties onto the new state if they match
         for (Property<?> propertyOld : bso.getProperties()) {
             Property propertyNew = bs.getBlock().getStateManager().getProperty(propertyOld.getName());
             if (propertyNew != null && bs.get(propertyNew) != null) {
@@ -39,7 +38,6 @@ public class BiggerStoneLanternBlockRightClickProcedure {
             }
         }
 
-        // Safely extract NBT metadata from block entity if it exists
         BlockEntity be = world.getBlockEntity(bp);
         NbtCompound bnbt = null;
         if (be != null) {
@@ -47,10 +45,8 @@ public class BiggerStoneLanternBlockRightClickProcedure {
             be.markRemoved();
         }
 
-        // Update the block in the world
         world.setBlockState(bp, bs, 3);
 
-        // Put the block entity NBT back into place using the public read() bridge
         if (bnbt != null) {
             be = world.getBlockEntity(bp);
             if (be != null) {
@@ -61,7 +57,6 @@ public class BiggerStoneLanternBlockRightClickProcedure {
             }
         }
 
-        // Play the flint and steel ignition audio cue
         if (world instanceof World level) {
             if (!level.isClient()) {
                 level.playSound((PlayerEntity) null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);

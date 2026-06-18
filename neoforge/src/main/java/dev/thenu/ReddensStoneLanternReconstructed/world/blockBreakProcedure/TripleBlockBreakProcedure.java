@@ -5,7 +5,8 @@
 
 package dev.thenu.ReddensStoneLanternReconstructed.world.blockBreakProcedure;
 
-import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.Blocks.BigStoneLanternBlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.checkGamemode.CheckGamemode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -30,7 +31,7 @@ public class TripleBlockBreakProcedure {
                 world.setBlock(BlockPos.containing(x, y - (double)2.0F, z), Blocks.AIR.defaultBlockState(), 3);
                 if (!(CheckGamemode.checkGamemode(entity) && world instanceof ServerLevel)) {
                     ServerLevel _level = (ServerLevel)world;
-                    ItemEntity entityToSpawn = new ItemEntity(_level, x, y - (double)2.0F, z, new ItemStack((ItemLike) BlockFile.BIG_STONE_LANTERN_MID.get()));
+                    ItemEntity entityToSpawn = new ItemEntity(_level, x, y - (double)2.0F, z, new ItemStack((ItemLike) BigStoneLanternBlockFile.BIG_STONE_LANTERN_MID.get()));
                     entityToSpawn.setPickUpDelay(10);
                     _level.addFreshEntity(entityToSpawn);
                 }
@@ -41,7 +42,7 @@ public class TripleBlockBreakProcedure {
                 world.setBlock(BlockPos.containing(x, y - (double)1.0F, z), Blocks.AIR.defaultBlockState(), 3);
                 if (!(CheckGamemode.checkGamemode(entity) && world instanceof ServerLevel)) {
                     ServerLevel _level = (ServerLevel)world;
-                    ItemEntity entityToSpawn = new ItemEntity(_level, x, y - (double)1.0F, z, new ItemStack((ItemLike) BlockFile.BIG_STONE_LANTERN_MID.get()));
+                    ItemEntity entityToSpawn = new ItemEntity(_level, x, y - (double)1.0F, z, new ItemStack((ItemLike) BigStoneLanternBlockFile.BIG_STONE_LANTERN_MID.get()));
                     entityToSpawn.setPickUpDelay(10);
                     _level.addFreshEntity(entityToSpawn);
                 }
@@ -52,7 +53,7 @@ public class TripleBlockBreakProcedure {
                 world.setBlock(BlockPos.containing(x, y + (double)2.0F, z), Blocks.AIR.defaultBlockState(), 3);
                 if (!(CheckGamemode.checkGamemode(entity) && world instanceof ServerLevel)) {
                     ServerLevel _level = (ServerLevel)world;
-                    ItemEntity entityToSpawn = new ItemEntity(_level, x, y, z, new ItemStack((ItemLike) BlockFile.BIG_STONE_LANTERN_MID.get()));
+                    ItemEntity entityToSpawn = new ItemEntity(_level, x, y, z, new ItemStack((ItemLike) BigStoneLanternBlockFile.BIG_STONE_LANTERN_MID.get()));
                     entityToSpawn.setPickUpDelay(10);
                     _level.addFreshEntity(entityToSpawn);
                 }

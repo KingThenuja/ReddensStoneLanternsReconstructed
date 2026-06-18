@@ -33,15 +33,8 @@ import static net.minecraft.fluid.Fluids.WATER;
 public class BroadStoneLanternBlockLightBlock extends Block implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
-    public BroadStoneLanternBlockLightBlock() {
-        super(Settings.create()
-                .mapColor(MapColor.STONE_GRAY)
-                .sounds(BlockSoundGroup.STONE)
-                .strength(1.0F, 10.0F)
-                .luminance((state) -> 15)
-                .nonOpaque()
-                .pistonBehavior(PistonBehavior.DESTROY)
-                .solidBlock((state, world, pos) -> false));
+    public BroadStoneLanternBlockLightBlock(Settings settings) {
+        super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false));
     }
 

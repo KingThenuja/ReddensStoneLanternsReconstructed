@@ -5,7 +5,9 @@
 
 package dev.thenu.ReddensStoneLanternReconstructed.networking.tickingProcedure;
 
-import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.Blocks.StonePillarBigLanternBlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.Blocks.StonePillarMidLanternBlockFile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -34,7 +36,7 @@ public class StonePillarBigTickProcedure {
         if (BottomIsPillar) {
             if (TopIsPillar) {
                 BlockPos _bp = BlockPos.containing(x, y, z);
-                BlockState _bs = ((Block) BlockFile.STONE_PILLAR_BIG_MIDDLE.get()).defaultBlockState();
+                BlockState _bs = StonePillarBigLanternBlockFile.STONE_PILLAR_BIG_MIDDLE.get().defaultBlockState();
                 BlockState _bso = world.getBlockState(_bp);
 
                 for(Property<?> _propertyOld : _bso.getProperties()) {
@@ -66,7 +68,7 @@ public class StonePillarBigTickProcedure {
                 }
             } else {
                 BlockPos _bp = BlockPos.containing(x, y, z);
-                BlockState _bs = ((Block) BlockFile.STONE_PILLAR_BIG_TOP.get()).defaultBlockState();
+                BlockState _bs = StonePillarBigLanternBlockFile.STONE_PILLAR_BIG_TOP.get().defaultBlockState();
                 BlockState _bso = world.getBlockState(_bp);
 
                 for(Property<?> _propertyOld : _bso.getProperties()) {
@@ -99,7 +101,7 @@ public class StonePillarBigTickProcedure {
             }
         } else if (TopIsPillar) {
             BlockPos _bp = BlockPos.containing(x, y, z);
-            BlockState _bs = ((Block) BlockFile.STONE_PILLAR_BIG_BOTTOM.get()).defaultBlockState();
+            BlockState _bs = StonePillarBigLanternBlockFile.STONE_PILLAR_BIG_BOTTOM.get().defaultBlockState();
             BlockState _bso = world.getBlockState(_bp);
 
             for(Property<?> _propertyOld : _bso.getProperties()) {
@@ -131,7 +133,7 @@ public class StonePillarBigTickProcedure {
             }
         } else {
             BlockPos _bp = BlockPos.containing(x, y, z);
-            BlockState _bs = ((Block) BlockFile.STONE_PILLAR_BIG_SHORT.get()).defaultBlockState();
+            BlockState _bs = StonePillarBigLanternBlockFile.STONE_PILLAR_BIG_SHORT.get().defaultBlockState();
             BlockState _bso = world.getBlockState(_bp);
 
             for(Property<?> _propertyOld : _bso.getProperties()) {
