@@ -4,6 +4,13 @@ plugins {
     id "com.modrinth.minotaur"
     id "com.matthewprenger.cursegradle"
 }
+tasks.withType(ProcessResources).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+tasks.withType(Jar).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
 def modrinthToken = System.getenv("MODRINTH_TOKEN")
 def secretPropsFile = rootProject.file('publishing.properties')
 def secretProps = new Properties()

@@ -1,13 +1,11 @@
-## Official release of the mod
+## Official release of the mod's 1.21.3 version
 
 ### *Supported versions:*
 
-- 1.21
-- 1.21.1
+- 1.21.3
 
 ### *Supported loaders:*
 
 - Fabric
 - Quilt
-- Forge
 - NeoForge
