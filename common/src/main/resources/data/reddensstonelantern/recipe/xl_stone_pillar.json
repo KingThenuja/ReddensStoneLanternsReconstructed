@@ -8,9 +8,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:cobblestone"
-    }
+    "a": "minecraft:cobblestone"
   },
   "result": {
     "id": "reddensstonelantern:stone_pillar_bigger_short",

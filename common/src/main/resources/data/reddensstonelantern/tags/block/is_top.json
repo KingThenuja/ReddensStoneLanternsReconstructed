@@ -1,13 +1,13 @@
 {
   "replace": false,
   "values": [
-    "reddensstonelantern:medium_stone_lantern_top_dark",
-    "reddensstonelantern:medium_stone_lantern_top_light",
     "reddensstonelantern:thin_stone_lantern_top_dark",
-    "reddensstonelantern:thin_stone_lantern_top_light",
-    "reddensstonelantern:broad_stone_lantern_top_dark",
     "reddensstonelantern:broad_stone_lantern_top_light",
     "reddensstonelantern:big_stone_lantern_top_light",
-    "reddensstonelantern:big_stone_lantern_top_dark"
+    "reddensstonelantern:medium_stone_lantern_top_light",
+    "reddensstonelantern:broad_stone_lantern_top_dark",
+    "reddensstonelantern:medium_stone_lantern_top_dark",
+    "reddensstonelantern:big_stone_lantern_top_dark",
+    "reddensstonelantern:thin_stone_lantern_top_light"
   ]
 }

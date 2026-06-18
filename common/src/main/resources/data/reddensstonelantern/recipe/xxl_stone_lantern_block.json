@@ -8,12 +8,8 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:cobblestone"
-    },
-    "b": {
-      "tag": "minecraft:coals"
-    }
+    "a": "minecraft:cobblestone",
+    "b": "#minecraft:coals"
   },
   "result": {
     "id": "reddensstonelantern:bigger_stone_lantern_block_l",

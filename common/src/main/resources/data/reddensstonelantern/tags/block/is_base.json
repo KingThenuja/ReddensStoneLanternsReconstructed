@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
+    "reddensstonelantern:broad_stone_lantern",
     "reddensstonelantern:medium_stone_lantern",
     "reddensstonelantern:thin_stone_lantern",
-    "reddensstonelantern:broad_stone_lantern",
     "reddensstonelantern:big_stone_lantern_base"
   ]
 }
