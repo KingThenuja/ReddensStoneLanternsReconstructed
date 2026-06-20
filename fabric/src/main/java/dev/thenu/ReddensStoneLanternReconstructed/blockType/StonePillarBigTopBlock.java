@@ -82,7 +82,7 @@ public class StonePillarBigTopBlock extends Block implements Waterloggable {
     }
 
     @Override
-    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(BlockFile.STONE_PILLAR_BIG_SHORT);
     }
 

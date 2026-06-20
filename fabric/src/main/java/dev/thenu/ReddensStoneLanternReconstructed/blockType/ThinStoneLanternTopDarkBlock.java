@@ -89,7 +89,7 @@ public class ThinStoneLanternTopDarkBlock extends Block implements Waterloggable
     }
 
     @Override
-    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(BlockFile.THIN_STONE_LANTERN);
     }
 

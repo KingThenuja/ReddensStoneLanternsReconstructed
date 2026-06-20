@@ -84,7 +84,7 @@ public class SmallfootStoneLanternDarkBlock extends Block implements Waterloggab
     }
 
     @Override
-    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(BlockFile.SMALLFOOT_STONE_LANTERN_LIGHT);
     }
 

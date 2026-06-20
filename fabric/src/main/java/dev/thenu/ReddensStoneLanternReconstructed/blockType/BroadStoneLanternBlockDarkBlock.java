@@ -87,7 +87,7 @@ public class BroadStoneLanternBlockDarkBlock extends Block implements Waterlogga
     }
 
     @Override
-    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(BlockFile.BROAD_STONE_LANTERN_BLOCK_LIGHT);
     }
 

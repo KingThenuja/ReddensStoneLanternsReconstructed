@@ -78,7 +78,7 @@ public class BiggerStoneLanternBlockDBlock extends Block implements Waterloggabl
     }
 
     @Override
-    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(BlockFile.BIGGER_STONE_LANTERN_BLOCK_L);
     }
 

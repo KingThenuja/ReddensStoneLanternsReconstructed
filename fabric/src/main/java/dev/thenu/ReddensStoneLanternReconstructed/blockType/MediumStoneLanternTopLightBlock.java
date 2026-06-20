@@ -91,7 +91,7 @@ public class MediumStoneLanternTopLightBlock extends Block implements Waterlogga
     }
 
     @Override
-    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(BlockFile.MEDIUM_STONE_LANTERN);
     }
 

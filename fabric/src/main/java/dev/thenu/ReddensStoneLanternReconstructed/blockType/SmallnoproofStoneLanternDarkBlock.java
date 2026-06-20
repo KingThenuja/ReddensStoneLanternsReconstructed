@@ -89,7 +89,7 @@ public class SmallnoproofStoneLanternDarkBlock extends Block implements Waterlog
     }
 
     @Override
-    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(BlockFile.SMALLNOPROOF_STONE_LANTERN_LIGHT);
     }
 

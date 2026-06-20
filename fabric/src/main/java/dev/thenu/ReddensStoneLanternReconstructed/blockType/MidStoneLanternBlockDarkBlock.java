@@ -87,7 +87,7 @@ public class MidStoneLanternBlockDarkBlock extends Block implements Waterloggabl
     }
 
     @Override
-    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(BlockFile.MID_STONE_LANTERN_BLOCK_LIGHT);
     }
 
