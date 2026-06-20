@@ -58,11 +58,7 @@ public class MidStoneLanternBlockRightClickProcedure {
         }
 
         if (world instanceof World level) {
-            if (!level.isClient()) {
-                level.playSound((PlayerEntity) null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
-            } else {
-                level.playSound(x, y, z, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
-            }
+            level.playSound(null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
         }
     }
 }

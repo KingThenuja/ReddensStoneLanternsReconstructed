@@ -3,8 +3,8 @@ package dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rig
 import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Property;
@@ -13,10 +13,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 public class BiggerStoneLanternBlockRightClickProcedure {
+
     public BiggerStoneLanternBlockRightClickProcedure() {
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
     public static void execute(WorldAccess world, double x, double y, double z) {
         BlockPos bp = BlockPos.ofFloored(x, y, z);
         BlockState bso = world.getBlockState(bp);
@@ -29,40 +29,41 @@ public class BiggerStoneLanternBlockRightClickProcedure {
         }
 
         for (Property<?> propertyOld : bso.getProperties()) {
-            Property propertyNew = bs.getBlock().getStateManager().getProperty(propertyOld.getName());
-            if (propertyNew != null && bs.get(propertyNew) != null) {
-                try {
-                    bs = (BlockState) bs.with(propertyNew, bso.get((Property) propertyOld));
-                } catch (Exception ignored) {
-                }
+            Property<?> propertyNew = bs.getBlock().getStateManager().getProperty(propertyOld.getName());
+            if (propertyNew != null) {
+                bs = copyProperty(bso, bs, propertyOld, propertyNew);
             }
         }
 
-        BlockEntity be = world.getBlockEntity(bp);
+        RegistryWrapper.WrapperLookup registries = world.getRegistryManager();
+        BlockEntity oldBe = world.getBlockEntity(bp);
         NbtCompound bnbt = null;
-        if (be != null) {
-            bnbt = be.createNbtWithId(world.getRegistryManager());
-            be.markRemoved();
+
+        if (oldBe != null) {
+            bnbt = oldBe.createNbtWithId(registries);
+            oldBe.markRemoved();
         }
 
         world.setBlockState(bp, bs, 3);
 
-        if (bnbt != null) {
-            be = world.getBlockEntity(bp);
-            if (be != null) {
-                try {
-                    be.read(bnbt, world.getRegistryManager()); // <-- FIXED HERE
-                } catch (Exception ignored) {
-                }
+        if (bnbt != null && world instanceof World level) {
+            BlockEntity newBe = BlockEntity.createFromNbt(bp, bs, bnbt, registries);
+            if (newBe != null) {
+                level.addBlockEntity(newBe);
             }
         }
 
         if (world instanceof World level) {
-            if (!level.isClient()) {
-                level.playSound((PlayerEntity) null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
-            } else {
-                level.playSound(x, y, z, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
-            }
+            level.playSound(null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T extends Comparable<T>> BlockState copyProperty(BlockState from, BlockState to, Property<?> srcProp, Property<?> targetProp) {
+        try {
+            return to.with((Property<T>) targetProp, from.get((Property<T>) srcProp));
+        } catch (Exception e) {
+            return to;
         }
     }
 }

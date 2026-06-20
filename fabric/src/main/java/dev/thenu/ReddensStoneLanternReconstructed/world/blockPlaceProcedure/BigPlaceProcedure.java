@@ -23,6 +23,7 @@ public class BigPlaceProcedure {
 
     public static void execute(WorldAccess world, double x, double y, double z, Entity entity) {
         if (entity != null) {
+            BlockPos bp = BlockPos.ofFloored(x, y, z);
             BlockPos basePos = BlockPos.ofFloored(x, y, z);
             BlockPos midPos = basePos.up();
             BlockPos topPos = basePos.up(2);
@@ -58,11 +59,7 @@ public class BigPlaceProcedure {
 
                 // Play ignition audio effects across both logical threads
                 if (world instanceof World level) {
-                    if (!level.isClient()) {
-                        level.playSound((PlayerEntity) null, topPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
-                    } else {
-                        level.playSound(x, y + 2.0D, z, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
-                    }
+                    level.playSound(null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
                 }
             } else if (CheckGamemode.checkGamemode(entity)) {
                 // Refund structural items or clear space if placement is obstructed in survival

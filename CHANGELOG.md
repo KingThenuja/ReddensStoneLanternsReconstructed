@@ -1,8 +1,8 @@
-## Official release of the mod's 1.21.3 version
+## Official release of the mod's 1.21.5 version
 
 ### *Supported versions:*
 
-- 1.21.3
+- 1.21.5
 
 ### *Supported loaders:*
 

@@ -27,11 +27,7 @@ public class BroadPlaceProcedure {
 
                 // Audio handling across both logical client and server threads
                 if (world instanceof World level) {
-                    if (!level.isClient()) {
-                        level.playSound((PlayerEntity) null, currentPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
-                    } else {
-                        level.playSound(x, y, z, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
-                    }
+                    level.playSound(null, currentPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
                 }
             } else if (CheckGamemode.checkGamemode(entity)) {
                 // If obstructed in survival mode, break the base block and drop items
