@@ -22,12 +22,14 @@ public class BiggerStoneLanternBlockRightClickProcedure {
         BlockState bso = world.getBlockState(bp);
         BlockState bs;
 
+        // Toggle state logic
         if (bso.getBlock() == BlockFile.BIGGER_STONE_LANTERN_BLOCK_L) {
             bs = BlockFile.BIGGER_STONE_LANTERN_BLOCK_D.getDefaultState();
         } else {
             bs = BlockFile.BIGGER_STONE_LANTERN_BLOCK_L.getDefaultState();
         }
 
+        // Copy over existing properties
         for (Property<?> propertyOld : bso.getProperties()) {
             Property<?> propertyNew = bs.getBlock().getStateManager().getProperty(propertyOld.getName());
             if (propertyNew != null) {
@@ -40,12 +42,14 @@ public class BiggerStoneLanternBlockRightClickProcedure {
         NbtCompound bnbt = null;
 
         if (oldBe != null) {
-            bnbt = oldBe.createNbtWithId(registries);
+            bnbt = oldBe.createNbt(registries);
             oldBe.markRemoved();
         }
 
+        // Apply updated block state
         world.setBlockState(bp, bs, 3);
 
+        // Re-inject NBT data cleanly onto the new BlockState layout
         if (bnbt != null && world instanceof World level) {
             BlockEntity newBe = BlockEntity.createFromNbt(bp, bs, bnbt, registries);
             if (newBe != null) {
@@ -53,6 +57,7 @@ public class BiggerStoneLanternBlockRightClickProcedure {
             }
         }
 
+        // Audio
         if (world instanceof World level) {
             level.playSound(null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
         }

@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package dev.thenu.ReddensStoneLanternReconstructed.networking.tickingProcedure;
 
 import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
@@ -12,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -19,119 +15,79 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 
 public class StonePillarThinATickProcedure {
+
     public StonePillarThinATickProcedure() {
     }
 
     public static void execute(LevelAccessor world, double x, double y, double z) {
         boolean TopIsPillar = false;
         boolean BottomIsPillar = false;
-        if (world.getBlockState(BlockPos.containing(x, y - (double)1.0F, z)).is(BlockTags.create(ResourceLocation.parse("reddensstonelantern:is_pillar")))) {
+
+        // 1. Tag lookup mapping adjustments for official runtime references
+        if (world.getBlockState(BlockPos.containing(x, y - 1.0D, z)).is(BlockTags.create(ResourceLocation.fromNamespaceAndPath("reddensstonelantern", "is_pillar")))) {
             BottomIsPillar = true;
         }
 
-        if (world.getBlockState(BlockPos.containing(x, y + (double)1.0F, z)).is(BlockTags.create(ResourceLocation.parse("reddensstonelantern:is_pillar")))) {
+        if (world.getBlockState(BlockPos.containing(x, y + 1.0D, z)).is(BlockTags.create(ResourceLocation.fromNamespaceAndPath("reddensstonelantern", "is_pillar")))) {
             TopIsPillar = true;
         }
 
+        // 2. Structural checks routing directly into a clean, unified state updater
         if (BottomIsPillar) {
             if (!TopIsPillar) {
-                BlockPos _bp = BlockPos.containing(x, y, z);
-                BlockState _bs = StonePillarThinALanternBlockFile.STONE_PILLAR_THIN_A_TOP.get().defaultBlockState();
-                BlockState _bso = world.getBlockState(_bp);
-
-                for(Property<?> _propertyOld : _bso.getProperties()) {
-                    Property _propertyNew = _bs.getBlock().getStateDefinition().getProperty(_propertyOld.getName());
-                    if (_propertyNew != null && _bs.getValue(_propertyNew) != null) {
-                        try {
-                            _bs = (BlockState)_bs.setValue(_propertyNew, _bso.getValue(_propertyOld));
-                        } catch (Exception var21) {
-                        }
-                    }
-                }
-
-                BlockEntity _be = world.getBlockEntity(_bp);
-                CompoundTag _bnbt = null;
-                if (_be != null) {
-                    _bnbt = _be.saveWithFullMetadata(world.registryAccess());
-                    _be.setRemoved();
-                }
-
-                world.setBlock(_bp, _bs, 3);
-                if (_bnbt != null) {
-                    _be = world.getBlockEntity(_bp);
-                    if (_be != null) {
-                        try {
-                            _be.loadWithComponents(_bnbt, world.registryAccess());
-                        } catch (Exception var20) {
-                        }
-                    }
-                }
+                // TOP PROFILE
+                updatePillarState(world, x, y, z, StonePillarThinALanternBlockFile.STONE_PILLAR_THIN_A_TOP.get().defaultBlockState());
             }
         } else if (TopIsPillar) {
-            BlockPos _bp = BlockPos.containing(x, y, z);
-            BlockState _bs = StonePillarThinALanternBlockFile.STONE_PILLAR_THIN_A_BOTTOM.get().defaultBlockState();
-            BlockState _bso = world.getBlockState(_bp);
-
-            for(Property<?> _propertyOld : _bso.getProperties()) {
-                Property _propertyNew = _bs.getBlock().getStateDefinition().getProperty(_propertyOld.getName());
-                if (_propertyNew != null && _bs.getValue(_propertyNew) != null) {
-                    try {
-                        _bs = (BlockState)_bs.setValue(_propertyNew, _bso.getValue(_propertyOld));
-                    } catch (Exception var19) {
-                    }
-                }
-            }
-
-            BlockEntity _be = world.getBlockEntity(_bp);
-            CompoundTag _bnbt = null;
-            if (_be != null) {
-                _bnbt = _be.saveWithFullMetadata(world.registryAccess());
-                _be.setRemoved();
-            }
-
-            world.setBlock(_bp, _bs, 3);
-            if (_bnbt != null) {
-                _be = world.getBlockEntity(_bp);
-                if (_be != null) {
-                    try {
-                        _be.loadWithComponents(_bnbt, world.registryAccess());
-                    } catch (Exception var18) {
-                    }
-                }
-            }
+            // BOTTOM PROFILE
+            updatePillarState(world, x, y, z, StonePillarThinALanternBlockFile.STONE_PILLAR_THIN_A_BOTTOM.get().defaultBlockState());
         } else {
-            BlockPos _bp = BlockPos.containing(x, y, z);
-            BlockState _bs = StonePillarThinALanternBlockFile.STONE_PILLAR_THIN_A_SHORT.get().defaultBlockState();
-            BlockState _bso = world.getBlockState(_bp);
+            // SHORT PROFILE (Standalone)
+            updatePillarState(world, x, y, z, StonePillarThinALanternBlockFile.STONE_PILLAR_THIN_A_SHORT.get().defaultBlockState());
+        }
+    }
 
-            for(Property<?> _propertyOld : _bso.getProperties()) {
-                Property _propertyNew = _bs.getBlock().getStateDefinition().getProperty(_propertyOld.getName());
-                if (_propertyNew != null && _bs.getValue(_propertyNew) != null) {
-                    try {
-                        _bs = (BlockState)_bs.setValue(_propertyNew, _bso.getValue(_propertyOld));
-                    } catch (Exception var17) {
-                    }
-                }
-            }
+    // Consolidated method to eliminate boilerplate code copies safely across all shapes
+    private static void updatePillarState(LevelAccessor world, double x, double y, double z, BlockState targetState) {
+        BlockPos _bp = BlockPos.containing(x, y, z);
+        BlockState _bso = world.getBlockState(_bp);
+        BlockState _bs = targetState;
 
-            BlockEntity _be = world.getBlockEntity(_bp);
-            CompoundTag _bnbt = null;
-            if (_be != null) {
-                _bnbt = _be.saveWithFullMetadata(world.registryAccess());
-                _be.setRemoved();
-            }
-
-            world.setBlock(_bp, _bs, 3);
-            if (_bnbt != null) {
-                _be = world.getBlockEntity(_bp);
-                if (_be != null) {
-                    try {
-                        _be.loadWithComponents(_bnbt, world.registryAccess());
-                    } catch (Exception var16) {
-                    }
-                }
+        // Type-safe property copy sequence clearing out raw compiler warnings
+        for (Property<?> _propertyOld : _bso.getProperties()) {
+            Property<?> _propertyNew = _bs.getBlock().getStateDefinition().getProperty(_propertyOld.getName());
+            if (_propertyNew != null) {
+                _bs = copyProperty(_bso, _bs, _propertyOld, _propertyNew);
             }
         }
 
+        CompoundTag _bnbt = null;
+        BlockEntity _oldBe = world.getBlockEntity(_bp);
+
+        // Extract tile data before modifying world coordinates
+        if (_oldBe != null) {
+            _bnbt = _oldBe.saveWithFullMetadata(world.registryAccess());
+            _oldBe.setRemoved();
+        }
+
+        world.setBlock(_bp, _bs, 3);
+
+        // Deserialization hook utilizing Mojang static factory systems rather than direct instance loads
+        if (_bnbt != null && world instanceof Level _level) {
+            BlockEntity _newBe = BlockEntity.loadStatic(_bp, _bs, _bnbt, _level.registryAccess());
+            if (_newBe != null) {
+                _level.setBlockEntity(_newBe);
+            }
+        }
+    }
+
+    // Type helper ensuring property parameters convert error-free during runtime updates
+    @SuppressWarnings("unchecked")
+    private static <T extends Comparable<T>> BlockState copyProperty(BlockState from, BlockState to, Property<?> srcProp, Property<?> targetProp) {
+        try {
+            return to.setValue((Property<T>) targetProp, from.getValue((Property<T>) srcProp));
+        } catch (Exception e) {
+            return to;
+        }
     }
 }

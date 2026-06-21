@@ -36,20 +36,16 @@ public class BigPlaceProcedure {
                 BlockEntity be = world.getBlockEntity(basePos);
                 NbtCompound bnbt = null;
                 if (be != null) {
-                    bnbt = be.createNbtWithId(world.getRegistryManager());
+                    bnbt = be.createNbt(world.getRegistryManager());
                     be.markRemoved();
                 }
 
                 world.setBlockState(basePos, bs, 3);
 
-                // Restore metadata snapshot securely to the base block
-                if (bnbt != null) {
-                    be = world.getBlockEntity(basePos);
-                    if (be != null) {
-                        try {
-                            be.read(bnbt, world.getRegistryManager());
-                        } catch (Exception ignored) {
-                        }
+                if (bnbt != null && world instanceof World level) {
+                    BlockEntity newBe = BlockEntity.createFromNbt(bp, bs, bnbt, world.getRegistryManager());
+                    if (newBe != null) {
+                        level.addBlockEntity(newBe);
                     }
                 }
 

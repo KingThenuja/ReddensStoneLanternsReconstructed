@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Property;
@@ -39,21 +40,19 @@ public class MediumRightClickProcedure {
         }
 
         BlockEntity be = world.getBlockEntity(bp);
+        RegistryWrapper.WrapperLookup registries = world.getRegistryManager();
         NbtCompound bnbt = null;
         if (be != null) {
-            bnbt = be.createNbtWithId(world.getRegistryManager());
+            bnbt = be.createNbt(registries);
             be.markRemoved();
         }
 
         world.setBlockState(bp, bs, 3);
 
-        if (bnbt != null) {
-            be = world.getBlockEntity(bp);
-            if (be != null) {
-                try {
-                    be.read(bnbt, world.getRegistryManager());
-                } catch (Exception ignored) {
-                }
+        if (bnbt != null && world instanceof World level) {
+            BlockEntity newBe = BlockEntity.createFromNbt(bp, bs, bnbt, registries);
+            if (newBe != null) {
+                level.addBlockEntity(newBe);
             }
         }
 

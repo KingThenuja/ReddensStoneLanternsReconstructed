@@ -41,19 +41,16 @@ public class ThinStoneLanternBlockRightClickProcedure {
         BlockEntity be = world.getBlockEntity(bp);
         NbtCompound bnbt = null;
         if (be != null) {
-            bnbt = be.createNbtWithId(world.getRegistryManager());
+            bnbt = be.createNbt(world.getRegistryManager());
             be.markRemoved();
         }
 
         world.setBlockState(bp, bs, 3);
 
-        if (bnbt != null) {
-            be = world.getBlockEntity(bp);
-            if (be != null) {
-                try {
-                    be.read(bnbt, world.getRegistryManager());
-                } catch (Exception ignored) {
-                }
+        if (bnbt != null && world instanceof World level) {
+            BlockEntity newBe = BlockEntity.createFromNbt(bp, bs, bnbt, world.getRegistryManager());
+            if (newBe != null) {
+                level.addBlockEntity(newBe);
             }
         }
 

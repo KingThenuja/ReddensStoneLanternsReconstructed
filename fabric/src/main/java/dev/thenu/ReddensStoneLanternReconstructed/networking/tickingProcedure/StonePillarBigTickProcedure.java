@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 public class StonePillarBigTickProcedure {
@@ -55,20 +56,17 @@ public class StonePillarBigTickProcedure {
         BlockEntity be = world.getBlockEntity(bp);
         NbtCompound bnbt = null;
         if (be != null) {
-            bnbt = be.createNbtWithId(world.getRegistryManager());
+            bnbt = be.createNbt(world.getRegistryManager());
             be.markRemoved();
         }
 
         world.setBlockState(bp, bs, 3);
 
         // Safely re-apply snapped metadata to the freshly placed pillar segment
-        if (bnbt != null) {
-            be = world.getBlockEntity(bp);
-            if (be != null) {
-                try {
-                    be.read(bnbt, world.getRegistryManager());
-                } catch (Exception ignored) {
-                }
+        if (bnbt != null && world instanceof World level) {
+            BlockEntity newBe = BlockEntity.createFromNbt(bp, bs, bnbt, world.getRegistryManager());
+            if (newBe != null) {
+                level.addBlockEntity(newBe);
             }
         }
     }
