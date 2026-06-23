@@ -17,6 +17,9 @@
     "entrypoints": {
         "main": [
           "dev.thenu.ReddensStoneLanternReconstructed.ReddensstonelanternMod"
+        ],
+        "client": [
+            "dev.thenu.ReddensStoneLanternReconstructed.client.ClientMod"
         ]
     },
     "depends": {

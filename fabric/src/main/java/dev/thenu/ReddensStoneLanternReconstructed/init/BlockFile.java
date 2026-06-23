@@ -91,8 +91,8 @@ public class BlockFile {
     public static Item MINI_STONE_LANTERN_LIGHT_ITEM;
     public static Item SMALLFOOT_STONE_LANTERN_DARK_ITEM;
     public static Item SMALLFOOT_STONE_LANTERN_LIGHT_ITEM;
-    public static Item SMALLPROOF_STONE_LANTERN_DARK_ITEM;
-    public static Item SMALLPROOF_STONE_LANTERN_LIGHT_ITEM;
+    //public static Item SMALLPROOF_STONE_LANTERN_DARK_ITEM;
+    //public static Item SMALLPROOF_STONE_LANTERN_LIGHT_ITEM;
     public static Item SMALLNOPROOF_STONE_LANTERN_DARK_ITEM;
     public static Item SMALLNOPROOF_STONE_LANTERN_LIGHT_ITEM;
     public static Item MININOPROOF_STONE_LANTERN_DARK_ITEM;
@@ -214,11 +214,13 @@ public class BlockFile {
         SMALLFOOT_STONE_LANTERN_LIGHT = registerBlock("smallfoot_stone_lantern_light", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).luminance((state) -> 14).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), SmallfootStoneLanternLightBlock::new);
         SMALLFOOT_STONE_LANTERN_LIGHT_ITEM = registerBlockItem("smallfoot_stone_lantern_light", SMALLFOOT_STONE_LANTERN_LIGHT);
 
+        /*
         SMALLPROOF_STONE_LANTERN_DARK = registerBlock("smallproof_stone_lantern_dark", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), SmallproofStoneLanternDarkBlock::new);
         SMALLPROOF_STONE_LANTERN_DARK_ITEM = registerBlockItem("smallproof_stone_lantern_dark", SMALLPROOF_STONE_LANTERN_DARK);
 
         SMALLPROOF_STONE_LANTERN_LIGHT = registerBlock("smallproof_stone_lantern_light", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).luminance((state) -> 14).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), SmallproofStoneLanternLightBlock::new);
         SMALLPROOF_STONE_LANTERN_LIGHT_ITEM = registerBlockItem("smallproof_stone_lantern_light", SMALLPROOF_STONE_LANTERN_LIGHT);
+        */
 
         SMALLNOPROOF_STONE_LANTERN_DARK = registerBlock("smallnoproof_stone_lantern_dark", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), SmallnoproofStoneLanternDarkBlock::new);
         SMALLNOPROOF_STONE_LANTERN_DARK_ITEM = registerBlockItem("smallnoproof_stone_lantern_dark", SMALLNOPROOF_STONE_LANTERN_DARK);
@@ -322,11 +324,12 @@ public class BlockFile {
         THIN_STONE_LANTERN_BLOCK_LIGHT = registerBlock("thin_stone_lantern_block_light", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).luminance((state) -> 15).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), ThinStoneLanternBlockLightBlock::new);
         THIN_STONE_LANTERN_BLOCK_LIGHT_ITEM = registerBlockItem("thin_stone_lantern_block_light", THIN_STONE_LANTERN_BLOCK_LIGHT);
     }
+
     private static Block registerBlock(String name, AbstractBlock.Settings baseSettings, java.util.function.Function<AbstractBlock.Settings, Block> blockFactory) {
         RegistryKey<Block> blockKey = RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(ReddensstonelanternMod.MODID, name));
         AbstractBlock.Settings settings = baseSettings.registryKey(blockKey);
         Block block = blockFactory.apply(settings);
-        return Registry.register(Registries.BLOCK, Identifier.of(ReddensstonelanternMod.MODID, name), block);
+        return Registry.register(Registries.BLOCK, blockKey, block);
     }
 
     private static Item registerBlockItem(String name, Block block) {

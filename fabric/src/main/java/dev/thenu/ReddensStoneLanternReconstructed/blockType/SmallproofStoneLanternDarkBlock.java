@@ -3,14 +3,11 @@ package dev.thenu.ReddensStoneLanternReconstructed.blockType;
 import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.SmallproofRightClickProcedure;
 import net.minecraft.block.*;
-import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -23,7 +20,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.OrderedTick;
 import net.minecraft.world.tick.ScheduledTickView;
@@ -61,13 +57,13 @@ public class SmallproofStoneLanternDarkBlock extends Block implements Waterlogga
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext context) {
-        boolean flag = context.getWorld().getFluidState(context.getBlockPos()).getFluid() == Fluids.WATER;
+        boolean flag = context.getWorld().getFluidState(context.getBlockPos()).getFluid() == WATER;
         return super.getPlacementState(context).with(WATERLOGGED, flag);
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.get(WATERLOGGED) ? WATER.getStill(false) : super.getFluidState(state);
     }
 
 
@@ -94,6 +90,7 @@ public class SmallproofStoneLanternDarkBlock extends Block implements Waterlogga
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient) {
             SmallproofRightClickProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
+
         }
         return ActionResult.SUCCESS;
     }
