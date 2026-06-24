@@ -1,6 +1,5 @@
 package dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick;
 
-import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.Blocks.SmallProofLanternBlockFile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -9,7 +8,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
