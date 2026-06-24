@@ -30,6 +30,7 @@ modrinth {
     gameVersions = [property("minecraft_version").toString()]
     loaders = ["neoforge"]
     changelog = rootProject.file("CHANGELOG.md").text
+
 }
 curseforge {
     apiKey = cfToken

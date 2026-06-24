@@ -34,6 +34,7 @@ modrinth {
     gameVersions = [property("minecraft_version").toString()]
     loaders = ["fabric", "quilt"]
     changelog = rootProject.file("CHANGELOG.md").text
+
 }
 curseforge {
     apiKey = cfToken
