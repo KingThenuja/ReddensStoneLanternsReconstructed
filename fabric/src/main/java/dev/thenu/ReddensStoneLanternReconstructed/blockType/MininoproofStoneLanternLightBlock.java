@@ -94,7 +94,7 @@ public class MininoproofStoneLanternLightBlock extends Block implements Waterlog
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             MininoproofRightClickProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
         }
         return ActionResult.SUCCESS;

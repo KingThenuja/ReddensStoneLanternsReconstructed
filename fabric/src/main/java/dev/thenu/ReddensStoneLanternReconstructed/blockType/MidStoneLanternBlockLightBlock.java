@@ -94,7 +94,7 @@ public class MidStoneLanternBlockLightBlock extends Block implements Waterloggab
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             MidStoneLanternBlockRightClickProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
         }
         return ActionResult.SUCCESS;

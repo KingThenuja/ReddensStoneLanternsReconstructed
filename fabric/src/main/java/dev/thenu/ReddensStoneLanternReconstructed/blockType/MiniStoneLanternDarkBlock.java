@@ -92,7 +92,7 @@ public class MiniStoneLanternDarkBlock extends Block implements Waterloggable {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             MiniRightClickProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
         }
         return ActionResult.SUCCESS;

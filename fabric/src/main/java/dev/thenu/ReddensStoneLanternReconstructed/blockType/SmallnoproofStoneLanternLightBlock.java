@@ -97,7 +97,7 @@ public class SmallnoproofStoneLanternLightBlock extends Block implements Waterlo
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             SmallnoproofRightClickProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
         }
         return ActionResult.SUCCESS;

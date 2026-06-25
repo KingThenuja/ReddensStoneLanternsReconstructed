@@ -48,6 +48,7 @@ public class ReddensstonelanternMod implements ModInitializer {
         }
 
     public static void queueServerWork(int tick, Runnable action) {
+
         workQueue.add(new ActionEntry(action, tick));
     }
 
