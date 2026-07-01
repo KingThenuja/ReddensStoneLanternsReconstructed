@@ -30,14 +30,14 @@ modrinth {
 }
 tasks.register('publishCurseForge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
     apiToken = cfToken
-    def projectId = property("curseforge_project_id").toString()
+    def projectId = ("${curseforge_project_id}").toLong()
     def mainFile = upload(projectId, tasks.findByName("remapJar") ?: tasks.named("jar"))
     mainFile.displayName = "Redden's Stone Lanterns Reconstructed v${version}"
-    mainFile.releaseType = property("versionType").toString()
+    mainFile.releaseType = "${versionType}"
     mainFile.changelogType = "markdown"
     mainFile.changelog = rootProject.file("CHANGELOG.md").text
     mainFile.addGameVersion("1.21")
-    mainFile.addGameVersion(property("minecraft_version").toString())
+    mainFile.addGameVersion("${minecraft_version}")
     mainFile.addModLoader("NeoForge")
 }
 
