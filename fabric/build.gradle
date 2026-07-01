@@ -2,7 +2,7 @@ plugins {
     id 'multiloader-loader'
     id 'fabric-loom'
     id "com.modrinth.minotaur"
-    id "com.matthewprenger.cursegradle"
+    id "net.darkhax.curseforgegradle"
 }
 def modrinthToken = System.getenv("MODRINTH_TOKEN")
 def secretPropsFile = rootProject.file('publishing.properties')
@@ -28,28 +28,24 @@ modrinth {
     loaders = ["fabric", "quilt"]
     changelog = rootProject.file("CHANGELOG.md").text
 }
-curseforge {
-    apiKey = cfToken
-
-    project {
-        id = property("curseforge_project_id").toString()
-
-        mainArtifact(tasks.findByName("remapJar") ?: tasks.named("jar")) {
-            displayName = "Redden's Stone Lanterns Reconstructed v${version}"
-        }
-
-        releaseType = property("versionType").toString()
-
-        addGameVersion "1.21"
-        addGameVersion property("minecraft_version").toString()
-
-        addGameVersion "Fabric"
-        addGameVersion "Quilt"
-
-        changelogType = "markdown"
-        changelog = rootProject.file("CHANGELOG.md").text
-    }
+tasks.register('publishCurseForge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    apiToken = cfToken
+    def projectId = property("curseforge_project_id").toString()
+    def mainFile = upload(projectId, tasks.findByName("remapJar") ?: tasks.named("jar"))
+    mainFile.displayName = "Redden's Stone Lanterns Reconstructed v${version}"
+    mainFile.releaseType = property("versionType").toString()
+    mainFile.changelogType = "markdown"
+    mainFile.changelog = rootProject.file("CHANGELOG.md").text
+    mainFile.addGameVersion("1.21")
+    mainFile.addGameVersion(property("minecraft_version").toString())
+    mainFile.addModLoader("Fabric")
+    mainFile.addModLoader("Quilt")
 }
+
+tasks.named('publishCurseForge').configure {
+    dependsOn tasks.findByName("remapJar") ?: tasks.named("jar")
+}
+
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
     mappings "net.fabricmc:yarn:${yarn_mappings}:v2"
