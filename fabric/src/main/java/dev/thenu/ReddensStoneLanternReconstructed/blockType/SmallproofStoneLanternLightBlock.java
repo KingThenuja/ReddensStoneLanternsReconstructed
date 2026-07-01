@@ -1,5 +1,6 @@
 package dev.thenu.ReddensStoneLanternReconstructed.blockType;
 
+import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.SmallproofRightClickProcedure;
 import dev.thenu.ReddensStoneLanternReconstructed.world.blockPlaceProcedure.LanternPlaceSoundProcedure;
 import net.minecraft.block.*;
@@ -8,6 +9,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -71,6 +73,11 @@ public class SmallproofStoneLanternLightBlock extends Block implements Waterlogg
     public BlockState getPlacementState(ItemPlacementContext context) {
         boolean flag = context.getWorld().getFluidState(context.getBlockPos()).getFluid() == Fluids.WATER;
         return super.getPlacementState(context).with(WATERLOGGED, flag);
+    }
+
+    @Override
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
+        return new ItemStack(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
     }
 
     @Override

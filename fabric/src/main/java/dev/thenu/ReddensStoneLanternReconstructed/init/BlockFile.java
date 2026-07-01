@@ -91,8 +91,8 @@ public class BlockFile {
     public static Item MINI_STONE_LANTERN_LIGHT_ITEM;
     public static Item SMALLFOOT_STONE_LANTERN_DARK_ITEM;
     public static Item SMALLFOOT_STONE_LANTERN_LIGHT_ITEM;
-    /*public static Item SMALLPROOF_STONE_LANTERN_DARK_ITEM;
-    public static Item SMALLPROOF_STONE_LANTERN_LIGHT_ITEM;*/
+    public static Item SMALLPROOF_STONE_LANTERN_DARK_ITEM;
+    public static Item SMALLPROOF_STONE_LANTERN_LIGHT_ITEM;
     public static Item SMALLNOPROOF_STONE_LANTERN_DARK_ITEM;
     public static Item SMALLNOPROOF_STONE_LANTERN_LIGHT_ITEM;
     public static Item MININOPROOF_STONE_LANTERN_DARK_ITEM;
@@ -149,10 +149,8 @@ public class BlockFile {
         BIG_STONE_LANTERN_TOP_LIGHT = registerBlock("big_stone_lantern_top_light", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).luminance((s) -> 15).nonOpaque().pistonBehavior(PistonBehavior.NORMAL).solidBlock((state, world, pos) -> false), BigStoneLanternTopLightBlock::new);
         BIG_STONE_LANTERN_TOP_LIGHT_ITEM = registerBlockItem("big_stone_lantern_top_light", BIG_STONE_LANTERN_TOP_LIGHT);
 
-
         BROAD_STONE_LANTERN = registerBlock("broad_stone_lantern", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.BLOCK).solidBlock((state, world, pos) -> false), BroadStoneLanternBlock::new);
         BROAD_STONE_LANTERN_ITEM = registerBlockItem("broad_stone_lantern", BROAD_STONE_LANTERN);
-
 
         BIGGER_STONE_LANTERN_BLOCK_D = registerBlock("bigger_stone_lantern_block_d", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), BiggerStoneLanternBlockDBlock::new);
         BIGGER_STONE_LANTERN_BLOCK_D_ITEM = registerBlockItem("bigger_stone_lantern_block_d", BIGGER_STONE_LANTERN_BLOCK_D);
@@ -163,13 +161,11 @@ public class BlockFile {
         BIGGER_STONE_LANTERN_PROOF = registerBlock("bigger_stone_lantern_proof", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), BiggerStoneLanternProofBlock::new);
         BIGGER_STONE_LANTERN_PROOF_ITEM = registerBlockItem("bigger_stone_lantern_proof", BIGGER_STONE_LANTERN_PROOF);
 
-
         BIG_STONE_LANTERN_BLOCK_DARK = registerBlock("big_stone_lantern_block_dark", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), BigStoneLanternBlockDarkBlock::new);
         BIG_STONE_LANTERN_BLOCK_DARK_ITEM = registerBlockItem("big_stone_lantern_block_dark", BIG_STONE_LANTERN_BLOCK_DARK);
 
         BIG_STONE_LANTERN_BLOCK_LIGHT = registerBlock("big_stone_lantern_block_light", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).luminance((s) -> 15).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), BigStoneLanternBlockLightBlock::new);
         BIG_STONE_LANTERN_BLOCK_LIGHT_ITEM = registerBlockItem("big_stone_lantern_block_light", BIG_STONE_LANTERN_BLOCK_LIGHT);
-
 
         MEDIUM_STONE_LANTERN = registerBlock("medium_stone_lantern", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.BLOCK).solidBlock((state, world, pos) -> false), MediumStoneLanternBlock::new);
         MEDIUM_STONE_LANTERN_ITEM = registerBlockItem("medium_stone_lantern", MEDIUM_STONE_LANTERN);
@@ -188,7 +184,6 @@ public class BlockFile {
 
         THIN_STONE_LANTERN_TOP_LIGHT = registerBlock("thin_stone_lantern_top_light", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).luminance((state) -> 15).nonOpaque().pistonBehavior(PistonBehavior.NORMAL).solidBlock((state, world, pos) -> false), ThinStoneLanternTopLightBlock::new);
         THIN_STONE_LANTERN_TOP_LIGHT_ITEM = registerBlockItem("thin_stone_lantern_top_light", THIN_STONE_LANTERN_TOP_LIGHT);
-
         
         BROAD_STONE_LANTERN_TOP_DARK = registerBlock("broad_stone_lantern_top_dark", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.BLOCK).solidBlock((state, world, pos) -> false), BroadStoneLanternTopDarkBlock::new);
         BROAD_STONE_LANTERN_TOP_DARK_ITEM = registerBlockItem("broad_stone_lantern_top_dark", BROAD_STONE_LANTERN_TOP_DARK);
@@ -213,13 +208,13 @@ public class BlockFile {
 
         SMALLFOOT_STONE_LANTERN_LIGHT = registerBlock("smallfoot_stone_lantern_light", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).luminance((state) -> 14).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), SmallfootStoneLanternLightBlock::new);
         SMALLFOOT_STONE_LANTERN_LIGHT_ITEM = registerBlockItem("smallfoot_stone_lantern_light", SMALLFOOT_STONE_LANTERN_LIGHT);
-        /*
+
         SMALLPROOF_STONE_LANTERN_DARK = registerBlock("smallproof_stone_lantern_dark", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), SmallproofStoneLanternDarkBlock::new);
         SMALLPROOF_STONE_LANTERN_DARK_ITEM = registerBlockItem("smallproof_stone_lantern_dark", SMALLPROOF_STONE_LANTERN_DARK);
 
         SMALLPROOF_STONE_LANTERN_LIGHT = registerBlock("smallproof_stone_lantern_light", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).luminance((state) -> 14).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), SmallproofStoneLanternLightBlock::new);
         SMALLPROOF_STONE_LANTERN_LIGHT_ITEM = registerBlockItem("smallproof_stone_lantern_light", SMALLPROOF_STONE_LANTERN_LIGHT);
-*/
+
         SMALLNOPROOF_STONE_LANTERN_DARK = registerBlock("smallnoproof_stone_lantern_dark", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), SmallnoproofStoneLanternDarkBlock::new);
         SMALLNOPROOF_STONE_LANTERN_DARK_ITEM = registerBlockItem("smallnoproof_stone_lantern_dark", SMALLNOPROOF_STONE_LANTERN_DARK);
 
@@ -298,26 +293,20 @@ public class BlockFile {
         STONE_PILLAR_BIGGER_TOP = registerBlock("stone_pillar_bigger_top", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), StonePillarBiggerTopBlock::new);
         STONE_PILLAR_BIGGER_TOP_ITEM = registerBlockItem("stone_pillar_bigger_top", STONE_PILLAR_BIGGER_TOP);
 
-
         BROAD_STONE_LANTERN_BLOCK_DARK = registerBlock("broad_stone_lantern_block_dark", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), BroadStoneLanternBlockDarkBlock::new);
         BROAD_STONE_LANTERN_BLOCK_DARK_ITEM = registerBlockItem("broad_stone_lantern_block_dark", BROAD_STONE_LANTERN_BLOCK_DARK);
-
 
         BROAD_STONE_LANTERN_BLOCK_LIGHT = registerBlock("broad_stone_lantern_block_light", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).luminance((state) -> 15).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), BroadStoneLanternBlockLightBlock::new);
         BROAD_STONE_LANTERN_BLOCK_LIGHT_ITEM = registerBlockItem("broad_stone_lantern_block_light", BROAD_STONE_LANTERN_BLOCK_LIGHT);
 
-
         MID_STONE_LANTERN_BLOCK_DARK = registerBlock("mid_stone_lantern_block_dark", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), MidStoneLanternBlockDarkBlock::new);
         MID_STONE_LANTERN_BLOCK_DARK_ITEM = registerBlockItem("mid_stone_lantern_block_dark", MID_STONE_LANTERN_BLOCK_DARK);
-
 
         MID_STONE_LANTERN_BLOCK_LIGHT = registerBlock("mid_stone_lantern_block_light", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).luminance((state) -> 15).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), MidStoneLanternBlockLightBlock::new);
         MID_STONE_LANTERN_BLOCK_LIGHT_ITEM = registerBlockItem("mid_stone_lantern_block_light", MID_STONE_LANTERN_BLOCK_LIGHT);
 
-
         THIN_STONE_LANTERN_BLOCK_DARK = registerBlock("thin_stone_lantern_block_dark", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), ThinStoneLanternBlockDarkBlock::new);
         THIN_STONE_LANTERN_BLOCK_DARK_ITEM = registerBlockItem("thin_stone_lantern_block_dark", THIN_STONE_LANTERN_BLOCK_DARK);
-
 
         THIN_STONE_LANTERN_BLOCK_LIGHT = registerBlock("thin_stone_lantern_block_light", AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).sounds(BlockSoundGroup.STONE).strength(1.0F, 10.0F).luminance((state) -> 15).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).solidBlock((state, world, pos) -> false), ThinStoneLanternBlockLightBlock::new);
         THIN_STONE_LANTERN_BLOCK_LIGHT_ITEM = registerBlockItem("thin_stone_lantern_block_light", THIN_STONE_LANTERN_BLOCK_LIGHT);

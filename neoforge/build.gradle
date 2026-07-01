@@ -2,7 +2,7 @@ plugins {
     id 'multiloader-loader'
     id 'net.neoforged.moddev'
     id "com.modrinth.minotaur"
-    id "com.matthewprenger.cursegradle"
+    id "net.darkhax.curseforgegradle"
 }
 def modrinthToken = System.getenv("MODRINTH_TOKEN")
 def secretPropsFile = rootProject.file('publishing.properties')
@@ -32,26 +32,23 @@ modrinth {
     changelog = rootProject.file("CHANGELOG.md").text
 
 }
-curseforge {
-    apiKey = cfToken
 
-    project {
-        id = property("curseforge_project_id").toString()
-
-        mainArtifact(tasks.named("jar").flatMap { it.archiveFile }) {
-            displayName = "Redden's Stone Lanterns Reconstructed v${version}"
-        }
-
-        releaseType = property("versionType").toString()
-
-        addGameVersion property("minecraft_version").toString()
-
-        addGameVersion "NeoForge"
-
-        changelogType = "markdown"
-        changelog = rootProject.file("CHANGELOG.md").text
-    }
+tasks.register('publishCurseForge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    apiToken = cfToken
+    def projectId = ("${curseforge_project_id}").toLong()
+    def mainFile = upload(projectId, tasks.findByName("remapJar") ?: tasks.named("jar"))
+    mainFile.displayName = "Redden's Stone Lanterns Reconstructed v${version}"
+    mainFile.releaseType = "${versionType}"
+    mainFile.changelogType = "markdown"
+    mainFile.changelog = rootProject.file("CHANGELOG.md").text
+    mainFile.addGameVersion("${minecraft_version}")
+    mainFile.addModLoader("NeoForge")
 }
+
+tasks.named('publishCurseForge').configure {
+    dependsOn tasks.findByName("remapJar") ?: tasks.named("jar")
+}
+
 sourceSets {
     main {
         resources {

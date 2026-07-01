@@ -33,7 +33,7 @@ public class SmallRightClickProcedure {
             Property propertyNew = bs.getBlock().getStateManager().getProperty(propertyOld.getName());
             if (propertyNew != null && bs.get(propertyNew) != null) {
                 try {
-                    bs = (BlockState) bs.with(propertyNew, bso.get((Property) propertyOld));
+                    bs = bs.with(propertyNew, bso.get((Property) propertyOld));
                 } catch (Exception ignored) {
                 }
             }
