@@ -26,7 +26,7 @@ public class CreativeTabFile {
                             entries.add(BlockFile.SMALL_STONE_LANTERN_LIGHT);
                             entries.add(BlockFile.MINI_STONE_LANTERN_LIGHT);
                             entries.add(BlockFile.SMALLFOOT_STONE_LANTERN_LIGHT);
-                            //entries.add(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
+                            entries.add(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
                             entries.add(BlockFile.SMALLNOPROOF_STONE_LANTERN_LIGHT);
                             entries.add(BlockFile.MININOPROOF_STONE_LANTERN_LIGHT);
                             entries.add(BlockFile.STONE_PILLAR_THIN_A_SHORT);

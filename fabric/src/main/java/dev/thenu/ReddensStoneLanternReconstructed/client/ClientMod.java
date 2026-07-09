@@ -25,6 +25,12 @@ public class ClientMod implements ClientModInitializer {
         registerCutout("small_stone_lantern_top_dark");
         registerCutout("small_stone_lantern_top_light");
 
+        registerCutout("thin_stone_lantern");
+        registerCutout("thin_stone_lantern_top_dark");
+        registerCutout("thin_stone_lantern_top_light");
+        registerCutout("thin_stone_lantern_block_dark");
+        registerCutout("thin_stone_lantern_block_light");
+
         registerCutout("big_stone_lantern_base");
         registerCutout("big_stone_lantern_mid");
         registerCutout("big_stone_lantern_top_light");
