@@ -5,11 +5,10 @@
 
 package dev.thenu.ReddensStoneLanternReconstructed.world.blockBreakProcedure;
 
-import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.Blocks.BigStoneLanternBlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.checkGamemode.CheckGamemode;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
@@ -26,7 +25,7 @@ public class TripleBlockBreakProcedure {
 
     public static void execute(LevelAccessor world, double x, double y, double z, BlockState blockstate, Entity entity) {
         if (entity != null) {
-            if (blockstate.is(BlockTags.create(ResourceLocation.parse("reddensstonelantern:is_top")))) {
+            if (blockstate.is(BlockTags.create(Identifier.parse("reddensstonelantern:is_top")))) {
                 world.setBlock(BlockPos.containing(x, y - (double)1.0F, z), Blocks.AIR.defaultBlockState(), 3);
                 world.setBlock(BlockPos.containing(x, y - (double)2.0F, z), Blocks.AIR.defaultBlockState(), 3);
                 if (!(CheckGamemode.checkGamemode(entity) && world instanceof ServerLevel)) {
@@ -37,7 +36,7 @@ public class TripleBlockBreakProcedure {
                 }
             }
 
-            if (blockstate.is(BlockTags.create(ResourceLocation.parse("reddensstonelantern:is_mid")))) {
+            if (blockstate.is(BlockTags.create(Identifier.parse("reddensstonelantern:is_mid")))) {
                 world.setBlock(BlockPos.containing(x, y + (double)1.0F, z), Blocks.AIR.defaultBlockState(), 3);
                 world.setBlock(BlockPos.containing(x, y - (double)1.0F, z), Blocks.AIR.defaultBlockState(), 3);
                 if (!(CheckGamemode.checkGamemode(entity) && world instanceof ServerLevel)) {
@@ -48,7 +47,7 @@ public class TripleBlockBreakProcedure {
                 }
             }
 
-            if (blockstate.is(BlockTags.create(ResourceLocation.parse("reddensstonelantern:is_base")))) {
+            if (blockstate.is(BlockTags.create(Identifier.parse("reddensstonelantern:is_base")))) {
                 world.setBlock(BlockPos.containing(x, y + (double)1.0F, z), Blocks.AIR.defaultBlockState(), 3);
                 world.setBlock(BlockPos.containing(x, y + (double)2.0F, z), Blocks.AIR.defaultBlockState(), 3);
                 if (!(CheckGamemode.checkGamemode(entity) && world instanceof ServerLevel)) {

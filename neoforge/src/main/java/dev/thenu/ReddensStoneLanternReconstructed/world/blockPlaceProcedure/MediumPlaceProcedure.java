@@ -5,7 +5,7 @@ import dev.thenu.ReddensStoneLanternReconstructed.Blocks.MediumLanternBlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.checkGamemode.CheckGamemode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -26,7 +26,7 @@ public class MediumPlaceProcedure {
                 world.setBlock(BlockPos.containing(x, y + 1.0D, z), ((Block) MediumLanternBlockFile.MEDIUM_STONE_LANTERN_TOP_LIGHT.get()).defaultBlockState(), 3);
 
                 if (world instanceof Level _level) {
-                    SoundEvent flintSound = BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.flintandsteel.use"))
+                    SoundEvent flintSound = BuiltInRegistries.SOUND_EVENT.get(Identifier.parse("item.flintandsteel.use"))
                             .map(net.minecraft.core.Holder::value)
                             .orElse(null);
 

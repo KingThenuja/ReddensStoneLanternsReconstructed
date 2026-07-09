@@ -7,7 +7,7 @@ package dev.thenu.ReddensStoneLanternReconstructed.world.blockBreakProcedure;
 
 import dev.thenu.ReddensStoneLanternReconstructed.networking.checkGamemode.CheckGamemode;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;
@@ -22,7 +22,7 @@ public class DoubleBlockBreakProcedure {
 
     public static void execute(LevelAccessor world, double x, double y, double z, BlockState blockstate, Entity entity) {
         if (entity != null) {
-            if (blockstate.is(BlockTags.create(ResourceLocation.parse("reddensstonelantern:is_top")))) {
+            if (blockstate.is(BlockTags.create(Identifier.parse("reddensstonelantern:is_top")))) {
                 if (!(CheckGamemode.checkGamemode(entity))) {
                     BlockPos _pos = BlockPos.containing(x, y - (double)1.0F, z);
                     Block.dropResources(world.getBlockState(_pos), world, BlockPos.containing(x, y - (double)1.0F, z), (BlockEntity)null);
@@ -34,7 +34,7 @@ public class DoubleBlockBreakProcedure {
                 world.levelEvent(2001, BlockPos.containing(x, y - (double)1.0F, z), Block.getId(Blocks.ANDESITE_WALL.defaultBlockState()));
             }
 
-            if (blockstate.is(BlockTags.create(ResourceLocation.parse("reddensstonelantern:is_base")))) {
+            if (blockstate.is(BlockTags.create(Identifier.parse("reddensstonelantern:is_base")))) {
                 if (!(CheckGamemode.checkGamemode(entity))) {
                     BlockPos _pos = BlockPos.containing(x, y, z);
                     Block.dropResources(world.getBlockState(_pos), world, BlockPos.containing(x, y, z), (BlockEntity)null);

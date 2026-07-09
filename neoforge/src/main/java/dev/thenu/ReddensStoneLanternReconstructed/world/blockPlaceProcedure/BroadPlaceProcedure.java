@@ -1,11 +1,10 @@
 package dev.thenu.ReddensStoneLanternReconstructed.world.blockPlaceProcedure;
 
-import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.Blocks.BroadLanternBlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.checkGamemode.CheckGamemode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -26,7 +25,7 @@ public class BroadPlaceProcedure {
 
                 if (world instanceof Level) {
                     Level _level = (Level)world;
-                    SoundEvent flintSound = BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.flintandsteel.use"))
+                    SoundEvent flintSound = BuiltInRegistries.SOUND_EVENT.get(Identifier.parse("item.flintandsteel.use"))
                             .map(net.minecraft.core.Holder::value)
                             .orElse(null);
 

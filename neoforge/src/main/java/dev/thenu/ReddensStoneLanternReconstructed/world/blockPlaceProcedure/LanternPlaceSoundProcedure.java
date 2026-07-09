@@ -2,7 +2,7 @@ package dev.thenu.ReddensStoneLanternReconstructed.world.blockPlaceProcedure;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
@@ -16,7 +16,7 @@ public class LanternPlaceSoundProcedure {
     public static void execute(LevelAccessor world, double x, double y, double z) {
         if (world instanceof Level _level) {
             // Unpack the SoundEvent from the registry Holder wrapper safely
-            SoundEvent flintSound = BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.flintandsteel.use"))
+            SoundEvent flintSound = BuiltInRegistries.SOUND_EVENT.get(Identifier.parse("item.flintandsteel.use"))
                     .map(net.minecraft.core.Holder::value)
                     .orElse(null);
 

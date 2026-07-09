@@ -1,11 +1,9 @@
 package dev.thenu.ReddensStoneLanternReconstructed.world.blockPlaceProcedure;
 
-import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.Blocks.BigStoneLanternBlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.checkGamemode.CheckGamemode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
