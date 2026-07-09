@@ -1,7 +1,6 @@
 package dev.thenu.ReddensStoneLanternReconstructed.blockType;
 
 import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
-import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.SmallproofRightClickProcedure;
 import dev.thenu.ReddensStoneLanternReconstructed.world.blockPlaceProcedure.LanternPlaceSoundProcedure;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,6 +9,8 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -49,6 +50,7 @@ public class SmallproofStoneLanternLightBlock extends Block implements Waterlogg
         }
         return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
+
     @Override
     public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.empty();
@@ -74,7 +76,7 @@ public class SmallproofStoneLanternLightBlock extends Block implements Waterlogg
         boolean flag = context.getWorld().getFluidState(context.getBlockPos()).getFluid() == Fluids.WATER;
         return super.getPlacementState(context).with(WATERLOGGED, flag);
     }
-
+/*
     @Override
     public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
@@ -92,11 +94,14 @@ public class SmallproofStoneLanternLightBlock extends Block implements Waterlogg
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient()) {
-            SmallproofRightClickProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
+            BlockState newState = BlockFile.SMALLPROOF_STONE_LANTERN_DARK.getDefaultState()
+                    .with(WATERLOGGED, state.get(WATERLOGGED));
+
+            world.setBlockState(pos, newState, Block.NOTIFY_ALL);
+            world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, net.minecraft.sound.SoundCategory.BLOCKS, 0.5F, 1.0F);
         }
         return ActionResult.SUCCESS;
-    }
-
+    }*/
 }

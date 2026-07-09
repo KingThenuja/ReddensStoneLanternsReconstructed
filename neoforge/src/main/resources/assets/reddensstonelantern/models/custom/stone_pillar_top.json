@@ -1,0 +1,255 @@
+{
+  "credit": "Made with Blockbench",
+  "ambientocclusion": false,
+  "texture_size": [
+    64,
+    64
+  ],
+  "elements": [
+    {
+      "from": [
+        5,
+        0,
+        5
+      ],
+      "to": [
+        11,
+        14,
+        11
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          16,
+          -2,
+          0
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            13.75,
+            10.25,
+            15.25,
+            13.75
+          ],
+          "texture": "#2"
+        },
+        "east": {
+          "uv": [
+            13.75,
+            10.25,
+            15.25,
+            13.75
+          ],
+          "texture": "#2"
+        },
+        "south": {
+          "uv": [
+            13.75,
+            10.25,
+            15.25,
+            13.75
+          ],
+          "texture": "#2"
+        },
+        "west": {
+          "uv": [
+            13.75,
+            10.25,
+            15.25,
+            13.75
+          ],
+          "texture": "#2"
+        },
+        "up": {
+          "uv": [
+            13.5,
+            1.5,
+            15,
+            3
+          ],
+          "texture": "#2"
+        },
+        "down": {
+          "uv": [
+            13.25,
+            4.25,
+            14.75,
+            5.75
+          ],
+          "texture": "#2"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        14,
+        4
+      ],
+      "to": [
+        12,
+        16,
+        12
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          16,
+          0,
+          0
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            13.25,
+            10.25,
+            15.25,
+            10.75
+          ],
+          "texture": "#2"
+        },
+        "east": {
+          "uv": [
+            13.25,
+            10.25,
+            15.25,
+            10.75
+          ],
+          "texture": "#2"
+        },
+        "south": {
+          "uv": [
+            13.25,
+            10.25,
+            15.25,
+            10.75
+          ],
+          "texture": "#2"
+        },
+        "west": {
+          "uv": [
+            13.25,
+            10.25,
+            15.25,
+            10.75
+          ],
+          "texture": "#2"
+        },
+        "up": {
+          "uv": [
+            13,
+            4,
+            15,
+            6
+          ],
+          "texture": "#2"
+        },
+        "down": {
+          "uv": [
+            13,
+            8,
+            15,
+            10
+          ],
+          "texture": "#2"
+        }
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "thirdperson_lefthand": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "firstperson_righthand": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "firstperson_lefthand": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "ground": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "gui": {
+      "rotation": [
+        22.5,
+        -45,
+        0
+      ],
+      "translation": [
+        0,
+        -2.75,
+        0
+      ],
+      "scale": [
+        0.45,
+        0.45,
+        0.45
+      ]
+    },
+    "fixed": {
+      "translation": [
+        0,
+        -2.75,
+        -0.75
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  },
+  "groups": [
+    {
+      "name": "small medium",
+      "origin": [
+        12.6,
+        13.5,
+        25.4
+      ],
+      "color": 0,
+      "children": [
+        0,
+        1,
+        {
+          "name": "thin",
+          "origin": [
+            2.5,
+            3,
+            3.5
+          ],
+          "color": 0,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 ### *Supported versions:*
 
-- 1.21.8
+- 1.21.9
 
 ### *Supported loaders:*
 

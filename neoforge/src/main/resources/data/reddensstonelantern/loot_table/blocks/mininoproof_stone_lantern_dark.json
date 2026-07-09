@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "reddensstonelantern:blocks/mininoproof_stone_lantern_dark",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "reddensstonelantern:mininoproof_stone_lantern_light"
+        }
+      ]
+    }
+  ]
+}
