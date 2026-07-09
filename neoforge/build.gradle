@@ -32,7 +32,9 @@ modrinth {
     changelog = rootProject.file("CHANGELOG.md").text
 
 }
-
+tasks.named('sourcesJar', Jar) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 tasks.register('publishCurseForge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
     apiToken = cfToken
     def projectId = ("${curseforge_project_id}").toLong()
