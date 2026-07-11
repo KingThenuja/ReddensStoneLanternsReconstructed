@@ -1,52 +1,53 @@
 package dev.thenu.ReddensStoneLanternReconstructed.world.blockBreakProcedure;
 
+import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.checkGamemode.CheckGamemode;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 
 public class DoubleBlockBreakProcedure {
-    private static final TagKey<Block> IS_TOP = TagKey.of(RegistryKeys.BLOCK, net.minecraft.util.Identifier.of("reddensstonelantern", "is_top"));
-    private static final TagKey<Block> IS_BASE = TagKey.of(RegistryKeys.BLOCK, net.minecraft.util.Identifier.of("reddensstonelantern", "is_base"));
+    private static final TagKey<Block> IS_TOP = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("reddensstonelantern", "is_top"));
+    private static final TagKey<Block> IS_BASE = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("reddensstonelantern", "is_base"));
 
     public DoubleBlockBreakProcedure() {
     }
 
-    public static void execute(WorldAccess world, double x, double y, double z, BlockState blockstate, Entity entity) {
+    public static void execute(LevelAccessor level, double x, double y, double z, BlockState blockstate, Entity entity) {
         if (entity != null) {
-            BlockPos currentPos = BlockPos.ofFloored(x, y, z);
 
-            // Behavior when the broken block is the top half
-            if (blockstate.isIn(IS_TOP)) {
-                BlockPos targetPos = currentPos.down();
+            BlockPos currentPos = BlockPos.containing(x, y, z);
+            GameEvent.Context context = GameEvent.Context.of(entity);
+
+            if (blockstate.is(IS_TOP)) {
+                BlockPos targetPos = currentPos.below();
                 if (!CheckGamemode.checkGamemode(entity)) {
-                    Block.dropStacks(world.getBlockState(targetPos), (net.minecraft.world.World) world, targetPos, null);
-                    world.breakBlock(targetPos, false);
+                    Block.dropResources(level.getBlockState(targetPos), level, targetPos, null);
+                    level.destroyBlock(targetPos, false);
                 } else {
-                    world.setBlockState(targetPos, Blocks.AIR.getDefaultState(), 3);
+                    level.setBlock(targetPos, Blocks.AIR.defaultBlockState(), 3);
                 }
 
-                // Plays block break particles/sounds (ID 2001) using Andesite Wall properties
-                world.syncWorldEvent(2001, targetPos, Block.getRawIdFromState(Blocks.ANDESITE_WALL.getDefaultState()));
+                level.gameEvent(GameEvent.BLOCK_DESTROY, targetPos, context);
             }
 
-            // Behavior when the broken block is the bottom half
-            if (blockstate.isIn(IS_BASE)) {
+            if (blockstate.is(IS_BASE)) {
                 if (!CheckGamemode.checkGamemode(entity)) {
-                    Block.dropStacks(world.getBlockState(currentPos), (net.minecraft.world.World) world, currentPos, null);
-                    world.breakBlock(currentPos, false);
+                    Block.dropResources(level.getBlockState(currentPos), level, currentPos, null);
+                    level.destroyBlock(currentPos, false);
                 } else {
-                    world.setBlockState(currentPos, Blocks.AIR.getDefaultState(), 3);
+                    level.setBlock(currentPos, Blocks.AIR.defaultBlockState(), 3);
                 }
 
-                BlockPos targetPosAbove = currentPos.up();
-                // Plays block break particles/sounds (ID 2001) for the missing upper component
-                world.syncWorldEvent(2001, targetPosAbove, Block.getRawIdFromState(Blocks.ANDESITE_WALL.getDefaultState()));
+                BlockPos targetPosAbove = currentPos.above();
+                level.gameEvent(GameEvent.BLOCK_DESTROY, targetPosAbove, context);
             }
         }
     }

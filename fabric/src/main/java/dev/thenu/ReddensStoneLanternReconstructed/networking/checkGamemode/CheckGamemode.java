@@ -1,19 +1,19 @@
 package dev.thenu.ReddensStoneLanternReconstructed.networking.checkGamemode;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.world.GameMode;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.GameType;
 
 public class CheckGamemode {
     CheckGamemode() {
     }
 
     public static boolean checkGamemode(Entity entity) {
-        if (entity instanceof ServerPlayerEntity serverPlayer) {
-            return serverPlayer.interactionManager.getGameMode() == GameMode.SURVIVAL;
-        } else if (entity.getEntityWorld().isClient() && entity instanceof PlayerEntity) {
-            return entity.getEntityWorld().isClient();
+        if (entity instanceof ServerPlayer serverPlayer) {
+            return serverPlayer.gameMode.getGameModeForPlayer() == GameType.SURVIVAL;
+        } else if (entity.level().isClientSide() && entity instanceof Player) {
+            return entity.level().isClientSide();
         } else {
             return false;
         }

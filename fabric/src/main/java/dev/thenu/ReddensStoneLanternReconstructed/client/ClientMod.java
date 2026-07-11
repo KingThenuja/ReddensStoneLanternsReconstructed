@@ -1,17 +1,11 @@
 package dev.thenu.ReddensStoneLanternReconstructed.client;
 
-import dev.thenu.ReddensStoneLanternReconstructed.ReddensstonelanternMod;
-import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.ReddensstonelanternMod
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
-import net.minecraft.block.Block;
-import net.minecraft.client.render.BlockRenderLayer;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
-
-import java.util.Optional;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 
 public class ClientMod implements ClientModInitializer {
     @Override
@@ -45,12 +39,12 @@ public class ClientMod implements ClientModInitializer {
     }
 
     private void registerCutout(String path) {
-        Identifier id = Identifier.of(ReddensstonelanternMod.MODID, path);
-        RegistryKey<Block> key = RegistryKey.of(RegistryKeys.BLOCK, id);
+        Identifier id = Identifier.fromNamespaceAndPath(ReddensstonelanternMod.MODID, path);
+        Registries<Block> key = TagKey.create(Registries.BLOCK, id);
         var blockEntryLookUp = Registries.BLOCK.getOptional(key);
         if (blockEntryLookUp.isPresent()) {
             Block block = blockEntryLookUp.get().value();
-            BlockRenderLayerMap.putBlock(block, BlockRenderLayer.CUTOUT);
+            ChunkSectionLayerMap.putBlock(block, BlockRenderLayer.CUTOUT);
         } else {
             System.err.println("[Reddens Lantern Mod] Client delayed layout binding error: Could not resolve key: " + id);
         }
