@@ -1,22 +1,23 @@
 package dev.thenu.ReddensStoneLanternReconstructed;
 
 import dev.thenu.ReddensStoneLanternReconstructed.Blocks.*;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Function;
 
 public class BlockFile {
     public static final String MOD_ID = "reddensstonelantern";
 
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MOD_ID);
 
-
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(
+            BuiltInRegistries.BLOCK,
+            BlockFile.MOD_ID
+    );
 
     public static <T extends Block> DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> function) {
         DeferredBlock<T> toReturn = BLOCKS.registerBlock(name, function);

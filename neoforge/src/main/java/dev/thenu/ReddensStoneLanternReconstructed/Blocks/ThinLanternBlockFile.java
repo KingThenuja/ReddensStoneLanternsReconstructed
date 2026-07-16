@@ -19,7 +19,7 @@ public class ThinLanternBlockFile {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MOD_ID);
 
 
-    public static final DeferredBlock<Block> THIN_STONE_LANTERN = registerBlock("thin_stone_lantern",
+    public static final Block THIN_STONE_LANTERN = registerBlock("thin_stone_lantern",
             props -> new ThinStoneLanternBlock(props
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .mapColor(MapColor.STONE)

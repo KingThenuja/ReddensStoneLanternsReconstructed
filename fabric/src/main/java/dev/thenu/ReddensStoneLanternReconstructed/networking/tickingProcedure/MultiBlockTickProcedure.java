@@ -1,27 +1,27 @@
 package dev.thenu.ReddensStoneLanternReconstructed.networking.tickingProcedure;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.block.Block;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class MultiBlockTickProcedure {
-    private static final TagKey<Block> IS_TOP = TagKey.of(RegistryKeys.BLOCK, Identifier.of("reddensstonelantern", "is_top"));
-    private static final TagKey<Block> IS_BASE = TagKey.of(RegistryKeys.BLOCK, Identifier.of("reddensstonelantern", "is_base"));
+    private static final TagKey<Block> IS_TOP = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("reddensstonelantern", "is_top"));
+    private static final TagKey<Block> IS_BASE = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("reddensstonelantern", "is_base"));
 
     public MultiBlockTickProcedure() {
     }
 
-    public static void execute(WorldAccess world, double x, double y, double z) {
-        BlockPos bp = BlockPos.ofFloored(x, y, z);
+    public static void execute(LevelAccessor levelAccessor, double x, double y, double z) {
+        BlockPos bp = BlockPos.containing(x, y, z);
 
         // Check the block state directly above and directly below for mod tags
-        if (!world.getBlockState(bp.up()).isIn(IS_TOP) && !world.getBlockState(bp.down()).isIn(IS_BASE)) {
+        if (!levelAccessor.getBlockState(bp.above()).is(IS_TOP) && !levelAccessor.getBlockState(bp.below()).is(IS_BASE)) {
             // Break the block into air if it doesn't satisfy structural requirements
-            world.setBlockState(bp, Blocks.AIR.getDefaultState(), 3);
+            levelAccessor.setBlock(bp, Blocks.AIR.defaultBlockState(), 3);
         }
     }
 }

@@ -1,74 +1,70 @@
 package dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick;
 
 import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.property.Property;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 
 public class BiggerStoneLanternBlockRightClickProcedure {
 
     public BiggerStoneLanternBlockRightClickProcedure() {
     }
 
-    public static void execute(WorldAccess world, double x, double y, double z) {
-        BlockPos bp = BlockPos.ofFloored(x, y, z);
-        BlockState bso = world.getBlockState(bp);
-        BlockState bs;
+    public static void execute(LevelAccessor levelAccessor, double x, double y, double z) {
+        BlockPos blockPos = BlockPos.containing(x, y, z);
+        BlockState currentBlockState = levelAccessor.getBlockState(blockPos);
+        BlockState newBlockState;
 
-        // Toggle state logic
-        if (bso.getBlock() == BlockFile.BIGGER_STONE_LANTERN_BLOCK_L) {
-            bs = BlockFile.BIGGER_STONE_LANTERN_BLOCK_D.getDefaultState();
+        // Determine the target block state based on the current state (toggling light/dark)
+        if (currentBlockState.getBlock() == BlockFile.BIGGER_STONE_LANTERN_BLOCK_L) {
+            newBlockState = BlockFile.BIGGER_STONE_LANTERN_BLOCK_D.defaultBlockState();
         } else {
-            bs = BlockFile.BIGGER_STONE_LANTERN_BLOCK_L.getDefaultState();
+            newBlockState = BlockFile.BIGGER_STONE_LANTERN_BLOCK_L.defaultBlockState();
         }
 
-        // Copy over existing properties
-        for (Property<?> propertyOld : bso.getProperties()) {
-            Property<?> propertyNew = bs.getBlock().getStateManager().getProperty(propertyOld.getName());
-            if (propertyNew != null) {
-                bs = copyProperty(bso, bs, propertyOld, propertyNew);
+        // Copy block state properties (like direction, waterlogged, etc.) to the new state
+        for (Property<?> oldProperty : currentBlockState.getProperties()) {
+            Property<?> newProperty = newBlockState.getBlock().getStateDefinition().getProperty(oldProperty.getName());
+            if (newProperty != null) {
+                newBlockState = copyProperty(currentBlockState, newBlockState, oldProperty, newProperty);
             }
         }
 
-        RegistryWrapper.WrapperLookup registries = world.getRegistryManager();
-        BlockEntity oldBe = world.getBlockEntity(bp);
-        NbtCompound bnbt = null;
+        BlockEntity oldBlockEntity = levelAccessor.getBlockEntity(blockPos);
+        CompoundTag blockEntityData = null;
 
-        if (oldBe != null) {
-            bnbt = oldBe.createNbt(registries);
-            oldBe.markRemoved();
+        // Save and remove the existing BlockEntity data before replacing the block
+        if (oldBlockEntity != null) {
+            blockEntityData = oldBlockEntity.saveCustomOnly(levelAccessor.registryAccess());
+            oldBlockEntity.setRemoved();
         }
 
-        // Apply updated block state
-        world.setBlockState(bp, bs, 3);
+        // Replace the block in the world
+        levelAccessor.setBlock(blockPos, newBlockState, 3);
 
-        // Re-inject NBT data cleanly onto the new BlockState layout
-        if (bnbt != null && world instanceof World level) {
-            BlockEntity newBe = BlockEntity.createFromNbt(bp, bs, bnbt, registries);
-            if (newBe != null) {
-                level.addBlockEntity(newBe);
+        // Restore the BlockEntity data to the new block
+        if (levelAccessor instanceof Level level) {
+            level.playSound(null, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 0.5F, 1.0F);
+            if (blockEntityData != null) {
+                BlockEntity newBlockEntity = BlockEntity.loadStatic(blockPos, newBlockState, blockEntityData, levelAccessor.registryAccess());
+                if (newBlockEntity != null) {
+                    level.onBlockEntityAdded(newBlockEntity);
+                }
             }
-        }
-
-        // Audio
-        if (world instanceof World level) {
-            level.playSound(null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
         }
     }
-
     @SuppressWarnings("unchecked")
-    private static <T extends Comparable<T>> BlockState copyProperty(BlockState from, BlockState to, Property<?> srcProp, Property<?> targetProp) {
+    private static <T extends Comparable<T>> BlockState copyProperty(BlockState sourceState, BlockState targetState, Property<?> sourceProp, Property<?> targetProp) {
         try {
-            return to.with((Property<T>) targetProp, from.get((Property<T>) srcProp));
+            return targetState.setValue((Property<T>) targetProp, sourceState.getValue((Property<T>) sourceProp));
         } catch (Exception e) {
-            return to;
+            return targetState;
         }
     }
 }

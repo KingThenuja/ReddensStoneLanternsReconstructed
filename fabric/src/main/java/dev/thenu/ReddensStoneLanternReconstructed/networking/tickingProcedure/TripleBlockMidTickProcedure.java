@@ -1,27 +1,27 @@
 package dev.thenu.ReddensStoneLanternReconstructed.networking.tickingProcedure;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.block.Block;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class TripleBlockMidTickProcedure {
-    // Custom block tag references for 1.21.1 Fabric
-    private static final TagKey<Block> IS_TOP = TagKey.of(RegistryKeys.BLOCK, Identifier.of("reddensstonelantern", "is_top"));
-    private static final TagKey<Block> IS_BASE = TagKey.of(RegistryKeys.BLOCK, Identifier.of("reddensstonelantern", "is_base"));
+    // Custom block tag references for 26.1 Fabric
+    private static final TagKey<Block> IS_TOP = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("reddensstonelantern", "is_top"));
+    private static final TagKey<Block> IS_BASE = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("reddensstonelantern", "is_base"));
 
     public TripleBlockMidTickProcedure() {
     }
 
-    public static void execute(WorldAccess world, double x, double y, double z) {
-        BlockPos bp = BlockPos.ofFloored(x, y, z);
+    public static void execute(LevelAccessor levelAccessor, double x, double y, double z) {
+        BlockPos bp = BlockPos.containing(x, y, z);
 
         // Break the middle block if there isn't a valid top block above OR a valid base block below
-        if (!world.getBlockState(bp.up()).isIn(IS_TOP) || !world.getBlockState(bp.down()).isIn(IS_BASE)) {
-            world.setBlockState(bp, Blocks.AIR.getDefaultState(), 3);
+        if (!levelAccessor.getBlockState(bp.above()).is(IS_TOP) || !levelAccessor.getBlockState(bp.below()).is(IS_BASE)) {
+            levelAccessor.setBlock(bp, Blocks.AIR.defaultBlockState(), 3);
         }
     }
 }

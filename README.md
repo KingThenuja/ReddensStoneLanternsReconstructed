@@ -28,7 +28,7 @@
 ## 📖 About This Fork
 >
 > Reconstructed is maintained by me, a single developer, and
-> continues the legacy of RedLime's original mod.
+> continues the legacy of ReddenWang's original mod.
 > This fork aims to make all of the features of the original mod be fully
 > implemented in newer
 > Minecraft versions and to

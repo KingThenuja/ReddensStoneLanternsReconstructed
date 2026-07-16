@@ -4,6 +4,11 @@ import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.init.CreativeTabFile;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.player.PlayerPickItemEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,65 +17,24 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class ReddensstonelanternMod implements ModInitializer {
-
-    public static final Logger LOGGER = LoggerFactory.getLogger("Redden's Stone Lanterns Reconstructed");
-    public static final String MOD_ID = "reddensstonelantern";
-    public static final String MODID = MOD_ID;
-
-    private static final Collection<ActionEntry> workQueue = new ConcurrentLinkedQueue<>();
+public class ReddensstonelanternMod implements ModInitializer {public static final Logger LOGGER = LoggerFactory.getLogger("Redden's Stone Lanterns Reconstructed");public static final String MOD_ID = "reddensstonelantern";public static final String MODID = MOD_ID;private static final Collection<ActionEntry> workQueue = new ConcurrentLinkedQueue<>();
 
     @Override
     public void onInitialize() {
         BlockFile.register();
         CreativeTabFile.register();
-
         initNetworking();
+        ServerTickEvents.END_SERVER_TICK.register(server -> {List<ActionEntry> actionsToRun = new ArrayList<>();for (ActionEntry entry : workQueue) {entry.decrementTicks();if (entry.getTicks() <= 0) {actionsToRun.add(entry);}}for (ActionEntry entry : actionsToRun) {entry.getAction().run();}workQueue.removeAll(actionsToRun);});
 
-        ServerTickEvents.END_SERVER_TICK.register(server -> {
-            List<ActionEntry> actionsToRun = new ArrayList<>();
-
-            for (ActionEntry entry : workQueue) {
-                entry.decrementTicks();
-                if (entry.getTicks() <= 0) {
-                    actionsToRun.add(entry);
-                }
+        PlayerPickItemEvents.BLOCK.register((ServerPlayer player, BlockPos pos, BlockState state, boolean requestIncludeData) -> {
+            if (state.is(BlockFile.BIGGER_STONE_LANTERN_BLOCK_D)) {
+                return new ItemStack(BlockFile.BIGGER_STONE_LANTERN_BLOCK_L);
             }
-
-            for (ActionEntry entry : actionsToRun) {
-                entry.getAction().run();
-            }
-            workQueue.removeAll(actionsToRun);
+            return null;
         });
+
     }
-
-    private void initNetworking() {
-        }
-
-    public static void queueServerWork(int tick, Runnable action) {
-
-        workQueue.add(new ActionEntry(action, tick));
-    }
-
-    private static class ActionEntry {
-        private final Runnable action;
-        private int ticks;
-
-        public ActionEntry(Runnable action, int ticks) {
-            this.action = action;
-            this.ticks = ticks;
-        }
-
-        public Runnable getAction() {
-            return this.action;
-        }
-
-        public int getTicks() {
-            return this.ticks;
-        }
-
-        public void decrementTicks() {
-            this.ticks--;
-        }
-    }
+    private void initNetworking() {}
+    public static void queueServerWork(int tick, Runnable action) {workQueue.add(new ActionEntry(action, tick));}
+    private static class ActionEntry { private final Runnable action;private int ticks;public ActionEntry(Runnable action, int ticks) {this.action = action;this.ticks = ticks;}public Runnable getAction() {return this.action;}public int getTicks() {return this.ticks;}public void decrementTicks() {this.ticks--;}}
 }

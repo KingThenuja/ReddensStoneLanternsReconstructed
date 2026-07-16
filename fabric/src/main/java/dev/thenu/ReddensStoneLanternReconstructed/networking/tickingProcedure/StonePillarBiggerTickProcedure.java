@@ -1,73 +1,78 @@
 package dev.thenu.ReddensStoneLanternReconstructed.networking.tickingProcedure;
 
 import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.block.Block;
-import net.minecraft.state.property.Property;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 
 public class StonePillarBiggerTickProcedure {
-    private static final TagKey<Block> IS_PILLAR = TagKey.of(RegistryKeys.BLOCK, Identifier.of("reddensstonelantern", "is_pillar"));
+    private static final TagKey<Block> IS_PILLAR = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("reddensstonelantern", "is_pillar"));
 
     public StonePillarBiggerTickProcedure() {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public static void execute(WorldAccess world, double x, double y, double z) {
-        BlockPos bp = BlockPos.ofFloored(x, y, z);
-        BlockState bso = world.getBlockState(bp);
+    public static void execute(LevelAccessor levelAccessor, double x, double y, double z) {
+        BlockPos blockPos = BlockPos.containing(x, y, z);
+        BlockState currentBlockState = levelAccessor.getBlockState(blockPos);
+        BlockState newBlockState;
 
-        boolean bottomIsPillar = world.getBlockState(bp.down()).isIn(IS_PILLAR);
-        boolean topIsPillar = world.getBlockState(bp.up()).isIn(IS_PILLAR);
+        boolean isBottomAPillar = levelAccessor.getBlockState(blockPos.below()).is(IS_PILLAR);
+        boolean isTopAPillar = levelAccessor.getBlockState(blockPos.above()).is(IS_PILLAR);
 
         // Determine target block variation based on surrounding connections
-        BlockState bs;
-        if (bottomIsPillar) {
-            if (topIsPillar) {
-                bs = BlockFile.STONE_PILLAR_BIGGER_MIDDLE.getDefaultState();
+        if (isBottomAPillar) {
+            if (isTopAPillar) {
+                newBlockState = BlockFile.STONE_PILLAR_BIGGER_MIDDLE.defaultBlockState();
             } else {
-                bs = BlockFile.STONE_PILLAR_BIGGER_TOP.getDefaultState();
+                newBlockState = BlockFile.STONE_PILLAR_BIGGER_TOP.defaultBlockState();
             }
-        } else if (topIsPillar) {
-            bs = BlockFile.STONE_PILLAR_BIGGER_BOTTOM.getDefaultState();
+        } else if (isTopAPillar) {
+            newBlockState = BlockFile.STONE_PILLAR_BIGGER_BOTTOM.defaultBlockState();
         } else {
-            bs = BlockFile.STONE_PILLAR_BIGGER_SHORT.getDefaultState();
+            newBlockState = BlockFile.STONE_PILLAR_BIGGER_SHORT.defaultBlockState();
         }
 
         // Dynamically copy valid properties from old block state to the new one
-        for (Property<?> propertyOld : bso.getProperties()) {
-            Property propertyNew = bs.getBlock().getStateManager().getProperty(propertyOld.getName());
-            if (propertyNew != null && bs.get(propertyNew) != null) {
-                try {
-                    bs = (BlockState) bs.with(propertyNew, bso.get((Property) propertyOld));
-                } catch (Exception ignored) {
-                }
+        for (Property<?> propertyOld : currentBlockState.getProperties()) {
+            Property<?> propertyNew = newBlockState.getBlock().getStateDefinition().getProperty(propertyOld.getName());
+            if (propertyNew != null) {
+                newBlockState = copyProperty(currentBlockState, newBlockState, propertyOld, propertyNew);
             }
         }
 
         // Snapshot original block entity payload data
-        BlockEntity be = world.getBlockEntity(bp);
-        NbtCompound bnbt = null;
-        if (be != null) {
-            bnbt = be.createNbt(world.getRegistryManager());
-            be.markRemoved();
+        BlockEntity oldBlockEntity = levelAccessor.getBlockEntity(blockPos);
+        CompoundTag blockEntityData = null;
+        if (oldBlockEntity != null) {
+            blockEntityData = oldBlockEntity.saveCustomOnly(levelAccessor.registryAccess());
+            oldBlockEntity.setRemoved();
         }
 
-        world.setBlockState(bp, bs, 3);
+        levelAccessor.setBlock(blockPos, newBlockState, 3);
 
         // Safely re-apply snapped metadata to the freshly placed pillar segment
-        if (bnbt != null && world instanceof World level) {
-            BlockEntity newBe = BlockEntity.createFromNbt(bp, bs, bnbt, world.getRegistryManager());
-            if (newBe != null) {
-                level.addBlockEntity(newBe);
+        if (blockEntityData != null && levelAccessor instanceof Level level) {
+            BlockEntity newBlockEntity = BlockEntity.loadStatic(blockPos, newBlockState, blockEntityData, levelAccessor.registryAccess());
+            if (newBlockEntity != null) {
+                level.onBlockEntityAdded(newBlockEntity);
             }
+        }
+    }
+    @SuppressWarnings("unchecked")
+    private static <T extends Comparable<T>> BlockState copyProperty(BlockState sourceState, BlockState targetState, Property<?> sourceProp, Property<?> targetProp) {
+        try {
+            return targetState.setValue((Property<T>) targetProp, sourceState.getValue((Property<T>) sourceProp));
+        } catch (Exception e) {
+            return targetState;
         }
     }
 }
