@@ -77,10 +77,10 @@ public class SmallproofStoneLanternDarkBlock extends Block implements SimpleWate
         return super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
     }
 
-    @Override
+    /*@Override
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
-    }
+    }*/
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {

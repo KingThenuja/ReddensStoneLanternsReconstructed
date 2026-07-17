@@ -19,6 +19,7 @@ public class SmallproofRightClickProcedure {
         BlockState currentBlockState = levelAccessor.getBlockState(blockPos);
         BlockState newBlockState;
 
+        /*
         if (currentBlockState.getBlock() == BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT) {
             newBlockState = BlockFile.SMALLPROOF_STONE_LANTERN_DARK.defaultBlockState();
         } else if (currentBlockState.getBlock() == BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT) {
@@ -51,7 +52,7 @@ public class SmallproofRightClickProcedure {
                     level.setBlockEntity(newBlockEntity);
                 }
             }
-        }
+        }*/
     }
     @SuppressWarnings("unchecked")
     private static <T extends Comparable<T>> BlockState copyProperty(BlockState sourceState, BlockState targetState, Property<?> sourceProp, Property<?> targetProp) {

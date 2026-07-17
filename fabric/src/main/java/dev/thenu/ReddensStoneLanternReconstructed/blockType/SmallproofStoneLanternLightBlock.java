@@ -66,10 +66,10 @@ public class SmallproofStoneLanternLightBlock extends Block implements SimpleWat
         return super.getStateForPlacement(context).setValue(WATERLOGGED, flag);
     }
 
-    @Override
+    /*@Override
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
-    }
+    }*/
 
     @Override
     public FluidState getFluidState(BlockState state) {

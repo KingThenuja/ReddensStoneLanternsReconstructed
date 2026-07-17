@@ -30,6 +30,114 @@ public class ReddensstonelanternMod implements ModInitializer {public static fin
             if (state.is(BlockFile.BIGGER_STONE_LANTERN_BLOCK_D)) {
                 return new ItemStack(BlockFile.BIGGER_STONE_LANTERN_BLOCK_L);
             }
+            if (state.is(BlockFile.BIG_STONE_LANTERN_BASE)) {
+                return new ItemStack(BlockFile.BIG_STONE_LANTERN_MID);
+            }
+            if (state.is(BlockFile.BIG_STONE_LANTERN_BLOCK_DARK)) {
+                return new ItemStack(BlockFile.BIG_STONE_LANTERN_BLOCK_LIGHT);
+            }
+            if (state.is(BlockFile.BIG_STONE_LANTERN_TOP_DARK)) {
+                return new ItemStack(BlockFile.BIG_STONE_LANTERN_MID);
+            }
+            if (state.is(BlockFile.BIG_STONE_LANTERN_TOP_LIGHT)) {
+                return new ItemStack(BlockFile.BIG_STONE_LANTERN_MID);
+            }
+            if (state.is(BlockFile.BROAD_STONE_LANTERN_BLOCK_DARK)) {
+                return new ItemStack(BlockFile.BROAD_STONE_LANTERN_BLOCK_LIGHT);
+            }
+            if (state.is(BlockFile.BROAD_STONE_LANTERN_TOP_DARK)) {
+                return new ItemStack(BlockFile.BROAD_STONE_LANTERN);
+            }
+            if (state.is(BlockFile.BROAD_STONE_LANTERN_TOP_LIGHT)) {
+                return new ItemStack(BlockFile.BROAD_STONE_LANTERN);
+            }
+            if (state.is(BlockFile.MEDIUM_STONE_LANTERN_TOP_DARK)) {
+                return new ItemStack(BlockFile.MEDIUM_STONE_LANTERN);
+            }
+            if (state.is(BlockFile.MEDIUM_STONE_LANTERN_TOP_LIGHT)) {
+                return new ItemStack(BlockFile.MEDIUM_STONE_LANTERN);
+            }
+            if (state.is(BlockFile.MID_STONE_LANTERN_BLOCK_DARK)) {
+                return new ItemStack(BlockFile.MID_STONE_LANTERN_BLOCK_LIGHT);
+            }
+            if (state.is(BlockFile.MINI_STONE_LANTERN_DARK)) {
+                return new ItemStack(BlockFile.MINI_STONE_LANTERN_LIGHT);
+            }
+            if (state.is(BlockFile.MININOPROOF_STONE_LANTERN_DARK)) {
+                return new ItemStack(BlockFile.MININOPROOF_STONE_LANTERN_LIGHT);
+            }
+            if (state.is(BlockFile.SMALL_STONE_LANTERN_DARK)) {
+                return new ItemStack(BlockFile.SMALL_STONE_LANTERN_LIGHT);
+            }
+            if (state.is(BlockFile.SMALL_STONE_LANTERN_LIGHT)) {
+                return new ItemStack(BlockFile.SMALL_STONE_LANTERN_LIGHT);
+            }
+            if (state.is(BlockFile.SMALLFOOT_STONE_LANTERN_DARK)) {
+                return new ItemStack(BlockFile.SMALLFOOT_STONE_LANTERN_LIGHT);
+            }
+            if (state.is(BlockFile.SMALLNOPROOF_STONE_LANTERN_DARK)) {
+                return new ItemStack(BlockFile.SMALLNOPROOF_STONE_LANTERN_LIGHT);
+            }/*
+            if (state.is(BlockFile.SMALLPROOF_STONE_LANTERN_DARK)) {
+                return new ItemStack(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
+            }
+            if (state.is(BlockFile.SMALLPROOF_STONE_LANTERN_DARK)) {
+                return new ItemStack(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
+            }*/
+            if (state.is(BlockFile.STONE_PILLAR_BIG_BOTTOM)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_BIG_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_BIG_MIDDLE)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_BIG_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_BIG_TOP)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_BIG_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_BIGGER_BOTTOM)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_BIGGER_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_BIGGER_MIDDLE)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_BIGGER_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_BIGGER_TOP)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_BIGGER_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_MID_BOTTOM)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_MID_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_MID_MIDDLE)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_MID_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_MID_TOP)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_MID_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_THIN_A_BOTTOM)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_THIN_A_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_THIN_A_TOP)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_THIN_A_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_THIN_B_BOTTOM)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_THIN_B_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_THIN_B_TOP)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_THIN_B_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_THIN_C_BOTTOM)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_THIN_C_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_THIN_C_MIDDLE)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_THIN_C_SHORT);
+            }
+            if (state.is(BlockFile.STONE_PILLAR_THIN_C_TOP)) {
+                return new ItemStack(BlockFile.STONE_PILLAR_THIN_C_SHORT);
+            }
+            if (state.is(BlockFile.THIN_STONE_LANTERN_TOP_DARK)) {
+                return new ItemStack(BlockFile.THIN_STONE_LANTERN);
+            }
+            if (state.is(BlockFile.THIN_STONE_LANTERN_TOP_LIGHT)) {
+                return new ItemStack(BlockFile.THIN_STONE_LANTERN);
+            }
             return null;
         });
 
