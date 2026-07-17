@@ -11,6 +11,9 @@ def secretProps = new Properties()
 tasks.withType(ProcessResources).configureEach {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
+tasks.withType(Jar).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 if (secretPropsFile.exists()) {
     secretPropsFile.withInputStream { stream ->
         secretProps.load(stream)
