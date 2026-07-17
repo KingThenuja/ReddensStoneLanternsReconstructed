@@ -27,15 +27,16 @@ public class ThinStoneLanternBlockRightClickProcedure {
         BlockState bso = world.getBlockState(bp);
         BlockState bs;
 
+        /*
         if (bso.getBlock() == BlockFile.THIN_STONE_LANTERN_BLOCK_LIGHT) {
             bs = BlockFile.THIN_STONE_LANTERN_BLOCK_DARK.getDefaultState();
         } else if (bso.getBlock() == BlockFile.THIN_STONE_LANTERN_BLOCK_DARK) {
             bs = BlockFile.THIN_STONE_LANTERN_BLOCK_LIGHT.getDefaultState();
         } else {
             return;
-        }
+        }*/
 
-        for (Property<?> propertyOld : bso.getProperties()) {
+        /*for (Property<?> propertyOld : bso.getProperties()) {
             Property propertyNew = bs.getBlock().getStateManager().getProperty(propertyOld.getName());
             if (propertyNew != null && bs.get(propertyNew) != null) {
                 try {
@@ -43,7 +44,7 @@ public class ThinStoneLanternBlockRightClickProcedure {
                 } catch (Exception ignored) {
                 }
             }
-        }
+        }*/
 
         BlockEntity be = world.getBlockEntity(bp);
         NbtCompound bnbt = null;
@@ -52,14 +53,14 @@ public class ThinStoneLanternBlockRightClickProcedure {
             be.markRemoved();
         }
 
-        world.setBlockState(bp, bs, 3);
+        //world.setBlockState(bp, bs, 3);
 
-        if (bnbt != null && world instanceof World level) {
+        /*if (bnbt != null && world instanceof World level) {
             BlockEntity newBe = BlockEntity.createFromNbt(bp, bs, bnbt, world.getRegistryManager());
             if (newBe != null) {
                 level.addBlockEntity(newBe);
             }
-        }
+        }*/
 
         if (world instanceof World level) {
             level.playSound(null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);

@@ -48,6 +48,8 @@ tasks.register('publishCurseForge', net.darkhax.curseforgegradle.TaskPublishCurs
     mainFile.addGameVersion("${minecraft_version}")
     mainFile.addModLoader("Fabric")
     mainFile.addModLoader("Quilt")
+    mainFile.addEnvironment("Client")
+    mainFile.addEnvironment("Server")
 }
 
 tasks.named('publishCurseForge').configure {
