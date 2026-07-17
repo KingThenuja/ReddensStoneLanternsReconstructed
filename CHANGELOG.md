@@ -1,4 +1,4 @@
-## Official release of the mod's 1.21.8 version
+## Official release of version 1.1 for 1.21.9
 
 ### *Supported versions:*
 
@@ -9,3 +9,7 @@
 - Fabric
 - Quilt
 - NeoForge
+
+### *Changes:*
+
+- [Fabric] Removed the correct block that is not working properly
