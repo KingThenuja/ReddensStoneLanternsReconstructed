@@ -2,7 +2,9 @@ package dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rig
 
 import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -19,40 +21,38 @@ public class SmallproofRightClickProcedure {
         BlockState currentBlockState = levelAccessor.getBlockState(blockPos);
         BlockState newBlockState;
 
-        /*
         if (currentBlockState.getBlock() == BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT) {
             newBlockState = BlockFile.SMALLPROOF_STONE_LANTERN_DARK.defaultBlockState();
-        } else if (currentBlockState.getBlock() == BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT) {
-            newBlockState = BlockFile.SMALLPROOF_STONE_LANTERN_DARK.defaultBlockState();
         } else {
-            return;
+            newBlockState = BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT.defaultBlockState();
         }
 
-        for (Property<?> propertyOld : currentBlockState.getProperties()) {
-            Property<?> propertyNew = newBlockState.getBlock().getStateDefinition().getProperty(propertyOld.getName());
-            if (propertyNew != null) {
-                newBlockState = copyProperty(currentBlockState, newBlockState, propertyOld, propertyNew);
+        for (Property<?> oldProperty : currentBlockState.getProperties()) {
+            Property<?> newProperty = newBlockState.getBlock().getStateDefinition().getProperty(oldProperty.getName());
+            if (newProperty != null) {
+                newBlockState = copyProperty(currentBlockState, newBlockState, oldProperty, newProperty);
             }
         }
 
-        BlockEntity be = levelAccessor.getBlockEntity(blockPos);
+        HolderLookup.Provider registries = levelAccessor.registryAccess();
+        BlockEntity oldBlockEntity = levelAccessor.getBlockEntity(blockPos);
         CompoundTag blockEntityData = null;
-        if (be != null) {
-            blockEntityData = be.saveCustomOnly(levelAccessor.registryAccess());
-            be.setRemoved();
+        if (oldBlockEntity != null) {
+            blockEntityData = oldBlockEntity.saveCustomOnly(registries);
+            oldBlockEntity.setRemoved();
         }
 
         levelAccessor.setBlock(blockPos, newBlockState, 3);
 
         if (levelAccessor instanceof Level level) {
-            level.playSound(null, blockPos, net.minecraft.sounds.SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 0.5F, 1.0F);
+            level.playSound(null, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 0.5F, 1.0F);
             if (blockEntityData != null) {
-                net.minecraft.world.level.block.entity.BlockEntity newBlockEntity = net.minecraft.world.level.block.entity.BlockEntity.loadStatic(blockPos, newBlockState, blockEntityData, levelAccessor.registryAccess());
+                BlockEntity newBlockEntity = BlockEntity.loadStatic(blockPos, newBlockState, blockEntityData, levelAccessor.registryAccess());
                 if (newBlockEntity != null) {
-                    level.setBlockEntity(newBlockEntity);
+                    level.onBlockEntityAdded(newBlockEntity);
                 }
             }
-        }*/
+        }
     }
     @SuppressWarnings("unchecked")
     private static <T extends Comparable<T>> BlockState copyProperty(BlockState sourceState, BlockState targetState, Property<?> sourceProp, Property<?> targetProp) {

@@ -84,12 +84,14 @@ loom {
             setConfigName('Fabric Client')
             ideConfigGenerated(true)
             runDir('runs/client')
+            vmArg "-Dfabric.remapClasspathFile=${project.buildDir}/loom-cache/remapped-classpath.txt"
         }
         server {
             server()
             setConfigName('Fabric Server')
             ideConfigGenerated(true)
             runDir('runs/server')
+            vmArg "-Dfabric.remapClasspathFile=${project.buildDir}/loom-cache/remapped-classpath.txt"
         }
     }
 }

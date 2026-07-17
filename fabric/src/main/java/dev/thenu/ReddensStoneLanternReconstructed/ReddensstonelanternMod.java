@@ -5,8 +5,11 @@ import dev.thenu.ReddensStoneLanternReconstructed.init.CreativeTabFile;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.PlayerPickItemEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.slf4j.Logger;
@@ -77,13 +80,13 @@ public class ReddensstonelanternMod implements ModInitializer {public static fin
             }
             if (state.is(BlockFile.SMALLNOPROOF_STONE_LANTERN_DARK)) {
                 return new ItemStack(BlockFile.SMALLNOPROOF_STONE_LANTERN_LIGHT);
-            }/*
+            }
             if (state.is(BlockFile.SMALLPROOF_STONE_LANTERN_DARK)) {
                 return new ItemStack(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
             }
             if (state.is(BlockFile.SMALLPROOF_STONE_LANTERN_DARK)) {
                 return new ItemStack(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
-            }*/
+            }
             if (state.is(BlockFile.STONE_PILLAR_BIG_BOTTOM)) {
                 return new ItemStack(BlockFile.STONE_PILLAR_BIG_SHORT);
             }
@@ -139,6 +142,28 @@ public class ReddensstonelanternMod implements ModInitializer {public static fin
                 return new ItemStack(BlockFile.THIN_STONE_LANTERN);
             }
             return null;
+        });
+        UseBlockCallback.EVENT.register((player, level, hand, hitResult) -> {
+            // We only want this to run on the server and only once per click (Main Hand)
+            if (!level.isClientSide() && hand == InteractionHand.MAIN_HAND) {
+                BlockPos pos = hitResult.getBlockPos();
+                BlockState state = level.getBlockState(pos);
+
+                // Check if the clicked block is the Light Smallproof Lantern
+                if (state.getBlock() == BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT) {
+                    dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.SmallproofRightClickProcedure.execute(level, pos.getX(), pos.getY(), pos.getZ());
+                    return InteractionResult.SUCCESS; // Cancels normal block interaction and swings hand
+                }
+
+                // Check if the clicked block is the Dark Smallproof Lantern
+                if (state.getBlock() == BlockFile.SMALLPROOF_STONE_LANTERN_DARK) {
+                    dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.SmallproofRightClickProcedure.execute(level, pos.getX(), pos.getY(), pos.getZ());
+                    return InteractionResult.SUCCESS;
+                }
+            }
+
+            // If it's any other block, let Minecraft handle it normally
+            return InteractionResult.PASS;
         });
 
     }

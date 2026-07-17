@@ -5,15 +5,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 
-import java.util.Map;
 
 public class ThinStoneLanternBlockRightClickProcedure {
     public ThinStoneLanternBlockRightClickProcedure() {
@@ -24,10 +21,10 @@ public class ThinStoneLanternBlockRightClickProcedure {
         BlockState currentBlockState = levelAccessor.getBlockState(blockPos);
         BlockState newBlockState;
 
-        if (currentBlockState.getBlock() == BlockFile.THIN_STONE_LANTERN_TOP_LIGHT) {
-            newBlockState = BlockFile.THIN_STONE_LANTERN_TOP_DARK.defaultBlockState();
-        } else if (currentBlockState.getBlock() == BlockFile.THIN_STONE_LANTERN_TOP_DARK) {
-            newBlockState = BlockFile.THIN_STONE_LANTERN_TOP_LIGHT.defaultBlockState();
+        if (currentBlockState.getBlock() == BlockFile.THIN_STONE_LANTERN_BLOCK_LIGHT) {
+            newBlockState = BlockFile.THIN_STONE_LANTERN_BLOCK_DARK.defaultBlockState();
+        } else if (currentBlockState.getBlock() == BlockFile.THIN_STONE_LANTERN_BLOCK_DARK) {
+            newBlockState = BlockFile.THIN_STONE_LANTERN_BLOCK_LIGHT.defaultBlockState();
         } else {
             return;
         }

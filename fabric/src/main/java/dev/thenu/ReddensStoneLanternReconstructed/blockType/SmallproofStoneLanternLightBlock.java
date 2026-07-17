@@ -5,6 +5,8 @@ import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.righ
 import dev.thenu.ReddensStoneLanternReconstructed.world.blockPlaceProcedure.LanternPlaceSoundProcedure;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -12,17 +14,16 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -37,7 +38,7 @@ public class SmallproofStoneLanternLightBlock extends Block implements SimpleWat
             Block.box(3.0D, 0.0D, 3.0D, 13.0D, 5.0D, 13.0D),
             Block.box(4.0D, 5.0D, 4.0D, 12.0D, 11.0D, 12.0D),
             Block.box(2.0D, 11.0D, 2.0D, 14.0D, 15.0D, 14.0D)
-    );
+    ).optimize();
 
     public SmallproofStoneLanternLightBlock(BlockBehaviour.Properties properties) {
         super(properties);
@@ -66,10 +67,10 @@ public class SmallproofStoneLanternLightBlock extends Block implements SimpleWat
         return super.getStateForPlacement(context).setValue(WATERLOGGED, flag);
     }
 
-    /*@Override
+    @Override
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
-    }*/
+    }
 
     @Override
     public FluidState getFluidState(BlockState state) {
@@ -97,4 +98,5 @@ public class SmallproofStoneLanternLightBlock extends Block implements SimpleWat
         }
         return InteractionResult.SUCCESS;
     }
+
 }

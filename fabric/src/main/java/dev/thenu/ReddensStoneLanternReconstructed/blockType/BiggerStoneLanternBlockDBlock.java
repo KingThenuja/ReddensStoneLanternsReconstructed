@@ -75,4 +75,5 @@ public class BiggerStoneLanternBlockDBlock extends Block implements SimpleWaterl
         }
         return InteractionResult.SUCCESS;
     }
+
 }

@@ -68,12 +68,12 @@ public class BlockFile {
     public static Block SMALLFOOT_STONE_LANTERN_LIGHT    = registerBlock("smallfoot_stone_lantern_light",    properties -> new SmallfootStoneLanternLightBlock(properties
             .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).lightLevel((_) -> 14).noOcclusion().pushReaction(PushReaction.DESTROY).forceSolidOn()));
 
-    /*
+
     public static Block SMALLPROOF_STONE_LANTERN_DARK    = registerBlock("smallproof_stone_lantern_dark",    properties -> new SmallproofStoneLanternDarkBlock(properties
-            .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).noOcclusion().pushReaction(PushReaction.DESTROY).forceSolidOn()));
+            .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).noOcclusion().dynamicShape().pushReaction(PushReaction.DESTROY).forceSolidOn()));
     public static Block SMALLPROOF_STONE_LANTERN_LIGHT   = registerBlock("smallproof_stone_lantern_light",   properties -> new SmallproofStoneLanternLightBlock(properties
-            .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).lightLevel((_) -> 14).noOcclusion().pushReaction(PushReaction.DESTROY).forceSolidOn()));
-    */
+            .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).lightLevel((_) -> 14).noOcclusion().dynamicShape().pushReaction(PushReaction.DESTROY).forceSolidOn()));
+
 
     public static Block SMALLNOPROOF_STONE_LANTERN_DARK  = registerBlock("smallnoproof_stone_lantern_dark",  properties -> new SmallnoproofStoneLanternDarkBlock(properties
             .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).noOcclusion().pushReaction(PushReaction.DESTROY).forceSolidOn()));
@@ -153,6 +153,8 @@ public class BlockFile {
             .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).lightLevel((_) -> 15).noOcclusion().pushReaction(PushReaction.DESTROY).forceSolidOn()));
 
     public static Block THIN_STONE_LANTERN_BLOCK_LIGHT   = registerBlock("thin_stone_lantern_block_light",   properties -> new ThinStoneLanternBlockLightBlock(properties
+            .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).lightLevel((_) -> 15).noOcclusion().pushReaction(PushReaction.DESTROY).forceSolidOn()));
+    public static Block THIN_STONE_LANTERN_BLOCK_DARK   = registerBlock("thin_stone_lantern_block_dark",   properties -> new ThinStoneLanternBlockDarkBlock(properties
             .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).lightLevel((_) -> 15).noOcclusion().pushReaction(PushReaction.DESTROY).forceSolidOn()));
     public static Block THIN_STONE_LANTERN               = registerBlock("thin_stone_lantern",               properties -> new ThinStoneLanternBlock(properties
             .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).noOcclusion().pushReaction(PushReaction.NORMAL).forceSolidOn()));

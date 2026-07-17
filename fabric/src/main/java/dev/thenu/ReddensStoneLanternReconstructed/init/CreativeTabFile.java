@@ -17,14 +17,14 @@ public class CreativeTabFile {
             Identifier.fromNamespaceAndPath(ReddensstonelanternMod.MOD_ID, "reddens_deco"),
             FabricCreativeModeTab.builder().icon(() -> new ItemStack(BlockFile.MEDIUM_STONE_LANTERN))
                     .title(Component.translatable("item_group.reddensstonelantern.reddens_deco"))
-                    .displayItems((parameters, output) -> {
+                    .displayItems((_, output) -> {
                         output.accept(BlockFile.MEDIUM_STONE_LANTERN);
                         output.accept(BlockFile.THIN_STONE_LANTERN);
                         output.accept(BlockFile.BROAD_STONE_LANTERN);
                         output.accept(BlockFile.SMALL_STONE_LANTERN_LIGHT);
                         output.accept(BlockFile.MINI_STONE_LANTERN_LIGHT);
                         output.accept(BlockFile.SMALLFOOT_STONE_LANTERN_LIGHT);
-                        //output.accept(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
+                        output.accept(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
                         output.accept(BlockFile.SMALLNOPROOF_STONE_LANTERN_LIGHT);
                         output.accept(BlockFile.MININOPROOF_STONE_LANTERN_LIGHT);
                         output.accept(BlockFile.STONE_PILLAR_THIN_A_SHORT);
