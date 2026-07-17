@@ -25,8 +25,10 @@ public class ThinRightClickProcedure {
 
         if (bso.getBlock() == BlockFile.THIN_STONE_LANTERN_TOP_LIGHT) {
             bs = BlockFile.THIN_STONE_LANTERN_TOP_DARK.getDefaultState();
-        } else {
+        } else if (bso.getBlock() == BlockFile.THIN_STONE_LANTERN_TOP_DARK) {
             bs = BlockFile.THIN_STONE_LANTERN_TOP_LIGHT.getDefaultState();
+        } else {
+            return;
         }
 
         for (Property<?> propertyOld : bso.getProperties()) {

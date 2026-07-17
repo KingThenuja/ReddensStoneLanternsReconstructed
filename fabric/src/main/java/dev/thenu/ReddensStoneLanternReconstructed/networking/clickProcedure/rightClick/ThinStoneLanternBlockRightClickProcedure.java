@@ -1,5 +1,7 @@
 package dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick;
 
+import dev.thenu.ReddensStoneLanternReconstructed.blockType.ThinStoneLanternBlockDarkBlock;
+import dev.thenu.ReddensStoneLanternReconstructed.blockType.ThinStoneLanternBlockLightBlock;
 import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -20,25 +22,15 @@ public class ThinStoneLanternBlockRightClickProcedure {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public static void execute(Map<String, Object> dependencies, WorldAccess world, double x, double y, double z) {
-        if (world.isClient()) {
-            return;
-        }
-
-        if (dependencies != null && dependencies.get("entity") instanceof PlayerEntity player) {
-            if (player.getActiveHand() == Hand.OFF_HAND) {
-                return;
-            }
-        }
-
+    public static void execute(WorldAccess world, double x, double y, double z) {
         BlockPos bp = BlockPos.ofFloored(x, y, z);
         BlockState bso = world.getBlockState(bp);
         BlockState bs;
 
-        if (bso.getBlock() == BlockFile.THIN_STONE_LANTERN_TOP_LIGHT) {
-            bs = BlockFile.THIN_STONE_LANTERN_TOP_DARK.getDefaultState();
-        } else if (bso.getBlock() == BlockFile.THIN_STONE_LANTERN_TOP_DARK) {
-            bs = BlockFile.THIN_STONE_LANTERN_TOP_LIGHT.getDefaultState();
+        if (bso.getBlock() == BlockFile.THIN_STONE_LANTERN_BLOCK_LIGHT) {
+            bs = BlockFile.THIN_STONE_LANTERN_BLOCK_DARK.getDefaultState();
+        } else if (bso.getBlock() == BlockFile.THIN_STONE_LANTERN_BLOCK_DARK) {
+            bs = BlockFile.THIN_STONE_LANTERN_BLOCK_LIGHT.getDefaultState();
         } else {
             return;
         }
@@ -74,7 +66,4 @@ public class ThinStoneLanternBlockRightClickProcedure {
         }
     }
 
-    public static void execute(WorldAccess world, double x, double y, double z) {
-        execute(null, world, x, y, z);
-    }
 }

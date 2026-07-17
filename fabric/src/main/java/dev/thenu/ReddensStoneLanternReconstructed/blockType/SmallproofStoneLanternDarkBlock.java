@@ -1,6 +1,7 @@
 package dev.thenu.ReddensStoneLanternReconstructed.blockType;
 
 import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.SmallproofRightClickProcedure;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -79,7 +80,7 @@ public class SmallproofStoneLanternDarkBlock extends Block implements Waterlogga
         }
         return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
-/*
+
     @Override
     public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT);
@@ -88,12 +89,8 @@ public class SmallproofStoneLanternDarkBlock extends Block implements Waterlogga
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient()) {
-            BlockState newState = BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT.getDefaultState()
-                    .with(WATERLOGGED, state.get(WATERLOGGED));
-
-            world.setBlockState(pos, newState, Block.NOTIFY_ALL);
-            world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, net.minecraft.sound.SoundCategory.BLOCKS, 0.5F, 1.0F);
+            SmallproofRightClickProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
         }
         return ActionResult.SUCCESS;
-    }*/
+    }
 }

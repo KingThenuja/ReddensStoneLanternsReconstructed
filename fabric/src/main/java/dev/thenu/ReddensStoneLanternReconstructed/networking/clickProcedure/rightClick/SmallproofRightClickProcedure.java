@@ -20,30 +20,20 @@ public class SmallproofRightClickProcedure {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public static void execute(Map<String, Object> dependencies, WorldAccess world, double x, double y, double z) {
-        if (world.isClient()) {
-            return;
-        }
-
-        if (dependencies != null && dependencies.get("entity") instanceof PlayerEntity player) {
-            if (player.getActiveHand() == Hand.OFF_HAND) {
-                return;
-            }
-        }
-
+    public static void execute(WorldAccess world, double x, double y, double z) {
         BlockPos bp = BlockPos.ofFloored(x, y, z);
         BlockState bso = world.getBlockState(bp);
         BlockState bs;
-/*
+
         if (bso.getBlock() == BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT) {
             bs = BlockFile.SMALLPROOF_STONE_LANTERN_DARK.getDefaultState();
         } else if (bso.getBlock() == BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT) {
             bs = BlockFile.SMALLPROOF_STONE_LANTERN_DARK.getDefaultState();
         } else {
             return;
-        }*/
+        }
 
-        /*for (Property<?> propertyOld : bso.getProperties()) {
+        for (Property<?> propertyOld : bso.getProperties()) {
             Property propertyNew = bs.getBlock().getStateManager().getProperty(propertyOld.getName());
             if (propertyNew != null && bs.get(propertyNew) != null) {
                 try {
@@ -52,7 +42,7 @@ public class SmallproofRightClickProcedure {
                 }
             }
         }
-*/
+
         BlockEntity be = world.getBlockEntity(bp);
         NbtCompound bnbt = null;
         if (be != null) {
@@ -60,21 +50,17 @@ public class SmallproofRightClickProcedure {
             be.markRemoved();
         }
 
-        //world.setBlockState(bp, bs, 3);
+        world.setBlockState(bp, bs, 3);
 
-        /*if (bnbt != null && world instanceof World level) {
-            //BlockEntity newBe = BlockEntity.createFromNbt(bp, bs, bnbt, world.getRegistryManager());
+        if (bnbt != null && world instanceof World level) {
+            BlockEntity newBe = BlockEntity.createFromNbt(bp, bs, bnbt, world.getRegistryManager());
             if (newBe != null) {
                 level.addBlockEntity(newBe);
             }
-        }*/
+        }
 
         if (world instanceof World level) {
             level.playSound(null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
         }
-    }
-
-    public static void execute(WorldAccess world, double x, double y, double z) {
-        execute(null, world, x, y, z);
     }
 }
