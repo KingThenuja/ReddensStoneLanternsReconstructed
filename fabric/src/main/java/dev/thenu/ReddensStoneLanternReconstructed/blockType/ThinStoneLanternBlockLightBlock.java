@@ -36,7 +36,7 @@ public class ThinStoneLanternBlockLightBlock extends Block implements Waterlogga
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false));
     }
-
+/*
     @Override
     public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.empty();
@@ -94,6 +94,6 @@ public class ThinStoneLanternBlockLightBlock extends Block implements Waterlogga
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         ThinStoneLanternBlockRightClickProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
         return ActionResult.SUCCESS;
-    }
+    }*/
 
 }

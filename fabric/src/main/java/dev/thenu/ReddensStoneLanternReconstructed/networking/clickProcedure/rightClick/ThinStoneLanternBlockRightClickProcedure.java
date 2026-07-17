@@ -15,7 +15,7 @@ import net.minecraft.world.WorldAccess;
 public class ThinStoneLanternBlockRightClickProcedure {
     public ThinStoneLanternBlockRightClickProcedure() {
     }
-
+/*
     @SuppressWarnings({"unchecked", "rawtypes"})
     public static void execute(WorldAccess world, double x, double y, double z) {
         BlockPos bp = BlockPos.ofFloored(x, y, z);
@@ -57,5 +57,5 @@ public class ThinStoneLanternBlockRightClickProcedure {
         if (world instanceof World level) {
             level.playSound(null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
         }
-    }
+    }*/
 }
