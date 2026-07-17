@@ -18,7 +18,7 @@ import java.util.Map;
 public class ThinStoneLanternBlockRightClickProcedure {
     public ThinStoneLanternBlockRightClickProcedure() {
     }
-
+/*
     @SuppressWarnings({"unchecked", "rawtypes"})
     public static void execute(Map<String, Object> dependencies, WorldAccess world, double x, double y, double z) {
         if (world.isClient()) {
@@ -76,5 +76,5 @@ public class ThinStoneLanternBlockRightClickProcedure {
 
     public static void execute(WorldAccess world, double x, double y, double z) {
         execute(null, world, x, y, z);
-    }
+    }*/
 }
