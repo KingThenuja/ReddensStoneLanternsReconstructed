@@ -14,10 +14,10 @@ import static dev.thenu.ReddensStoneLanternReconstructed.BlockFile.MOD_ID;
 import static dev.thenu.ReddensStoneLanternReconstructed.BlockFile.registerBlock;
 
 public class StonePillarThinALanternBlockFile {
-    public static void register() {
-    }
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
 
+    public static void register() {
+    }
 
     public static final DeferredBlock<Block> STONE_PILLAR_THIN_A_TOP = registerBlock("stone_pillar_thin_a_top",
             props -> new StonePillarThinATopBlock(props
@@ -27,8 +27,10 @@ public class StonePillarThinALanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 
     public static final DeferredBlock<Block> STONE_PILLAR_THIN_A_BOTTOM = registerBlock("stone_pillar_thin_a_bottom",
             props -> new StonePillarThinABottomBlock(props
@@ -38,8 +40,10 @@ public class StonePillarThinALanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 
     public static final DeferredBlock<Block> STONE_PILLAR_THIN_A_SHORT = registerBlock("stone_pillar_thin_a_short",
             props -> new StonePillarThinAShortBlock(props
@@ -49,7 +53,8 @@ public class StonePillarThinALanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
-
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 }

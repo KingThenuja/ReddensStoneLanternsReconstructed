@@ -14,10 +14,10 @@ import static dev.thenu.ReddensStoneLanternReconstructed.BlockFile.MOD_ID;
 import static dev.thenu.ReddensStoneLanternReconstructed.BlockFile.registerBlock;
 
 public class StonePillarBiggerLanternBlockFile {
-    public static void register() {
-    }
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
 
+    public static void register() {
+    }
 
     public static final DeferredBlock<Block> STONE_PILLAR_BIGGER_BOTTOM = registerBlock("stone_pillar_bigger_bottom",
             props -> new StonePillarBiggerBottomBlock(props
@@ -27,9 +27,10 @@ public class StonePillarBiggerLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
-
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 
     public static final DeferredBlock<Block> STONE_PILLAR_BIGGER_MIDDLE = registerBlock("stone_pillar_bigger_middle",
             props -> new StonePillarBiggerMiddleBlock(props
@@ -39,9 +40,10 @@ public class StonePillarBiggerLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
-
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 
     public static final DeferredBlock<Block> STONE_PILLAR_BIGGER_SHORT = registerBlock("stone_pillar_bigger_short",
             props -> new StonePillarBiggerShortBlock(props
@@ -51,9 +53,10 @@ public class StonePillarBiggerLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
-
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 
     public static final DeferredBlock<Block> STONE_PILLAR_BIGGER_TOP = registerBlock("stone_pillar_bigger_top",
             props -> new StonePillarBiggerTopBlock(props
@@ -63,7 +66,8 @@ public class StonePillarBiggerLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
-
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 }

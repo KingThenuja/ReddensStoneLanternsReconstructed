@@ -16,7 +16,7 @@ public class CreativeTabFile {
 
     static {
         REGISTRY = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "reddensstonelantern");
-        REDDENS_DECO = REGISTRY.register("reddens_deco", () -> CreativeModeTab.builder().title(Component.translatable("item_group.reddensstonelantern.reddens_deco")).icon(() -> new ItemStack((ItemLike) MediumLanternBlockFile.MEDIUM_STONE_LANTERN.get())).displayItems((parameters, tabData) -> {
+        REDDENS_DECO = REGISTRY.register("reddens_deco", () -> CreativeModeTab.builder().title(Component.translatable("item_group.reddensstonelantern.reddens_deco")).icon(() -> new ItemStack(MediumLanternBlockFile.MEDIUM_STONE_LANTERN.get())).displayItems((parameters, tabData) -> {
             tabData.accept(MediumLanternBlockFile.MEDIUM_STONE_LANTERN.get().asItem());
             tabData.accept(ThinLanternBlockFile.THIN_STONE_LANTERN.get().asItem());
             tabData.accept(BroadLanternBlockFile.BROAD_STONE_LANTERN.get().asItem());

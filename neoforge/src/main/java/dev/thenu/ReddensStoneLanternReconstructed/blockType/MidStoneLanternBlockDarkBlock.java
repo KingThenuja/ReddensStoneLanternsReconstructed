@@ -1,9 +1,5 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package dev.thenu.ReddensStoneLanternReconstructed.blockType;
+
 
 import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.Blocks.MidStoneLanternBlockFile;

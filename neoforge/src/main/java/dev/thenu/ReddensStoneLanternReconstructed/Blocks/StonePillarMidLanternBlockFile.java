@@ -14,9 +14,10 @@ import static dev.thenu.ReddensStoneLanternReconstructed.BlockFile.MOD_ID;
 import static dev.thenu.ReddensStoneLanternReconstructed.BlockFile.registerBlock;
 
 public class StonePillarMidLanternBlockFile {
+    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
+
     public static void register() {
     }
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
 
     public static final DeferredBlock<Block> STONE_PILLAR_MID_BOTTOM = registerBlock("stone_pillar_mid_bottom",
             props -> new StonePillarMidBottomBlock(props
@@ -26,9 +27,10 @@ public class StonePillarMidLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
-
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 
     public static final DeferredBlock<Block> STONE_PILLAR_MID_TOP = registerBlock("stone_pillar_mid_top",
             props -> new StonePillarMidTopBlock(props
@@ -38,9 +40,10 @@ public class StonePillarMidLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
-
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 
     public static final DeferredBlock<Block> STONE_PILLAR_MID_MIDDLE = registerBlock("stone_pillar_mid_middle",
             props -> new StonePillarMidMiddleBlock(props
@@ -50,9 +53,10 @@ public class StonePillarMidLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
-
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 
     public static final DeferredBlock<Block> STONE_PILLAR_MID_SHORT = registerBlock("stone_pillar_mid_short",
             props -> new StonePillarMidShortBlock(props
@@ -62,7 +66,8 @@ public class StonePillarMidLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
-
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 }

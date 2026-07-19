@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package dev.thenu.ReddensStoneLanternReconstructed.world.blockBreakProcedure;
 
 import dev.thenu.ReddensStoneLanternReconstructed.Blocks.BigStoneLanternBlockFile;

@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package dev.thenu.ReddensStoneLanternReconstructed.networking.tickingProcedure;
 
 import net.minecraft.core.BlockPos;
@@ -16,7 +11,6 @@ public class TripleBlockMidTickProcedure {
     }
 
     public static void execute(LevelAccessor world, double x, double y, double z) {
-        boolean IsAlone = false;
         if (!world.getBlockState(BlockPos.containing(x, y + (double)1.0F, z)).is(BlockTags.create(Identifier.parse("reddensstonelantern:is_top")))) {
             world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
         }

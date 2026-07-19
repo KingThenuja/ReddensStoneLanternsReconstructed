@@ -5,6 +5,7 @@ import dev.thenu.ReddensStoneLanternReconstructed.blockType.MediumStoneLanternTo
 import dev.thenu.ReddensStoneLanternReconstructed.blockType.MediumStoneLanternTopLightBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -14,9 +15,10 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import static dev.thenu.ReddensStoneLanternReconstructed.BlockFile.*;
 
 public class MediumLanternBlockFile {
+    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
+
     public static void register() {
     }
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
 
     public static final DeferredBlock<Block> MEDIUM_STONE_LANTERN = registerBlock("medium_stone_lantern",
             props -> new MediumStoneLanternBlock(props
@@ -26,8 +28,10 @@ public class MediumLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.BLOCK)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 
 
     public static final DeferredBlock<Block> MEDIUM_STONE_LANTERN_TOP_DARK = registerBlock("medium_stone_lantern_top_dark",
@@ -38,8 +42,10 @@ public class MediumLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.BLOCK)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 
 
     public static final DeferredBlock<Block> MEDIUM_STONE_LANTERN_TOP_LIGHT = registerBlock("medium_stone_lantern_top_light",
@@ -48,11 +54,11 @@ public class MediumLanternBlockFile {
                     .mapColor(MapColor.STONE)
                     .sound(SoundType.STONE)
                     .strength(1.0F, 10.0F)
-                    .lightLevel((s) -> 15)
+                    .lightLevel((_) -> 15)
                     .noOcclusion()
                     .pushReaction(PushReaction.BLOCK)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
-
-
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 }

@@ -9,12 +9,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,7 +26,7 @@ public class BigPlaceProcedure {
             // Check if there is clear space above to erect the multi-block lantern structure
             if (world.isEmptyBlock(BlockPos.containing(x, y + 1.0D, z)) && world.isEmptyBlock(BlockPos.containing(x, y + 2.0D, z))) {
                 BlockPos _bp = BlockPos.containing(x, y, z);
-                BlockState _bs = ((Block) BigStoneLanternBlockFile.BIG_STONE_LANTERN_BASE.get()).defaultBlockState();
+                BlockState _bs = BigStoneLanternBlockFile.BIG_STONE_LANTERN_BASE.get().defaultBlockState();
 
                 CompoundTag _bnbt = null;
                 BlockEntity _oldBe = world.getBlockEntity(_bp);
@@ -43,7 +40,7 @@ public class BigPlaceProcedure {
                 // 2. Commit block placement layout transformations
                 world.setBlock(_bp, _bs, 3);
                 world.setBlock(BlockPos.containing(x, y + 1.0D, z), BigStoneLanternBlockFile.BIG_STONE_LANTERN_MID.get().defaultBlockState(), 3);
-                world.setBlock(BlockPos.containing(x, y + 2.0D, z), ((Block) BigStoneLanternBlockFile.BIG_STONE_LANTERN_TOP_LIGHT.get()).defaultBlockState(), 3);
+                world.setBlock(BlockPos.containing(x, y + 2.0D, z), BigStoneLanternBlockFile.BIG_STONE_LANTERN_TOP_LIGHT.get().defaultBlockState(), 3);
 
                 // 3. Re-inject block entity context data via Mojang static loader hooks
                 if (_bnbt != null && world instanceof Level _level) {
@@ -55,13 +52,13 @@ public class BigPlaceProcedure {
 
                 // 4. Trigger audio effect using core compiled sound event references
                 if (world instanceof Level _level) {
-                    _level.playSound((Player) null, BlockPos.containing(x, y + 2.0D, z), SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 0.5F, 1.0F);
+                    _level.playSound(null, BlockPos.containing(x, y + 2.0D, z), SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 0.5F, 1.0F);
                 }
 
             } else if (CheckGamemode.checkGamemode(entity)) {
                 // If the space is blocked and gamemode criteria is met, handle drops safely
                 if (world instanceof ServerLevel _serverLevel) {
-                    ItemEntity entityToSpawn = new ItemEntity(_serverLevel, x, y, z, new ItemStack((ItemLike) BigStoneLanternBlockFile.BIG_STONE_LANTERN_MID.get()));
+                    ItemEntity entityToSpawn = new ItemEntity(_serverLevel, x, y, z, new ItemStack(BigStoneLanternBlockFile.BIG_STONE_LANTERN_MID.get()));
                     entityToSpawn.setPickUpDelay(10);
                     _serverLevel.addFreshEntity(entityToSpawn);
                 } else {

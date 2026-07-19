@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package dev.thenu.ReddensStoneLanternReconstructed.world.blockBreakProcedure;
 
 import dev.thenu.ReddensStoneLanternReconstructed.networking.checkGamemode.CheckGamemode;
@@ -13,7 +8,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class DoubleBlockBreakProcedure {
@@ -25,7 +19,7 @@ public class DoubleBlockBreakProcedure {
             if (blockstate.is(BlockTags.create(Identifier.parse("reddensstonelantern:is_top")))) {
                 if (!(CheckGamemode.checkGamemode(entity))) {
                     BlockPos _pos = BlockPos.containing(x, y - (double)1.0F, z);
-                    Block.dropResources(world.getBlockState(_pos), world, BlockPos.containing(x, y - (double)1.0F, z), (BlockEntity)null);
+                    Block.dropResources(world.getBlockState(_pos), world, BlockPos.containing(x, y - (double)1.0F, z), null);
                     world.destroyBlock(_pos, false);
                 } else {
                     world.setBlock(BlockPos.containing(x, y - (double)1.0F, z), Blocks.AIR.defaultBlockState(), 3);
@@ -37,7 +31,7 @@ public class DoubleBlockBreakProcedure {
             if (blockstate.is(BlockTags.create(Identifier.parse("reddensstonelantern:is_base")))) {
                 if (!(CheckGamemode.checkGamemode(entity))) {
                     BlockPos _pos = BlockPos.containing(x, y, z);
-                    Block.dropResources(world.getBlockState(_pos), world, BlockPos.containing(x, y, z), (BlockEntity)null);
+                    Block.dropResources(world.getBlockState(_pos), world, BlockPos.containing(x, y, z), null);
                     world.destroyBlock(_pos, false);
                 } else {
                     world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);

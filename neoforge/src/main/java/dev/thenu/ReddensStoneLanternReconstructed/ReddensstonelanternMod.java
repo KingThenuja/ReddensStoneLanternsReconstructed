@@ -28,8 +28,8 @@ public class ReddensstonelanternMod {
     public static final Logger LOGGER = LogManager.getLogger(ReddensstonelanternMod.class);
     public static final String MODID = "reddensstonelantern";
     private static boolean networkingRegistered = false;
-    private static final Map<CustomPacketPayload.Type<?>, NetworkMessage<?>> MESSAGES = new HashMap();
-    private static final Collection<Tuple<Runnable, Integer>> workQueue = new ConcurrentLinkedQueue();
+    private static final Map<CustomPacketPayload.Type<?>, NetworkMessage<?>> MESSAGES = new HashMap<>();
+    private static final Collection<Tuple<Runnable, Integer>> workQueue = new ConcurrentLinkedQueue<>();
 
     public ReddensstonelanternMod(IEventBus modEventBus) {
         NeoForge.EVENT_BUS.register(this);
@@ -63,7 +63,7 @@ public class ReddensstonelanternMod {
         if (networkingRegistered) {
             throw new IllegalStateException("Cannot register new network messages after networking has been registered");
         } else {
-            MESSAGES.put(id, new NetworkMessage(reader, handler));
+            MESSAGES.put(id, new NetworkMessage<>(reader, handler));
         }
     }
 
@@ -74,14 +74,14 @@ public class ReddensstonelanternMod {
 
     public static void queueServerWork(int tick, Runnable action) {
         if (Thread.currentThread().getThreadGroup() == SidedThreadGroups.SERVER) {
-            workQueue.add(new Tuple(action, tick));
+            workQueue.add(new Tuple<>(action, tick));
         }
 
     }
 
     @SubscribeEvent
     public void tick(ServerTickEvent.Post event) {
-        List<Tuple<Runnable, Integer>> actions = new ArrayList();
+        List<Tuple<Runnable, Integer>> actions = new ArrayList<>();
         workQueue.forEach((work) -> {
             work.setB((Integer)work.getB() - 1);
             if ((Integer)work.getB() == 0) {

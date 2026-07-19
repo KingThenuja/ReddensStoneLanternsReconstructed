@@ -1,7 +1,5 @@
 package dev.thenu.ReddensStoneLanternReconstructed.blockType;
 
-import dev.thenu.ReddensStoneLanternReconstructed.BlockFile;
-import dev.thenu.ReddensStoneLanternReconstructed.Blocks.BigStoneLanternBlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.Blocks.BiggerStoneLanternBlockFile;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.BiggerStoneLanternBlockRightClickProcedure;
 import net.minecraft.core.BlockPos;
@@ -14,18 +12,13 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -52,21 +45,21 @@ public class BiggerStoneLanternBlockDBlock extends Block implements SimpleWaterl
     }
 
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return box((double)1.0F, (double)0.0F, (double)1.0F, (double)15.0F, (double)16.0F, (double)15.0F);
+        return box(1.0F, 0.0F, 1.0F, 15.0F, 16.0F, 15.0F);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(new Property[]{WATERLOGGED});
+        builder.add(WATERLOGGED);
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         boolean flag = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
-        return (BlockState)super.getStateForPlacement(context).setValue(WATERLOGGED, flag);
+        return super.getStateForPlacement(context).setValue(WATERLOGGED, flag);
     }
 
     public FluidState getFluidState(BlockState state) {
-        return (Boolean)state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
@@ -87,11 +80,7 @@ public class BiggerStoneLanternBlockDBlock extends Block implements SimpleWaterl
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
-        double hitX = hit.getLocation().x;
-        double hitY = hit.getLocation().y;
-        double hitZ = hit.getLocation().z;
-        Direction direction = hit.getDirection();
-        BiggerStoneLanternBlockRightClickProcedure.execute(world, (double)x, (double)y, (double)z);
+        BiggerStoneLanternBlockRightClickProcedure.execute(world, x, y, z);
         return InteractionResult.SUCCESS;
     }
 

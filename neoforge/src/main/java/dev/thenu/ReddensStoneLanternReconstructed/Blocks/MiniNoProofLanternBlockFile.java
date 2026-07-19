@@ -1,6 +1,5 @@
 package dev.thenu.ReddensStoneLanternReconstructed.Blocks;
 
-import dev.thenu.ReddensStoneLanternReconstructed.blockType.MidStoneLanternBlockDarkBlock;
 import dev.thenu.ReddensStoneLanternReconstructed.blockType.MininoproofStoneLanternDarkBlock;
 import dev.thenu.ReddensStoneLanternReconstructed.blockType.MininoproofStoneLanternLightBlock;
 import net.minecraft.world.level.block.Block;
@@ -16,10 +15,10 @@ import static dev.thenu.ReddensStoneLanternReconstructed.BlockFile.MOD_ID;
 import static dev.thenu.ReddensStoneLanternReconstructed.BlockFile.registerBlock;
 
 public class MiniNoProofLanternBlockFile {
-    public static void register() {
-    }
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
 
+    public static void register() {
+    }
 
     public static final DeferredBlock<Block> MININOPROOF_STONE_LANTERN_DARK = registerBlock("mininoproof_stone_lantern_dark",
             props -> new MininoproofStoneLanternDarkBlock(props
@@ -29,9 +28,10 @@ public class MiniNoProofLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
-
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 
     public static final DeferredBlock<Block> MININOPROOF_STONE_LANTERN_LIGHT = registerBlock("mininoproof_stone_lantern_light",
             props -> new MininoproofStoneLanternLightBlock(props
@@ -41,6 +41,8 @@ public class MiniNoProofLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((bs, br, bp) -> false)
-            ));
+                    .isRedstoneConductor((_, _, _) -> false)
+            ),
+            BlockBehaviour.Properties.of()
+    );
 }

@@ -5,7 +5,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
@@ -22,7 +21,7 @@ public class LanternPlaceSoundProcedure {
 
             if (flintSound != null) {
                 if (!_level.isClientSide()) {
-                    _level.playSound((Player)null, BlockPos.containing(x, y, z), flintSound, SoundSource.BLOCKS, 0.3F, 1.0F);
+                    _level.playSound(null, BlockPos.containing(x, y, z), flintSound, SoundSource.BLOCKS, 0.3F, 1.0F);
                 } else {
                     _level.playLocalSound(x, y, z, flintSound, SoundSource.BLOCKS, 0.3F, 1.0F, false);
                 }
