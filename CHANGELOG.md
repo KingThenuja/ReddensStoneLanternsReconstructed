@@ -1,8 +1,8 @@
-## Official release of the mod's 1.21.8 version
+## Official release of the mod's 26.1, 26.1.1, 26.1.2 version
 
 ### *Supported versions:*
 
-- 1.21.11
+- 26.1 - 26.1.2
 
 ### *Supported loaders:*
 

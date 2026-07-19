@@ -16,7 +16,7 @@ description = '''${description}'''
 [[dependencies.${mod_id}]]
 modId = "neoforge"
 type="required"
-versionRange="${neo_version_range}"
+versionRange="[26.1, 26.2)"
 ordering = "NONE"
 side = "BOTH"
 

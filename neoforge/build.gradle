@@ -27,7 +27,7 @@ modrinth {
     versionNumber = version.toString()
     versionType = property("versionType").toString()
     uploadFile = tasks.findByName("remapJar") ?: tasks.named("jar")
-    gameVersions = [property("minecraft_version").toString()]
+    gameVersions = [property("minecraft_version").toString(), "26.1.1", "26.1.2"]
     loaders = ["neoforge"]
     changelog = rootProject.file("CHANGELOG.md").text
 
@@ -43,8 +43,10 @@ tasks.register('publishCurseForge', net.darkhax.curseforgegradle.TaskPublishCurs
     mainFile.releaseType = "${versionType}"
     mainFile.changelogType = "markdown"
     mainFile.changelog = rootProject.file("CHANGELOG.md").text
-    mainFile.addGameVersion("${minecraft_version}")
+    mainFile.addGameVersion("${minecraft_version}", "26.1.1", "26.1.2")
     mainFile.addModLoader("NeoForge")
+    mainFile.addEnvironment("Client")
+    mainFile.addEnvironment("Server")
 }
 
 tasks.named('publishCurseForge').configure {
