@@ -10,7 +10,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.util.Tuple;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -29,7 +28,7 @@ public class ReddensstonelanternMod {
     public static final String MODID = "reddensstonelantern";
     private static boolean networkingRegistered = false;
     private static final Map<CustomPacketPayload.Type<?>, NetworkMessage<?>> MESSAGES = new HashMap<>();
-    private static final Collection<Tuple<Runnable, Integer>> workQueue = new ConcurrentLinkedQueue<>();
+    private static final Collection<WorkItem> workQueue = new ConcurrentLinkedQueue<>();
 
     public ReddensstonelanternMod(IEventBus modEventBus) {
         NeoForge.EVENT_BUS.register(this);
@@ -72,25 +71,22 @@ public class ReddensstonelanternMod {
         networkingRegistered = true;
     }
 
-    public static void queueServerWork(int tick, Runnable action) {
-        if (Thread.currentThread().getThreadGroup() == SidedThreadGroups.SERVER) {
-            workQueue.add(new Tuple<>(action, tick));
-        }
-
-    }
-
     @SubscribeEvent
     public void tick(ServerTickEvent.Post event) {
-        List<Tuple<Runnable, Integer>> actions = new ArrayList<>();
-        workQueue.forEach((work) -> {
-            work.setB((Integer)work.getB() - 1);
-            if ((Integer)work.getB() == 0) {
-                actions.add(work);
-            }
+        List<WorkItem> toExecute = new ArrayList<>();
+        List<WorkItem> toKeep = new ArrayList<>();
 
+        workQueue.forEach((work) -> {
+            if (work.delay() <= 1) {
+                toExecute.add(work);
+            } else {
+                toKeep.add(new WorkItem(work.task(), work.delay() - 1));
+            }
         });
-        actions.forEach((e) -> ((Runnable)e.getA()).run());
-        workQueue.removeAll(actions);
+
+        toExecute.forEach((item) -> item.task().run());
+        workQueue.clear();
+        workQueue.addAll(toKeep);
     }
 
     private static record NetworkMessage<T extends CustomPacketPayload>(StreamCodec<? extends FriendlyByteBuf, T> reader, IPayloadHandler<T> handler) {

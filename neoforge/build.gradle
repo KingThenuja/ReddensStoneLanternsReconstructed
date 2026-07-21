@@ -45,6 +45,8 @@ tasks.register('publishCurseForge', net.darkhax.curseforgegradle.TaskPublishCurs
     mainFile.changelog = rootProject.file("CHANGELOG.md").text
     mainFile.addGameVersion("${minecraft_version}")
     mainFile.addModLoader("NeoForge")
+    mainFile.addEnvironment("Server")
+    mainFile.addEnvironment("Client")
 }
 
 tasks.named('publishCurseForge').configure {
