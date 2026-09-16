@@ -1,4 +1,4 @@
-## Official release of the mod's 26.3 version
+## 26.3 - v1.1
 
 ### *Supported Minecraft versions:*
 
@@ -12,6 +12,6 @@
 
 ### *New Changes:*
 
-- [Fabric] Added Minecraft 26.3 support
-- [NeoForge] Added Minecraft 26.3 support
-- [Quilt] Added Minecraft 26.3 support
+- [Fabric] Removed <a href="https://github.com/KingThenuja/ReddensStoneLanternsReconstructed/issues/2" target="_blank" alt="bug #2 link">bug #2</a>
+- [NeoForge] Removed <a href="https://github.com/KingThenuja/ReddensStoneLanternsReconstructed/issues/2" target="_blank" alt="bug #2 link">bug #2</a>
+- [Quilt] Removed <a href="https://github.com/KingThenuja/ReddensStoneLanternsReconstructed/issues/2" target="_blank" alt="bug #2 link">bug #2</a>

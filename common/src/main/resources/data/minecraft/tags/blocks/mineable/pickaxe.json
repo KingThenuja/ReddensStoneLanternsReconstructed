@@ -58,6 +58,8 @@
     "reddensstonelantern:big_stone_lantern_block_dark",
     "reddensstonelantern:broad_stone_lantern_block_dark",
     "reddensstonelantern:mid_stone_lantern_block_dark",
+    "reddensstonelantern:smallproof_stone_lantern_dark",
+    "reddensstonelantern:smallproof_stone_lantern_light",
     "reddensstonelantern:thin_stone_lantern_block_dark"
   ]
 }
