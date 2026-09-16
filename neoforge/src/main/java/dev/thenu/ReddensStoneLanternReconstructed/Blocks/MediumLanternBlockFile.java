@@ -27,7 +27,7 @@ public class MediumLanternBlockFile {
                     .sound(SoundType.STONE)
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
-                    .pushReaction(PushReaction.BLOCK)
+                    .pushReaction(PushReaction.IMMOVEABLE)
                     .isRedstoneConductor((_, _, _) -> false)
             ),
             BlockBehaviour.Properties.of()
@@ -41,7 +41,7 @@ public class MediumLanternBlockFile {
                     .sound(SoundType.STONE)
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
-                    .pushReaction(PushReaction.BLOCK)
+                    .pushReaction(PushReaction.IMMOVEABLE)
                     .isRedstoneConductor((_, _, _) -> false)
             ),
             BlockBehaviour.Properties.of()
@@ -56,7 +56,7 @@ public class MediumLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .lightLevel((_) -> 15)
                     .noOcclusion()
-                    .pushReaction(PushReaction.BLOCK)
+                    .pushReaction(PushReaction.IMMOVEABLE)
                     .isRedstoneConductor((_, _, _) -> false)
             ),
             BlockBehaviour.Properties.of()

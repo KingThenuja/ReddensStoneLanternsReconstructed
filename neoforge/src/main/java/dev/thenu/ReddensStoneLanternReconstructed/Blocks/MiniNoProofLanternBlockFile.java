@@ -27,7 +27,7 @@ public class MiniNoProofLanternBlockFile {
                     .sound(SoundType.STONE)
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
-                    .pushReaction(PushReaction.DESTROY)
+                    .pushReaction(PushReaction.POPPED)
                     .isRedstoneConductor((_, _, _) -> false)
             ),
             BlockBehaviour.Properties.of()
@@ -40,7 +40,7 @@ public class MiniNoProofLanternBlockFile {
                     .sound(SoundType.STONE)
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
-                    .pushReaction(PushReaction.DESTROY)
+                    .pushReaction(PushReaction.POPPED)
                     .isRedstoneConductor((_, _, _) -> false)
             ),
             BlockBehaviour.Properties.of()

@@ -25,7 +25,7 @@ public class BiggerStoneLanternBlockFile {
                     .mapColor(MapColor.STONE).sound(SoundType.STONE)
                     .strength(1.0F, 10.0F)
                     .noOcclusion()
-                    .pushReaction(PushReaction.DESTROY)
+                    .pushReaction(PushReaction.POPPED)
                     .isRedstoneConductor((bs, br, bp) -> false)
             ),
             BlockBehaviour.Properties.of()
@@ -39,7 +39,7 @@ public class BiggerStoneLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .lightLevel((s) -> 15)
                     .noOcclusion()
-                    .pushReaction(PushReaction.DESTROY)
+                    .pushReaction(PushReaction.POPPED)
                     .isRedstoneConductor((bs, br, bp) -> false)
             ),
             BlockBehaviour.Properties.of()
@@ -52,7 +52,7 @@ public class BiggerStoneLanternBlockFile {
                     .strength(1.0F, 10.0F)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
-                    .pushReaction(PushReaction.DESTROY)
+                    .pushReaction(PushReaction.POPPED)
                     .isRedstoneConductor((bs, br, bp) -> false)
             ),
             BlockBehaviour.Properties.of()
