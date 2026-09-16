@@ -1,4 +1,4 @@
-## Official release of the mod's 26.2 version
+## 26.2 - v1.1
 
 ### *Supported versions:*
 
@@ -9,3 +9,9 @@
 - Fabric
 - Quilt
 - NeoForge
+
+### *Changes:*
+
+- [Fabric] Removed <a href="https://github.com/KingThenuja/ReddensStoneLanternsReconstructed/issues/2" target="_blank" alt="bug #2 link">bug #2</a>
+- [NeoForge] Removed <a href="https://github.com/KingThenuja/ReddensStoneLanternsReconstructed/issues/2" target="_blank" alt="bug #2 link">bug #2</a>
+- [Quilt] Removed <a href="https://github.com/KingThenuja/ReddensStoneLanternsReconstructed/issues/2" target="_blank" alt="bug #2 link">bug #2</a>
