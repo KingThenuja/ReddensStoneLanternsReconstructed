@@ -1,6 +1,7 @@
 package dev.thenu.ReddensStoneLanternReconstructed.blockType;
 
 import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.BigStoneLanternBlockRightClickProcedure;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.BiggerStoneLanternBlockRightClickProcedure;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -84,7 +85,7 @@ public class BigStoneLanternBlockDarkBlock extends Block implements SimpleWaterl
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!level.isClientSide()) {
-            BiggerStoneLanternBlockRightClickProcedure.execute(level, pos.getX(), pos.getY(), pos.getZ());
+            BigStoneLanternBlockRightClickProcedure.execute(level, pos.getX(), pos.getY(), pos.getZ());
         }
         return InteractionResult.SUCCESS;
     }

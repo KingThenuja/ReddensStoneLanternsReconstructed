@@ -1,5 +1,6 @@
 package dev.thenu.ReddensStoneLanternReconstructed.blockType;
 
+import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.BigStoneLanternBlockRightClickProcedure;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.BiggerStoneLanternBlockRightClickProcedure;
 import dev.thenu.ReddensStoneLanternReconstructed.world.blockPlaceProcedure.LanternPlaceSoundProcedure;
 import net.minecraft.core.BlockPos;
@@ -84,7 +85,7 @@ public class BigStoneLanternBlockLightBlock extends Block implements SimpleWater
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!level.isClientSide()) {
-            BiggerStoneLanternBlockRightClickProcedure.execute(level, pos.getX(), pos.getY(), pos.getZ());
+            BigStoneLanternBlockRightClickProcedure.execute(level, pos.getX(), pos.getY(), pos.getZ());
         }
         return InteractionResult.SUCCESS;
     }

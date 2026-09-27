@@ -12,18 +12,7 @@ tasks.withType(Jar).configureEach {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 def modrinthToken = System.getenv("MODRINTH_TOKEN")
-def secretPropsFile = rootProject.file('publishing.properties')
-def secretProps = new Properties()
-
-if (secretPropsFile.exists()) {
-    secretPropsFile.withInputStream { stream ->
-        secretProps.load(stream)
-    }
-} else {
-    logger.warn("publishing.properties file not found!")
-}
-
-def cfToken = secretProps.getProperty('curseforge_token') ?: ""
+def cfToken = System.getenv("CURSEFORGE_TOKEN")
 
 modrinth {
     token = modrinthToken
