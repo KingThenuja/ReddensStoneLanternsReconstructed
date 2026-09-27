@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
-import java.awt.*;
+import java.util.List;
 import java.util.function.Function;
 
 public class BlockFile {
@@ -32,19 +32,16 @@ public class BlockFile {
             .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).noOcclusion().pushReaction(PushReaction.NORMAL).forceSolidOn()));
     public static Block BIG_STONE_LANTERN_TOP_LIGHT      = registerBlock("big_stone_lantern_top_light",      properties -> new BigStoneLanternTopLightBlock(properties
             .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).lightLevel((_) -> 15).noOcclusion().pushReaction(PushReaction.NORMAL).forceSolidOn()));
-
     public static Block BIGGER_STONE_LANTERN_BLOCK_D     = registerBlock("bigger_stone_lantern_block_d",     properties -> new BiggerStoneLanternBlockDBlock(properties
             .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).noOcclusion().pushReaction(PushReaction.DESTROY).forceSolidOn()));
     public static Block BIGGER_STONE_LANTERN_BLOCK_L     = registerBlock("bigger_stone_lantern_block_l",     properties -> new BiggerStoneLanternBlockLBlock(properties
             .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).lightLevel((_) -> 15).noOcclusion().pushReaction(PushReaction.DESTROY).forceSolidOn()));
     public static Block BIGGER_STONE_LANTERN_PROOF       = registerBlock("bigger_stone_lantern_proof",       properties -> new BiggerStoneLanternProofBlock(properties
             .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).noOcclusion().pushReaction(PushReaction.DESTROY).forceSolidOn()));
-
     public static Block BIG_STONE_LANTERN_BLOCK_DARK     = registerBlock("big_stone_lantern_block_dark",     properties -> new BigStoneLanternBlockDarkBlock(properties
             .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).noOcclusion().pushReaction(PushReaction.DESTROY).forceSolidOn()));
     public static Block BIG_STONE_LANTERN_BLOCK_LIGHT    = registerBlock("big_stone_lantern_block_light",    properties -> new BigStoneLanternBlockLightBlock(properties
             .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).lightLevel((_) -> 15).noOcclusion().pushReaction(PushReaction.DESTROY).forceSolidOn()));
-
     public static Block MEDIUM_STONE_LANTERN             = registerBlock("medium_stone_lantern",             properties -> new MediumStoneLanternBlock(properties
             .mapColor(MapColor.STONE).sound(copyOf(SoundType.STONE)).strength(1.0F, 10.0F).noOcclusion().pushReaction(PushReaction.BLOCK).forceSolidOn()));
     public static Block MEDIUM_STONE_LANTERN_TOP_DARK    = registerBlock("medium_stone_lantern_top_dark",    properties -> new MediumStoneLanternTopDarkBlock(properties
@@ -178,4 +175,6 @@ public class BlockFile {
                 new BlockItem(block, new Item.Properties().useBlockDescriptionPrefix()
                         .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(ReddensstonelanternMod.MOD_ID, name)))));
     }
+
+    public static List<Block> BLOCKS = List.of(BIG_STONE_LANTERN_BASE, BIG_STONE_LANTERN_MID, BIG_STONE_LANTERN_TOP_DARK, BIG_STONE_LANTERN_TOP_LIGHT, BIGGER_STONE_LANTERN_BLOCK_D, BIGGER_STONE_LANTERN_BLOCK_L, BIGGER_STONE_LANTERN_PROOF, BIG_STONE_LANTERN_BLOCK_DARK, BIG_STONE_LANTERN_BLOCK_LIGHT, MEDIUM_STONE_LANTERN, MEDIUM_STONE_LANTERN_TOP_DARK, MEDIUM_STONE_LANTERN_TOP_LIGHT, SMALL_STONE_LANTERN_LIGHT, SMALL_STONE_LANTERN_DARK, MINI_STONE_LANTERN_DARK, MINI_STONE_LANTERN_LIGHT, SMALLFOOT_STONE_LANTERN_DARK, SMALLFOOT_STONE_LANTERN_LIGHT, SMALLPROOF_STONE_LANTERN_DARK, SMALLPROOF_STONE_LANTERN_LIGHT, SMALLNOPROOF_STONE_LANTERN_DARK, SMALLNOPROOF_STONE_LANTERN_LIGHT, MININOPROOF_STONE_LANTERN_DARK, MININOPROOF_STONE_LANTERN_LIGHT, STONE_PILLAR_MID_BOTTOM, STONE_PILLAR_MID_TOP, STONE_PILLAR_MID_MIDDLE, STONE_PILLAR_MID_SHORT, STONE_PILLAR_THIN_A_TOP, STONE_PILLAR_THIN_A_BOTTOM, STONE_PILLAR_THIN_A_SHORT, STONE_PILLAR_THIN_B_BOTTOM, STONE_PILLAR_THIN_B_SHORT, STONE_PILLAR_THIN_B_TOP, STONE_PILLAR_THIN_C_BOTTOM, STONE_PILLAR_THIN_C_MIDDLE, STONE_PILLAR_THIN_C_SHORT, STONE_PILLAR_THIN_C_TOP, STONE_PILLAR_BIG_BOTTOM, STONE_PILLAR_BIG_MIDDLE, STONE_PILLAR_BIG_SHORT, STONE_PILLAR_BIG_TOP, STONE_PILLAR_BIGGER_BOTTOM, STONE_PILLAR_BIGGER_MIDDLE, STONE_PILLAR_BIGGER_SHORT, STONE_PILLAR_BIGGER_TOP, BROAD_STONE_LANTERN_BLOCK_DARK, BROAD_STONE_LANTERN_BLOCK_LIGHT, BROAD_STONE_LANTERN, BROAD_STONE_LANTERN_TOP_DARK, BROAD_STONE_LANTERN_TOP_LIGHT, MID_STONE_LANTERN_BLOCK_DARK, MID_STONE_LANTERN_BLOCK_LIGHT, THIN_STONE_LANTERN_BLOCK_LIGHT, THIN_STONE_LANTERN_BLOCK_DARK, THIN_STONE_LANTERN, THIN_STONE_LANTERN_TOP_DARK, THIN_STONE_LANTERN_TOP_LIGHT);
 }

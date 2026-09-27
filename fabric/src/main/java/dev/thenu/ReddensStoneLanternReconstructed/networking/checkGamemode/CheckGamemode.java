@@ -12,8 +12,8 @@ public class CheckGamemode {
     public static boolean checkGamemode(Entity entity) {
         if (entity instanceof ServerPlayer serverPlayer) {
             return serverPlayer.gameMode.getGameModeForPlayer() == GameType.SURVIVAL;
-        } else if (entity.level().isClientSide() && entity instanceof Player) {
-            return entity.level().isClientSide();
+        } else if (entity instanceof Player player) {
+            return player.level().isClientSide();
         } else {
             return false;
         }
