@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "group": "stone_lantern",
+  "ingredient": "reddensstonelantern:bigger_stone_lantern_block_l",
+  "result": {
+    "id": "reddensstonelantern:medium_stone_lantern",
+    "count": 1
+  }
+}

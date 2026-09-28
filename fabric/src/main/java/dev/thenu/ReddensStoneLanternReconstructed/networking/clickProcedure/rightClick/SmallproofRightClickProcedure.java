@@ -3,17 +3,13 @@ package dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rig
 import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Property;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-
-import java.util.Map;
 
 public class SmallproofRightClickProcedure {
     public SmallproofRightClickProcedure() {
@@ -27,10 +23,8 @@ public class SmallproofRightClickProcedure {
 
         if (bso.getBlock() == BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT) {
             bs = BlockFile.SMALLPROOF_STONE_LANTERN_DARK.getDefaultState();
-        } else if (bso.getBlock() == BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT) {
-            bs = BlockFile.SMALLPROOF_STONE_LANTERN_DARK.getDefaultState();
         } else {
-            return;
+            bs = BlockFile.SMALLPROOF_STONE_LANTERN_LIGHT.getDefaultState();
         }
 
         for (Property<?> propertyOld : bso.getProperties()) {

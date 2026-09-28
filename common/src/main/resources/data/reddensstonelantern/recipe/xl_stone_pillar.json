@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stone_lantern",
+  "category": "misc",
+  "pattern": [
+    "a",
+    "a",
+    "a"
+  ],
+  "key": {
+    "a": "minecraft:cobblestone"
+  },
+  "result": {
+    "id": "reddensstonelantern:stone_pillar_bigger_short",
+    "count": 2
+  }
+}

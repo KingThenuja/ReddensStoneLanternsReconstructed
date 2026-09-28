@@ -1,5 +1,7 @@
 package dev.thenu.ReddensStoneLanternReconstructed.blockType;
 
+import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.SmallRightClickProcedure;
+import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.ThinRightClickProcedure;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.ThinStoneLanternBlockRightClickProcedure;
 import dev.thenu.ReddensStoneLanternReconstructed.world.blockPlaceProcedure.LanternPlaceSoundProcedure;
 import net.minecraft.block.*;
@@ -36,7 +38,7 @@ public class ThinStoneLanternBlockLightBlock extends Block implements Waterlogga
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false));
     }
-/*
+
     @Override
     public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.empty();
@@ -95,5 +97,5 @@ public class ThinStoneLanternBlockLightBlock extends Block implements Waterlogga
         ThinStoneLanternBlockRightClickProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
         return ActionResult.SUCCESS;
     }
-*/
+
 }

@@ -1,6 +1,8 @@
 package dev.thenu.ReddensStoneLanternReconstructed.blockType;
 
 import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
+import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.SmallRightClickProcedure;
+import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.ThinRightClickProcedure;
 import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.ThinStoneLanternBlockRightClickProcedure;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
@@ -37,7 +39,7 @@ public class ThinStoneLanternBlockDarkBlock extends Block implements Waterloggab
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false));
     }
-/*
+
 
     @Override
     public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -93,8 +95,8 @@ public class ThinStoneLanternBlockDarkBlock extends Block implements Waterloggab
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        ThinStoneLanternBlockRightClickProcedure.execute(world, pos.getX(), pos.getX(), pos.getX());
+        ThinStoneLanternBlockRightClickProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
         return ActionResult.SUCCESS;
     }
-*/
+
 }

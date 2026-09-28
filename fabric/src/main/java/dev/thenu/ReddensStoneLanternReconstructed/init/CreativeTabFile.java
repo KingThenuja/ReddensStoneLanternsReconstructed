@@ -41,7 +41,7 @@ public class CreativeTabFile {
                             entries.add(BlockFile.BIG_STONE_LANTERN_BLOCK_LIGHT);
                             entries.add(BlockFile.BROAD_STONE_LANTERN_BLOCK_LIGHT);
                             entries.add(BlockFile.MID_STONE_LANTERN_BLOCK_LIGHT);
-                            //entries.add(BlockFile.THIN_STONE_LANTERN_BLOCK_LIGHT);
+                            entries.add(BlockFile.THIN_STONE_LANTERN_BLOCK_LIGHT);
                         })
                         .build()
         );
