@@ -1,4 +1,4 @@
-## Official release of version 1.1 for 1.21.11
+## Official release of version 1.2 for 1.21.11
 
 ### *Supported versions:*
 
