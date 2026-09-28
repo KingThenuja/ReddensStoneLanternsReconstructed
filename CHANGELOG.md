@@ -1,4 +1,4 @@
-## 26.3 - v1.1
+## 26.3 - v1.2
 
 ### *Supported Minecraft versions:*
 
