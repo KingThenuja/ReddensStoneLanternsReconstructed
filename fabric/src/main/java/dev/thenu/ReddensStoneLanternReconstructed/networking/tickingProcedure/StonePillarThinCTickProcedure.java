@@ -1,12 +1,12 @@
 package dev.thenu.ReddensStoneLanternReconstructed.networking.tickingProcedure;
 
 import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.block.Block;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;

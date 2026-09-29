@@ -3,7 +3,6 @@ package dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rig
 import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.sound.SoundCategory;

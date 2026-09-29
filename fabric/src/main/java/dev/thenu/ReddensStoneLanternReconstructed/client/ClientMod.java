@@ -1,7 +1,6 @@
 package dev.thenu.ReddensStoneLanternReconstructed.client;
 
 import dev.thenu.ReddensStoneLanternReconstructed.ReddensstonelanternMod;
-import dev.thenu.ReddensStoneLanternReconstructed.init.BlockFile;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
@@ -10,8 +9,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-
-import java.util.Optional;
 
 public class ClientMod implements ClientModInitializer {
     @Override

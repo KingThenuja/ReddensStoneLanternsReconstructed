@@ -22,7 +22,6 @@ public class BigRightClickProcedure {
         BlockState bso = world.getBlockState(bp);
         BlockState bs;
 
-        // 1. Toggle logic specifically for the BIG_STONE_LANTERN variants
         if (bso.getBlock() == BlockFile.BIG_STONE_LANTERN_TOP_LIGHT) {
             bs = BlockFile.BIG_STONE_LANTERN_TOP_DARK.getDefaultState();
         } else {
@@ -54,13 +53,11 @@ public class BigRightClickProcedure {
             }
         }
 
-        // 6. Play click audio
         if (world instanceof World level) {
             level.playSound(null, bp, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
         }
     }
 
-    // Helper method to completely strip raw type casting requirements and warnings
     @SuppressWarnings("unchecked")
     private static <T extends Comparable<T>> BlockState copyProperty(BlockState from, BlockState to, Property<?> srcProp, Property<?> targetProp) {
         try {

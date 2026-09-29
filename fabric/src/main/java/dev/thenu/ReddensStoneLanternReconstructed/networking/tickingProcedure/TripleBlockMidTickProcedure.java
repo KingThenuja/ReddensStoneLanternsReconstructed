@@ -1,9 +1,9 @@
 package dev.thenu.ReddensStoneLanternReconstructed.networking.tickingProcedure;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;

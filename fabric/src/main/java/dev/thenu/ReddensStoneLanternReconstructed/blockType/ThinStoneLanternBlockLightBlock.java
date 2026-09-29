@@ -2,14 +2,15 @@ package dev.thenu.ReddensStoneLanternReconstructed.blockType;
 
 import dev.thenu.ReddensStoneLanternReconstructed.networking.clickProcedure.rightClick.ThinStoneLanternBlockRightClickProcedure;
 import dev.thenu.ReddensStoneLanternReconstructed.world.blockPlaceProcedure.LanternPlaceSoundProcedure;
-import net.minecraft.block.*;
-import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -22,7 +23,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.OrderedTick;
 import net.minecraft.world.tick.ScheduledTickView;
@@ -36,7 +36,7 @@ public class ThinStoneLanternBlockLightBlock extends Block implements Waterlogga
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false));
     }
-/*
+
     @Override
     public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.empty();
@@ -95,5 +95,5 @@ public class ThinStoneLanternBlockLightBlock extends Block implements Waterlogga
         ThinStoneLanternBlockRightClickProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
         return ActionResult.SUCCESS;
     }
-*/
+
 }
